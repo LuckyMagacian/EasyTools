@@ -7,8 +7,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import yyj.bean.TempSms;
-
 public class SmsUtil {
 	/**
 	 * 发送短信
@@ -16,9 +14,6 @@ public class SmsUtil {
 	 * @return
 	 */
 	public static String postSms(TempSms sms){
-		// TODO 短信过滤 只发给夏栋
-		if(!sms.getMobile().equals("15757135741"))
-			return "0000";
 		try{
 			if(sms.getTdId()==null)
 				sms.setTdId(TempSms.SMS_TDID_MOBILE);

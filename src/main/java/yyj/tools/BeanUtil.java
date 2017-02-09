@@ -1,5 +1,4 @@
 package yyj.tools;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -272,6 +271,27 @@ public class BeanUtil {
 		}
 		return buffer.toString();
 	}
+	/**
+	 * 通用的内容比较方法,通过映射调用同一个类的不同对象的get方法来比较两个对象的内容是否相同
+	 * @param obj1
+	 * @param obj2
+	 * @return
+	 */
+	public static boolean staticEquals(Object obj1,Object obj2){
+		boolean result=true;
+		try{
+		List<Method> getters=BeanUtil.getGetters(obj1);
+		for(Method each:getters){
+			Object temp1=each.invoke(obj1);
+			Object temp2=each.invoke(obj2);
+			result&=temp1==null?temp1==temp2:temp1.equals(temp2);
+		}
+		}catch (Exception e) {
+			throw new AppException("映射equals方法异常",e);
+		}
+		return result;
+	}
+	
 	/**
 	 * 使用json数据设置对象要求json数据中的key与对象的字段名称要一致
 	 * @param obj

@@ -1,4 +1,4 @@
-package yyj.bean;
+package yyj.tools;
 
 public class TempSms {
 	/**短信通道-移动-免费*/

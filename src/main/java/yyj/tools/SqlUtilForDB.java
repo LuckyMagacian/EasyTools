@@ -17,11 +17,11 @@ public class SqlUtilForDB {
 	/** jdbc配置文件 */
 	private static Properties properties = new Properties();
 	/** jdbc配置文件路径 */
-	private static String path = "jdbc.properties";
+	private static String path = "properties/jdbc.properties";
 	/** 加载配置文件 */
 	static {
 		try {
-			File file = FileUtil.getClassPathFile(path);
+			File file = FileUtil.getFileOppositeClassPath(path);
 			FileReader reader = new FileReader(file);
 			properties.load(reader);
 		} catch (Exception e) {
@@ -46,7 +46,7 @@ public class SqlUtilForDB {
 	public static Connection getConnection() {
 		try {
 			Class.forName(properties.getProperty("driver"));
-			Connection conn = DriverManager.getConnection(properties.getProperty("dbUrl"),
+			Connection conn = DriverManager.getConnection(properties.getProperty("url"),
 					properties.getProperty("username"), properties.getProperty("password"));
 			return conn;
 		} catch (Exception e) {
