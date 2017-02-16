@@ -13,6 +13,42 @@ import com.alibaba.fastjson.JSONObject;
 
 public class BeanUtil {
 	/**
+	 * get/set 对
+	 * @author 1
+	 *
+	 */
+	public static class GetSetPair{
+		/**字段名*/
+		private String name;
+		/**get方法*/
+		private Method get;
+		/**set方法*/
+		private Method set;
+		public Method getGet() {
+			return get;
+		}
+		public void setGet(Method get) {
+			this.get = get;
+		}
+		public Method getSet() {
+			return set;
+		}
+		public void setSet(Method set) {
+			this.set = set;
+		}
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		@Override
+		public String toString() {
+			return BeanUtil.toString(this);
+		}
+	}
+	
+	/**
 	 * 获取类中所有字段
 	 * @param 对象或者类
 	 * @return 类中所有字段 包括常量
@@ -134,28 +170,6 @@ public class BeanUtil {
 		return map;
 	}
 	/**
-	 * 从table中创建java文件  未实现
-	 * @param table
-	 * @return
-	 */
-	public static String makeBeanFileFromTable(DBTable table){
-		try {
-			StringBuffer file=new StringBuffer();
-			String packageStr =BeanUtil.class.getPackage().toString();
-			packageStr=packageStr.substring(0,packageStr.lastIndexOf("."));
-			packageStr="package "+packageStr+".entity";
-			file.append(packageStr);
-			file.append("\n");
-			
-			
-			
-			return file.toString();
-		} catch (Exception e) {
-			throw new AppException("从表中生成bean文件异常",e);
-		}
-	}
-	
-	/**
 	 * 从请求bean中获取参数 已map形式返回 
 	 * @param bean
 	 * @return
@@ -197,8 +211,12 @@ public class BeanUtil {
 		}
 		return getters;
 	}
-	
-	private static Map<String , Method> getGetterMethods(Object obj){
+	/**
+	 * 获取类|对象中所有的get方法
+	 * @param obj
+	 * @return
+	 */
+	public static Map<String , Method> getGetterMethods(Object obj){
 		Class<?> clazz=null;
 		if(obj instanceof Class<?>)
 			clazz=(Class<?>) obj;
@@ -212,7 +230,7 @@ public class BeanUtil {
 		}
 		return getters;
 	}
-	
+
 	/**
 	 * 获取一个对象中所有的set方法
 	 * set方法的判定 set开头且拥有对应的get方法
@@ -233,8 +251,12 @@ public class BeanUtil {
 		}
 		return setters;
 	}
-	
-	private static Map<String , Method> getSetterMethods(Object obj){
+	/**
+	 * 获取类|对象中的所有set方法
+	 * @param obj
+	 * @return
+	 */
+	public static Map<String , Method> getSetterMethods(Object obj){
 		Class<?> clazz=null;
 		if(obj instanceof Class<?>)
 			clazz=(Class<?>) obj;
@@ -253,12 +275,12 @@ public class BeanUtil {
 	 * @param obj 对象
 	 * @return
 	 */
-	public static String staticToString(Object obj){
+	public static String toString(Object obj){
 		if(obj instanceof Class<?>)
 			throw new AppException("传入的参数不能为class!");
 		StringBuffer buffer=new StringBuffer(obj.getClass().getSimpleName()+":[");
 		try {
-			List<Method> getters=BeanUtil.getGetters(obj);
+			List<Method> getters=getGetters(obj);
 			for(Method each:getters){
 				if(!buffer.toString().endsWith("["))
 					buffer.append(",");
@@ -272,15 +294,15 @@ public class BeanUtil {
 		return buffer.toString();
 	}
 	/**
-	 * 通用的内容比较方法,通过映射调用同一个类的不同对象的get方法来比较两个对象的内容是否相同
+	 * 通用的equals方法,通过映射调用同一个类的不同对象的get方法来比较两个对象的内容是否相同
 	 * @param obj1
 	 * @param obj2
 	 * @return
 	 */
-	public static boolean staticEquals(Object obj1,Object obj2){
+	public static boolean equals(Object obj1,Object obj2){
 		boolean result=true;
 		try{
-		List<Method> getters=BeanUtil.getGetters(obj1);
+		List<Method> getters=getGetters(obj1);
 		for(Method each:getters){
 			Object temp1=each.invoke(obj1);
 			Object temp2=each.invoke(obj2);
@@ -290,6 +312,27 @@ public class BeanUtil {
 			throw new AppException("映射equals方法异常",e);
 		}
 		return result;
+	}
+	/**
+	 * 通用的浅copy方法
+	 * @param t1	 被复制的参数
+	 * @param t2	复制的结果
+	 * @return t2
+	 */
+	public static <T> T copy(T t1,T t2){
+		try{
+			if(!t2.getClass().equals(t1.getClass()))
+				throw new RuntimeException("传入的不是同一个类的实现");
+			Map<String, Method> getters=getGetterMethods(t1);
+			List<Method> setters=getSetters(t1);
+			for(Method each:setters){
+				if(getters.containsKey("get"+each.getName().substring(3)))
+					each.invoke(t2,getters.get("get"+each.getName().substring(3)).invoke(t1));
+			}
+			return t2;
+		}catch (Exception e) {
+			throw new RuntimeException("复制异常",e);
+		}
 	}
 	
 	/**
@@ -309,4 +352,17 @@ public class BeanUtil {
 			throw new AppException("字符串转对象异常!",e);
 		}
 	}
+	
+	
+//	public static Map<String, GetSetPair> getGetSetPair(Object obj){
+//		Class<?> clazz=null;
+//		if(obj instanceof Class<?>)
+//			clazz=(Class<?>) obj;
+//		else
+//			clazz=obj.getClass();
+//		Map<String , GetSetPair> map=new HashMap<>();
+//		clazz.getme
+//		
+//		return map;
+//	}
 }

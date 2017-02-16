@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 
 /**
@@ -201,5 +202,30 @@ public class FileUtil {
 			new AppException("获取文件内容以String形式异常", e);
 		}
 		return null;
+	}
+	/**
+	 * java代码格式化
+	 * @param str
+	 * @return
+	 */
+	public static String javaFormat(String str){
+		try {
+			String[] strs=str.split("\n");
+			StringBuffer buffer=new StringBuffer();
+			int tabCount=0;
+			List<String> list=Arrays.asList(strs);
+			for(String each:list){
+				if(each.endsWith("}"))
+					tabCount-=1;
+				for(int i=tabCount;i>0;i--)
+					buffer.append("\t");
+				buffer.append(each+"\n");
+				if(each.endsWith("{"))
+					tabCount+=1;
+			}
+			return buffer.toString();
+		} catch (Exception e) {
+			throw new RuntimeException("java代码格式化异常",e);
+		}
 	}
 }

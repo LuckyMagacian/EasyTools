@@ -5,6 +5,7 @@ import java.io.File;
 import org.junit.Test;
 
 import yyj.tools.FileUtil;
+import yyj.tools.HttpUtil;
 
 public class TestFileUtil {
 
@@ -24,7 +25,9 @@ public class TestFileUtil {
 	}
 	@Test
 	public void getFileStr(){
-		System.out.println(FileUtil.getFileContentString(FileUtil.getFileOppositeClassPath("test.txt")));
+		String xml=FileUtil.getFileContentString(FileUtil.getFileOppositeClassPath("test.txt"));
+		xml.replaceAll("702166200009", "702166200110");
+		System.out.println(HttpUtil.postXml(xml, "http://1.202.156.227:7002/InterFaceServlet", "utf-8", 60000));
 	}
 	
 	

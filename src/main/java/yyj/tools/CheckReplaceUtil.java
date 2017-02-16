@@ -76,5 +76,25 @@ public class CheckReplaceUtil {
 		return temp.toString();
 	}
 	
-	
+	/**
+	 * [下划线小写]转大写
+	 * @param string
+	 * @return
+	 */
+	public static String underlineLowcaserToUpcase(String string){
+		if(string==null)
+			return null;
+		StringBuffer temp=new StringBuffer();
+		String[] strs=string.split("_");
+		boolean flag=true;
+		temp.append(strs[0]);
+		for(String each:strs){
+			if(flag){
+				flag=false;
+				continue;
+			}
+			temp.append(firstCharUpcase(each));
+		}
+		return temp.toString();
+	}
 }

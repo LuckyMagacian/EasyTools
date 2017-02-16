@@ -1,0 +1,78 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<style type="text/css">
+		body{
+			margin:50px,auto; 
+		}
+		table{
+			vertical-align: middle;
+		}
+		th{
+			color:red;
+			text-align: left;
+			font-size: 20px;
+		}
+		td{
+			color:black;
+			font-size:20px;
+			text-align: left;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<table><!-- 表格 -->
+			<tbody>	
+			</tbody>
+		</table>
+	</div>
+	<script src="jquery.2.2.4.min.js"></script>
+
+	<script type="text/javascript">
+		function	successBack(jsonStr){
+				var temp='';
+				temp+='<tr>';
+				for(var key in jsonStr[0]){
+					temp+='<th>';
+					temp+=key;
+					temp+='</th>'
+				}
+				temp+='</tr>';
+				$.each(jsonStr,function(index,_this){
+					temp+='<tr>';
+					$.each(_this,function(name,_value){
+						temp+='<td>';
+						temp+=_value;
+						temp+='</td>'
+					});
+					temp+='</tr>';
+				});
+				console.log(temp);
+				$('tbody').append(temp);
+			};
+
+		$(function(){
+			var params = location.search.substr(1); //  获取参数 并且去掉？
+			var ArrParam = params.split('&');
+			var paramsArr = new Object();
+			$.each(ArrParam, function(i) {
+				var param = this.split('=');
+				paramsArr[param[0]] = param[1];
+			});
+			var ajaxObj=new Object();
+			ajaxObj.url='http://localhost:8088/EasyTools/testAjax.do';
+			ajaxObj.type='post';
+			ajaxObj.data=paramsArr;
+			ajaxObj.dataType='json';
+			ajaxObj.success=successBack;
+			ajaxObj.error=null;
+			$.ajax(ajaxObj);
+		});
+	</script>
+</body>
+
+
+
+</script>
+</html>
