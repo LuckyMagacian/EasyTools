@@ -2,10 +2,12 @@ package yyj.tools;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 
 /**
@@ -228,4 +230,32 @@ public class FileUtil {
 			throw new RuntimeException("java代码格式化异常",e);
 		}
 	}
+	/**
+	 * 将字符串写入到指定文件中
+	 * @param str		字符串内容
+	 * @param file 		文件
+	 * @param charSet 	字符集
+	 * @return
+	 */
+	public static File writeStrToFile(String str,File file,String charSet){
+		try {
+			if(file==null)
+				throw new NullPointerException("file can't be null");
+			if(file.isDirectory())
+				throw new IllegalArgumentException("file can't be directory");
+			if(!file.exists())
+				file.createNewFile();
+			charSet=charSet==null?"utf-8":charSet;
+			FileOutputStream fos=new FileOutputStream(file);
+			OutputStreamWriter writer=new OutputStreamWriter(fos, charSet);
+			PrintWriter printer=new PrintWriter(writer);
+			printer.print(str);
+			printer.flush();
+			printer.close();
+			return file;
+		} catch (Exception e) {
+			throw new RuntimeException("写入字符串到文件异常",e);
+		}
+	}
+	
 }

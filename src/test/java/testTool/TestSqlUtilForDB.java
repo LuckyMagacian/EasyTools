@@ -1,38 +1,21 @@
 package testTool;
 
-import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
+import static yyj.tools.SqlUtilForDB.getTables;
+import static yyj.tools.SqlUtilForDB.listToMap;
+import static yyj.tools.SqlUtilForDB.makeBeanFiles;
+
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.Format;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.junit.Test;
 
-import com.alibaba.fastjson.JSONObject;
-import com.mysql.fabric.xmlrpc.base.Param;
-
-import yyj.tools.BeanUtil;
-import yyj.tools.CheckReplaceUtil;
-import yyj.tools.FileUtil;
 import yyj.tools.SqlUtilForDB;
 import yyj.tools.SqlUtilForDB.ColumnInfo;
-import yyj.tools.SqlUtilForDB.DBTable;
-import yyj.tools.SqlUtilForDB.DatabaseInfo;
-import yyj.tools.SqlUtilForDB.ForeginKeyInfo;
-import yyj.tools.SqlUtilForDB.IndexInfo;
-import yyj.tools.SqlUtilForDB.PrimaryKeyInfo;
-import yyj.tools.SqlUtilForDB.TableInfo;
-import static yyj.tools.SqlUtilForDB.*;
 @Table
 public class TestSqlUtilForDB {
 
@@ -47,9 +30,6 @@ public class TestSqlUtilForDB {
 	@Test
 	public void getTableNames() throws ClassNotFoundException{
 		System.out.println(ColumnInfo.class.getSimpleName());
-	}
-	@Test
-	public void getTables(){
 	}
 	
 	@Test
@@ -75,8 +55,8 @@ public class TestSqlUtilForDB {
 	@Test
 	public void testMakeFile(){
 		Connection conn=SqlUtilForDB.getConnection();
-		String string=makeBeanFile(getTable(conn, "t_car_owner"));
-		System.out.println(FileUtil.javaFormat(string));
+		makeBeanFiles(getTables(conn), false,"t_");
+//		System.out.println(string);
 	}
 	@Test
 	public void testULtoU(){
@@ -88,5 +68,6 @@ public class TestSqlUtilForDB {
 		System.out.println(string.equals(string2));
 		System.out.println(string==string2);
 	}
+ 
 
 }

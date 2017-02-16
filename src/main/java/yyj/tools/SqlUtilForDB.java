@@ -23,6 +23,8 @@ import java.util.Properties;
 import java.util.Set;
 
 import javax.sql.DataSource;
+import javax.swing.JOptionPane;
+
 import org.apache.commons.dbcp.BasicDataSourceFactory;
 
 
@@ -34,7 +36,7 @@ public class SqlUtilForDB {
 	/** sql数据类型与java数据类型映射 */
 	private static HashMap<String, Class<?>>  ddtTojdt;
 	
-	private static HashMap<Class<?>, String> jdtToddt;
+//	private static HashMap<Class<?>, String> jdtToddt;
 	/** 加载配置文件 */
 	static {
 	
@@ -45,6 +47,7 @@ public class SqlUtilForDB {
 			FileReader reader = new FileReader(file);
 			properties.load(reader);
 			ddtTojdtInit();
+			jdtToddtInit();
 		} catch (Exception e) {
 			throw new RuntimeException("sqlutil初始化jdbc配置异常", e);
 		}
@@ -111,7 +114,7 @@ public class SqlUtilForDB {
 		ddtTojdt.put("json", String.class);
 	}
 	private static void jdtToddtInit(){
-		jdtToddt=new LinkedHashMap<>();
+//		jdtToddt=new LinkedHashMap<>();
 		
 	}
 	/**
@@ -668,21 +671,22 @@ public class SqlUtilForDB {
 	/**
 	 * 使用Table中的信息来构建javaBean类
 	 * @param table
+	 * @param annotationFlag  
+	 * 			true  会增加hibernate注解
+	 * 			false 不会增加注解
 	 * @return
 	 */
-	public static String makeBeanFile(DBTable table){
+	public static String makeBeanFile(DBTable table,boolean annotationFlag,String prefix){
 		String fileContent=null;
 		try {
 			StringBuffer buffer=new StringBuffer();
-			
+			//-------------------------------package---------------------------------
 			String packagePath=SqlUtilForDB.class.getPackage().getName();
 			packagePath=packagePath.substring(0,packagePath.lastIndexOf('.')+1);
 			packagePath+="entity";
 			buffer.append("package "+packagePath+";\n");
-			
-
+			//--------------------------------import---------------------------------
 			List<ColumnInfo> columnInfos=table.getColumnInfos();
-			List<IndexInfo>  indexInfos=table.getIndexInfo();
 			List<PrimaryKeyInfo> pkInfos=table.getPkInfo();
 			Map<String , PrimaryKeyInfo> pkMap=listToMap(pkInfos);
 			Set<String> tempSet=new HashSet<>();
@@ -693,15 +697,19 @@ public class SqlUtilForDB {
 					continue;
 				else
 					buffer.append("import "+each+";\n");	
-			buffer.append("import "+"javax.persistence.Column"+";\n");
-			buffer.append("import "+"javax.persistence.Entity"+";\n");
-			buffer.append("import "+"javax.persistence.Table"+";\n");
-			buffer.append("import "+"javax.persistence.Id"+";\n");
-			
+			if(annotationFlag){
+				buffer.append("import "+"javax.persistence.Column"+";\n");
+				buffer.append("import "+"javax.persistence.Entity"+";\n");
+				buffer.append("import "+"javax.persistence.Table"+";\n");
+				buffer.append("import "+"javax.persistence.Id"+";\n");
+			}
+			//--------------------------------class name------------------------------
 			String className=table.getTableInfo().getTableName();
+			if(prefix!=null&&!prefix.isEmpty())
+				className=className.startsWith(prefix)?className.replaceFirst(prefix, ""):className;
 			className=CheckReplaceUtil.firstCharUpcase(className);
 			className=CheckReplaceUtil.underlineLowcaserToUpcase(className);
-			
+			//---------------------------------class comment---------------------------
 			String classRemark=table.getTableInfo().getRemark();
 			buffer.append("/**\n");
 			buffer.append("*");
@@ -710,10 +718,13 @@ public class SqlUtilForDB {
 			buffer.append("*"+"@author yyj | auto generator\n");
 			buffer.append("*"+"@version "+"1.0.0 "+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date())+"\n");
 			buffer.append("*/\n");
-			buffer.append("@Entity"+"\n");
-			buffer.append("@Table"+"(name=\""+table.getTableInfo().getTableName()+"\")\n");
+			if(annotationFlag){
+				buffer.append("@Entity"+"\n");
+				buffer.append("@Table"+"(name=\""+table.getTableInfo().getTableName()+"\")\n");
+			}
+			//----------------------------------class body-------------------------------
 			buffer.append("public class "+className+"{"+"\n");
-			
+			//---------------------------------- field ---------------------------------
 			for(ColumnInfo each:columnInfos){
 				String javaType=each.getJavaType();
 				javaType=javaType.substring(javaType.lastIndexOf('.')+1,javaType.length());
@@ -724,14 +735,16 @@ public class SqlUtilForDB {
 				buffer.append("/**");
 				buffer.append(remark==null|remark.isEmpty()?"no comment":remark);
 				buffer.append("*/\n");
-				buffer.append("@Id"+"\n");
-				buffer.append("@Column(");
-				buffer.append("name=\""+each.getColumnName()+"\",");
-				buffer.append("unique="+pkMap.containsKey(each.getColumnName())+",");
-				buffer.append("nullable="+each.getNullAble()+")\n");	
+				if(annotationFlag){
+					buffer.append("@Id"+"\n");
+					buffer.append("@Column(");
+					buffer.append("name=\""+each.getColumnName()+"\",");
+					buffer.append("unique="+pkMap.containsKey(each.getColumnName())+",");
+					buffer.append("nullable="+each.getNullAble()+")\n");
+				}
 				buffer.append("private "+javaType+" "+name+";\n");
 			}
-			
+			//---------------------------------------set & get method------------------------
 			for(ColumnInfo each:columnInfos){
 				String javaType=each.getJavaType();
 				javaType=javaType.substring(javaType.lastIndexOf('.')+1,javaType.length());
@@ -753,11 +766,37 @@ public class SqlUtilForDB {
 				buffer.append("}\n");
 			}
 			buffer.append("}\n");
-			fileContent=buffer.toString();
+			//--------------------------------------java file format-----------------------------
+			fileContent=FileUtil.javaFormat(buffer.toString());
+			//---------------------------------------save javabean file-------------------------
+			String path=SqlUtilForDB.class.getClassLoader().getResource("").toURI().getPath();
+			path=path.substring(0,path.indexOf("target"))+"src/main/java/";
+			String[] strs=packagePath.split("\\.");
+			for(String each:strs)
+				path+=each+"/";
+			File file=new File(path);
+			if(!file.exists()||!file.isDirectory())
+				file.mkdir();
+			path+=className+".java";
+			file=new File(path);
+			FileUtil.writeStrToFile(fileContent, file, "utf-8");
 			return fileContent;
 		} catch (Exception e) {
 			throw new RuntimeException("构建bean文件内容异常",e);
 		}
+	}
+	/**
+	 * 构建bean
+	 * @param list
+	 * @param annotationFlag
+	 */
+	public static void makeBeanFiles(List<DBTable> list,boolean annotationFlag,String prefix){
+		String packagePath=SqlUtilForDB.class.getPackage().getName();
+		packagePath=packagePath.substring(0,packagePath.lastIndexOf('.')+1);
+		packagePath+="entity";
+		for(DBTable each:list)
+			makeBeanFile(each, annotationFlag,prefix);
+		JOptionPane.showMessageDialog(null, "生成javaBean成功\n路径:"+packagePath+"\n请刷新项目", "提示", JOptionPane.ERROR_MESSAGE); 
 	}
 	
 	/**
