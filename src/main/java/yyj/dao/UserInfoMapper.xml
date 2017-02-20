@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="yyj.dao.UserInfoDao">
+	<insert id="addUserInfo" parameterType="yyj.entity.UserInfo">
+		insert into t_user_info
+		(user_id,role_id,name,organization,passwd,phone,create_time,update_time)
+		values
+		(
+			<if test="userId != null">#{userId},</if>
+			<if test="userId == null">default,</if>
+			<if test="roleId != null">#{roleId},</if>
+			<if test="roleId == null">default,</if>
+			<if test="name != null">#{name},</if>
+			<if test="name == null">default,</if>
+			<if test="organization != null">#{organization},</if>
+			<if test="organization == null">default,</if>
+			<if test="passwd != null">#{passwd},</if>
+			<if test="passwd == null">default,</if>
+			<if test="phone != null">#{phone},</if>
+			<if test="phone == null">default,</if>
+			<if test="createTime != null">#{createTime},</if>
+			<if test="createTime == null">default,</if>
+			<if test="updateTime != null">#{updateTime},</if>
+			<if test="updateTime == null">default,</if>
+		)
+	</insert>
+	<delete id="deleteUserInfoByClass" parameterType="yyj.entity.UserInfo">
+		delete from t_user_info
+		<where>
+			<if test="userId != null"> and user_id = #{userId}  </if>
+			<if test="roleId != null"> and role_id = #{roleId}  </if>
+			<if test="name != null"> and name = #{name}  </if>
+			<if test="organization != null"> and organization = #{organization}  </if>
+			<if test="passwd != null"> and passwd = #{passwd}  </if>
+			<if test="phone != null"> and phone = #{phone}  </if>
+			<if test="createTime != null"> and create_time = #{createTime}  </if>
+			<if test="updateTime != null"> and update_time = #{updateTime}  </if>
+		</where>
+	</delete>
+	<delete id="deleteUserInfoByUniqueIndexOnUserId">
+		delete from t_user_info
+		<where>
+			AND user_id = #{userId}
+		</where>
+	</delete>
+	<update id="updateUserInfoByClass">
+		update t_user_info
+		<set>
+			user_id={userInfo.userId},
+			role_id={userInfo.roleId},
+			name={userInfo.name},
+			organization={userInfo.organization},
+			passwd={userInfo.passwd},
+			phone={userInfo.phone},
+			create_time={userInfo.createTime},
+			update_time={userInfo.updateTime}
+		</set>
+		<where>
+			<if test="userId != null">user_id = #{param.userId},</if>
+			<if test="roleId != null">role_id = #{param.roleId},</if>
+			<if test="name != null">name = #{param.name},</if>
+			<if test="organization != null">organization = #{param.organization},</if>
+			<if test="passwd != null">passwd = #{param.passwd},</if>
+			<if test="phone != null">phone = #{param.phone},</if>
+			<if test="createTime != null">create_time = #{param.createTime},</if>
+			<if test="updateTime != null">update_time = #{param.updateTime},</if>
+		</where>
+	</update>
+	<update id="updateUserInfoByUniqueIndexOnUserId">
+		update t_user_info
+		<set>
+			user_id={userInfo.userId},
+			role_id={userInfo.roleId},
+			name={userInfo.name},
+			organization={userInfo.organization},
+			passwd={userInfo.passwd},
+			phone={userInfo.phone},
+			create_time={userInfo.createTime},
+			update_time={userInfo.updateTime}
+		</set>
+		<where>
+			AND user_id={userId}
+		</where>
+	</update>
+	<select id="selectUserInfoByClass" resultMap="userInfoMap"  resultType="yyj.entity.UserInfo" parameterType="yyj.entity.UserInfo">
+		select
+			user_id,role_id,name,organization,passwd,phone,create_time,update_time
+		from t_user_info
+		<where>
+			<if test="userId != null">user_id = #{userId},</if>
+			<if test="roleId != null">role_id = #{roleId},</if>
+			<if test="name != null">name = #{name},</if>
+			<if test="organization != null">organization = #{organization},</if>
+			<if test="passwd != null">passwd = #{passwd},</if>
+			<if test="phone != null">phone = #{phone},</if>
+			<if test="createTime != null">create_time = #{createTime},</if>
+			<if test="updateTime != null">update_time = #{updateTime},</if>
+		</where>
+	</select>
+	<select id="selectUserInfoByUniqueIndexOnUserId" resultType="yyj.entity.UserInfo" resultMap="userInfoMap" >
+		select
+			user_id,role_id,name,organization,passwd,phone,create_time,update_time
+		from t_user_info
+		<where>
+			AND user_id={userId}
+		</where>
+	</select>
+	<resultMap id="userInfoMap" type="yyj.entity.UserInfo">
+		<result property="userId" 			column="user_id"></result>
+		<result property="roleId" 			column="role_id"></result>
+		<result property="name" 			column="name"></result>
+		<result property="organization" 			column="organization"></result>
+		<result property="passwd" 			column="passwd"></result>
+		<result property="phone" 			column="phone"></result>
+		<result property="createTime" 			column="create_time"></result>
+		<result property="updateTime" 			column="update_time"></result>
+	</resultMap>
+</mapper>

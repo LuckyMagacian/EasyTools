@@ -1,19 +1,25 @@
 package testTool;
 
+import static yyj.tools.SqlUtilForDB.createSelect;
+import static yyj.tools.SqlUtilForDB.getIndexInfos;
+import static yyj.tools.SqlUtilForDB.getTable;
 import static yyj.tools.SqlUtilForDB.getTables;
 import static yyj.tools.SqlUtilForDB.listToMap;
 import static yyj.tools.SqlUtilForDB.makeBeanFiles;
+import static yyj.tools.SqlUtilForDB.*;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Table;
 
+import org.apache.ibatis.annotations.Param;
 import org.junit.Test;
 
+import yyj.tools.FileUtil;
+import yyj.tools.HttpUtil;
 import yyj.tools.SqlUtilForDB;
 import yyj.tools.SqlUtilForDB.ColumnInfo;
 @Table
@@ -55,19 +61,40 @@ public class TestSqlUtilForDB {
 	@Test
 	public void testMakeFile(){
 		Connection conn=SqlUtilForDB.getConnection();
-		makeBeanFiles(getTables(conn), false,"t_");
-//		System.out.println(string);
+		makeBeanFiles(getTables(conn),  "t_",false,false);
+	}
+	
+	@Test
+	public void testMakeMapper(){
+		Connection conn=SqlUtilForDB.getConnection();
+		System.out.println(createSelect(getTable(conn, "t_car_owner"),"t_","asc",false));
 	}
 	@Test
-	public void testULtoU(){
-		String string="123";
-		List<String> strings=new ArrayList<>();
-		strings.add(string);
-		String string2=new String("123");
-		System.out.println(strings.contains(string2));
-		System.out.println(string.equals(string2));
-		System.out.println(string==string2);
+	public void testULtoU() throws Exception{
+		Connection conn=SqlUtilForDB.getConnection();
+		System.out.println(getIndexInfos(conn, "t_car_owner"));
 	}
- 
+	@Test
+	public void testResultMap(){
+		Connection conn=SqlUtilForDB.getConnection();
+		System.out.println(FileUtil.xmlFormat(makeMybatisFile(getTable(conn, "t_car_owner"),"t_","asc",false,false)));
+//		FileUtil.xmlFormat(makeMybatisFile(getTable(conn, "t_car_owner"),"t_","asc",false,false));
+	}
+	@Test
+	public void testa(){
+//		Connection conn=SqlUtilForDB.getConnection();
+//		System.out.println(makeMybatisDao(getTable(conn, "t_car_owner"), "t_", false,false));
+//		makeAll(conn, "t_", null, false, false);
+//		System.out.println(createInsert(getTable(conn, "test_type"), null));
+//		makeMybatisFile(getTable(conn, "t_car_owner"), "t_", null, false, false);
+		String temp="http://1.202.156.227:7002/Net/netCarModelsDataWebAction.action?";
+		String vl="宝马BMW Z4 35i跑车 2009款 35i 锋尚型 2座";
+		temp+="vehicleName=";
+		temp+=HttpUtil.urlEncode(vl);
+		String url="&pageNo=1&pageSize=10";
+		temp+=url;
+		System.out.println(temp);
+		System.out.println();
+	}
 
 }

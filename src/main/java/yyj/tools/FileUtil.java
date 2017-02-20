@@ -217,11 +217,17 @@ public class FileUtil {
 			int tabCount=0;
 			List<String> list=Arrays.asList(strs);
 			for(String each:list){
+				
 				if(each.endsWith("}"))
 					tabCount-=1;
+				
 				for(int i=tabCount;i>0;i--)
 					buffer.append("\t");
 				buffer.append(each+"\n");
+				
+				if(each.endsWith(")")&&!each.matches("[@*(/*)].*"))
+					buffer.append("\t");
+				
 				if(each.endsWith("{"))
 					tabCount+=1;
 			}
@@ -230,6 +236,32 @@ public class FileUtil {
 			throw new RuntimeException("java代码格式化异常",e);
 		}
 	}
+	
+	public static String xmlFormat(String str){
+		try {
+			String[] strs=str.split("\n");
+			StringBuffer buffer=new StringBuffer();
+			int tabCount=0;
+			List<String> list=Arrays.asList(strs);
+			for(String each:list){
+				each=each.trim();
+				if(each.matches("</ *[a-zA-Z]+ *>")||(each.matches(".*\\)")&&!each.matches("\\(.*"))||each.matches("from .+"))
+					tabCount-=1;
+				
+					for(int i=tabCount;i>0;i--)
+						buffer.append("\t");
+				buffer.append(each+"\n");
+				
+				if(each.matches("< *[a-zA-Z]+ *>")||each.matches("< *[a-zA-Z]+ *.*\" *>")||(each.matches("\\(.*")&&!each.matches(".*\\)"))||each.matches("select"))
+					tabCount+=1;
+				
+			}
+			return buffer.toString();
+		} catch (Exception e) {
+			throw new RuntimeException("xml代码格式化异常",e);
+		}
+	}
+	
 	/**
 	 * 将字符串写入到指定文件中
 	 * @param str		字符串内容
@@ -254,8 +286,27 @@ public class FileUtil {
 			printer.close();
 			return file;
 		} catch (Exception e) {
-			throw new RuntimeException("写入字符串到文件异常",e);
+			throw new RuntimeException("写入字符串到文件异常1",e);
 		}
 	}
-	
+	/**
+	 * 将字符串写入到指定文件(路径)中
+	 * @param str
+	 * @param filePath
+	 * @param charSet
+	 */
+	public static void writeStrToFile(String str,String filePath,String charSet){
+		try {
+			File file=new File(filePath);
+			if(filePath==null)
+				throw new NullPointerException("filePath can't be null");
+			if(file.isDirectory())
+				throw new IllegalArgumentException("This path is directory ! No file name !");
+			if(!file.exists())
+				file.createNewFile();
+			writeStrToFile(str, file, charSet);
+		}catch (Exception e) {
+			throw new AppException("写入字符串到文件异常2",e);
+		}
+	}
 }

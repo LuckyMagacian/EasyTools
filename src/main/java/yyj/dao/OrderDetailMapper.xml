@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="yyj.dao.OrderDetailDao">
+	<insert id="addOrderDetail" parameterType="yyj.entity.OrderDetail">
+		insert into t_order_detail
+		(order_id,insure_city,car_plate_no,has_plate,customer_name,id_card,phone_no,email,vehicle_id_no,engine_no,brand_modal,brand_modal_ch,register_date,is_secondhand,transfor_date,total_price,price_total_compulsory,price_total_business,price_compulsory,price_tax,date_compulsory,date_business,applicant_name,applicant_id_no,applicant_phone_no,applicant_email,insured_name,insured_id_no,insured_phone_no,insured_email,addressee_name,addressee_mobile,send_date,addressee_province,addressee_city,addressee_town,addressee_details,insured_addressee_details,insure_info,create_time,update_time)
+		values
+		(
+			<if test="orderId != null">#{orderId},</if>
+			<if test="orderId == null">default,</if>
+			<if test="insureCity != null">#{insureCity},</if>
+			<if test="insureCity == null">default,</if>
+			<if test="carPlateNo != null">#{carPlateNo},</if>
+			<if test="carPlateNo == null">default,</if>
+			<if test="hasPlate != null">#{hasPlate},</if>
+			<if test="hasPlate == null">default,</if>
+			<if test="customerName != null">#{customerName},</if>
+			<if test="customerName == null">default,</if>
+			<if test="idCard != null">#{idCard},</if>
+			<if test="idCard == null">default,</if>
+			<if test="phoneNo != null">#{phoneNo},</if>
+			<if test="phoneNo == null">default,</if>
+			<if test="email != null">#{email},</if>
+			<if test="email == null">default,</if>
+			<if test="vehicleIdNo != null">#{vehicleIdNo},</if>
+			<if test="vehicleIdNo == null">default,</if>
+			<if test="engineNo != null">#{engineNo},</if>
+			<if test="engineNo == null">default,</if>
+			<if test="brandModal != null">#{brandModal},</if>
+			<if test="brandModal == null">default,</if>
+			<if test="brandModalCh != null">#{brandModalCh},</if>
+			<if test="brandModalCh == null">default,</if>
+			<if test="registerDate != null">#{registerDate},</if>
+			<if test="registerDate == null">default,</if>
+			<if test="isSecondhand != null">#{isSecondhand},</if>
+			<if test="isSecondhand == null">default,</if>
+			<if test="transforDate != null">#{transforDate},</if>
+			<if test="transforDate == null">default,</if>
+			<if test="totalPrice != null">#{totalPrice},</if>
+			<if test="totalPrice == null">default,</if>
+			<if test="priceTotalCompulsory != null">#{priceTotalCompulsory},</if>
+			<if test="priceTotalCompulsory == null">default,</if>
+			<if test="priceTotalBusiness != null">#{priceTotalBusiness},</if>
+			<if test="priceTotalBusiness == null">default,</if>
+			<if test="priceCompulsory != null">#{priceCompulsory},</if>
+			<if test="priceCompulsory == null">default,</if>
+			<if test="priceTax != null">#{priceTax},</if>
+			<if test="priceTax == null">default,</if>
+			<if test="dateCompulsory != null">#{dateCompulsory},</if>
+			<if test="dateCompulsory == null">default,</if>
+			<if test="dateBusiness != null">#{dateBusiness},</if>
+			<if test="dateBusiness == null">default,</if>
+			<if test="applicantName != null">#{applicantName},</if>
+			<if test="applicantName == null">default,</if>
+			<if test="applicantIdNo != null">#{applicantIdNo},</if>
+			<if test="applicantIdNo == null">default,</if>
+			<if test="applicantPhoneNo != null">#{applicantPhoneNo},</if>
+			<if test="applicantPhoneNo == null">default,</if>
+			<if test="applicantEmail != null">#{applicantEmail},</if>
+			<if test="applicantEmail == null">default,</if>
+			<if test="insuredName != null">#{insuredName},</if>
+			<if test="insuredName == null">default,</if>
+			<if test="insuredIdNo != null">#{insuredIdNo},</if>
+			<if test="insuredIdNo == null">default,</if>
+			<if test="insuredPhoneNo != null">#{insuredPhoneNo},</if>
+			<if test="insuredPhoneNo == null">default,</if>
+			<if test="insuredEmail != null">#{insuredEmail},</if>
+			<if test="insuredEmail == null">default,</if>
+			<if test="addresseeName != null">#{addresseeName},</if>
+			<if test="addresseeName == null">default,</if>
+			<if test="addresseeMobile != null">#{addresseeMobile},</if>
+			<if test="addresseeMobile == null">default,</if>
+			<if test="sendDate != null">#{sendDate},</if>
+			<if test="sendDate == null">default,</if>
+			<if test="addresseeProvince != null">#{addresseeProvince},</if>
+			<if test="addresseeProvince == null">default,</if>
+			<if test="addresseeCity != null">#{addresseeCity},</if>
+			<if test="addresseeCity == null">default,</if>
+			<if test="addresseeTown != null">#{addresseeTown},</if>
+			<if test="addresseeTown == null">default,</if>
+			<if test="addresseeDetails != null">#{addresseeDetails},</if>
+			<if test="addresseeDetails == null">default,</if>
+			<if test="insuredAddresseeDetails != null">#{insuredAddresseeDetails},</if>
+			<if test="insuredAddresseeDetails == null">default,</if>
+			<if test="insureInfo != null">#{insureInfo},</if>
+			<if test="insureInfo == null">default,</if>
+			<if test="createTime != null">#{createTime},</if>
+			<if test="createTime == null">default,</if>
+			<if test="updateTime != null">#{updateTime},</if>
+			<if test="updateTime == null">default,</if>
+		)
+	</insert>
+	<delete id="deleteOrderDetailByClass" parameterType="yyj.entity.OrderDetail">
+		delete from t_order_detail
+		<where>
+			<if test="orderId != null"> and order_id = #{orderId}  </if>
+			<if test="insureCity != null"> and insure_city = #{insureCity}  </if>
+			<if test="carPlateNo != null"> and car_plate_no = #{carPlateNo}  </if>
+			<if test="hasPlate != null"> and has_plate = #{hasPlate}  </if>
+			<if test="customerName != null"> and customer_name = #{customerName}  </if>
+			<if test="idCard != null"> and id_card = #{idCard}  </if>
+			<if test="phoneNo != null"> and phone_no = #{phoneNo}  </if>
+			<if test="email != null"> and email = #{email}  </if>
+			<if test="vehicleIdNo != null"> and vehicle_id_no = #{vehicleIdNo}  </if>
+			<if test="engineNo != null"> and engine_no = #{engineNo}  </if>
+			<if test="brandModal != null"> and brand_modal = #{brandModal}  </if>
+			<if test="brandModalCh != null"> and brand_modal_ch = #{brandModalCh}  </if>
+			<if test="registerDate != null"> and register_date = #{registerDate}  </if>
+			<if test="isSecondhand != null"> and is_secondhand = #{isSecondhand}  </if>
+			<if test="transforDate != null"> and transfor_date = #{transforDate}  </if>
+			<if test="totalPrice != null"> and total_price = #{totalPrice}  </if>
+			<if test="priceTotalCompulsory != null"> and price_total_compulsory = #{priceTotalCompulsory}  </if>
+			<if test="priceTotalBusiness != null"> and price_total_business = #{priceTotalBusiness}  </if>
+			<if test="priceCompulsory != null"> and price_compulsory = #{priceCompulsory}  </if>
+			<if test="priceTax != null"> and price_tax = #{priceTax}  </if>
+			<if test="dateCompulsory != null"> and date_compulsory = #{dateCompulsory}  </if>
+			<if test="dateBusiness != null"> and date_business = #{dateBusiness}  </if>
+			<if test="applicantName != null"> and applicant_name = #{applicantName}  </if>
+			<if test="applicantIdNo != null"> and applicant_id_no = #{applicantIdNo}  </if>
+			<if test="applicantPhoneNo != null"> and applicant_phone_no = #{applicantPhoneNo}  </if>
+			<if test="applicantEmail != null"> and applicant_email = #{applicantEmail}  </if>
+			<if test="insuredName != null"> and insured_name = #{insuredName}  </if>
+			<if test="insuredIdNo != null"> and insured_id_no = #{insuredIdNo}  </if>
+			<if test="insuredPhoneNo != null"> and insured_phone_no = #{insuredPhoneNo}  </if>
+			<if test="insuredEmail != null"> and insured_email = #{insuredEmail}  </if>
+			<if test="addresseeName != null"> and addressee_name = #{addresseeName}  </if>
+			<if test="addresseeMobile != null"> and addressee_mobile = #{addresseeMobile}  </if>
+			<if test="sendDate != null"> and send_date = #{sendDate}  </if>
+			<if test="addresseeProvince != null"> and addressee_province = #{addresseeProvince}  </if>
+			<if test="addresseeCity != null"> and addressee_city = #{addresseeCity}  </if>
+			<if test="addresseeTown != null"> and addressee_town = #{addresseeTown}  </if>
+			<if test="addresseeDetails != null"> and addressee_details = #{addresseeDetails}  </if>
+			<if test="insuredAddresseeDetails != null"> and insured_addressee_details = #{insuredAddresseeDetails}  </if>
+			<if test="insureInfo != null"> and insure_info = #{insureInfo}  </if>
+			<if test="createTime != null"> and create_time = #{createTime}  </if>
+			<if test="updateTime != null"> and update_time = #{updateTime}  </if>
+		</where>
+	</delete>
+	<delete id="deleteOrderDetailByUniqueIndexOnOrderId">
+		delete from t_order_detail
+		<where>
+			AND order_id = #{orderId}
+		</where>
+	</delete>
+	<update id="updateOrderDetailByClass">
+		update t_order_detail
+		<set>
+			order_id={orderDetail.orderId},
+			insure_city={orderDetail.insureCity},
+			car_plate_no={orderDetail.carPlateNo},
+			has_plate={orderDetail.hasPlate},
+			customer_name={orderDetail.customerName},
+			id_card={orderDetail.idCard},
+			phone_no={orderDetail.phoneNo},
+			email={orderDetail.email},
+			vehicle_id_no={orderDetail.vehicleIdNo},
+			engine_no={orderDetail.engineNo},
+			brand_modal={orderDetail.brandModal},
+			brand_modal_ch={orderDetail.brandModalCh},
+			register_date={orderDetail.registerDate},
+			is_secondhand={orderDetail.isSecondhand},
+			transfor_date={orderDetail.transforDate},
+			total_price={orderDetail.totalPrice},
+			price_total_compulsory={orderDetail.priceTotalCompulsory},
+			price_total_business={orderDetail.priceTotalBusiness},
+			price_compulsory={orderDetail.priceCompulsory},
+			price_tax={orderDetail.priceTax},
+			date_compulsory={orderDetail.dateCompulsory},
+			date_business={orderDetail.dateBusiness},
+			applicant_name={orderDetail.applicantName},
+			applicant_id_no={orderDetail.applicantIdNo},
+			applicant_phone_no={orderDetail.applicantPhoneNo},
+			applicant_email={orderDetail.applicantEmail},
+			insured_name={orderDetail.insuredName},
+			insured_id_no={orderDetail.insuredIdNo},
+			insured_phone_no={orderDetail.insuredPhoneNo},
+			insured_email={orderDetail.insuredEmail},
+			addressee_name={orderDetail.addresseeName},
+			addressee_mobile={orderDetail.addresseeMobile},
+			send_date={orderDetail.sendDate},
+			addressee_province={orderDetail.addresseeProvince},
+			addressee_city={orderDetail.addresseeCity},
+			addressee_town={orderDetail.addresseeTown},
+			addressee_details={orderDetail.addresseeDetails},
+			insured_addressee_details={orderDetail.insuredAddresseeDetails},
+			insure_info={orderDetail.insureInfo},
+			create_time={orderDetail.createTime},
+			update_time={orderDetail.updateTime}
+		</set>
+		<where>
+			<if test="orderId != null">order_id = #{param.orderId},</if>
+			<if test="insureCity != null">insure_city = #{param.insureCity},</if>
+			<if test="carPlateNo != null">car_plate_no = #{param.carPlateNo},</if>
+			<if test="hasPlate != null">has_plate = #{param.hasPlate},</if>
+			<if test="customerName != null">customer_name = #{param.customerName},</if>
+			<if test="idCard != null">id_card = #{param.idCard},</if>
+			<if test="phoneNo != null">phone_no = #{param.phoneNo},</if>
+			<if test="email != null">email = #{param.email},</if>
+			<if test="vehicleIdNo != null">vehicle_id_no = #{param.vehicleIdNo},</if>
+			<if test="engineNo != null">engine_no = #{param.engineNo},</if>
+			<if test="brandModal != null">brand_modal = #{param.brandModal},</if>
+			<if test="brandModalCh != null">brand_modal_ch = #{param.brandModalCh},</if>
+			<if test="registerDate != null">register_date = #{param.registerDate},</if>
+			<if test="isSecondhand != null">is_secondhand = #{param.isSecondhand},</if>
+			<if test="transforDate != null">transfor_date = #{param.transforDate},</if>
+			<if test="totalPrice != null">total_price = #{param.totalPrice},</if>
+			<if test="priceTotalCompulsory != null">price_total_compulsory = #{param.priceTotalCompulsory},</if>
+			<if test="priceTotalBusiness != null">price_total_business = #{param.priceTotalBusiness},</if>
+			<if test="priceCompulsory != null">price_compulsory = #{param.priceCompulsory},</if>
+			<if test="priceTax != null">price_tax = #{param.priceTax},</if>
+			<if test="dateCompulsory != null">date_compulsory = #{param.dateCompulsory},</if>
+			<if test="dateBusiness != null">date_business = #{param.dateBusiness},</if>
+			<if test="applicantName != null">applicant_name = #{param.applicantName},</if>
+			<if test="applicantIdNo != null">applicant_id_no = #{param.applicantIdNo},</if>
+			<if test="applicantPhoneNo != null">applicant_phone_no = #{param.applicantPhoneNo},</if>
+			<if test="applicantEmail != null">applicant_email = #{param.applicantEmail},</if>
+			<if test="insuredName != null">insured_name = #{param.insuredName},</if>
+			<if test="insuredIdNo != null">insured_id_no = #{param.insuredIdNo},</if>
+			<if test="insuredPhoneNo != null">insured_phone_no = #{param.insuredPhoneNo},</if>
+			<if test="insuredEmail != null">insured_email = #{param.insuredEmail},</if>
+			<if test="addresseeName != null">addressee_name = #{param.addresseeName},</if>
+			<if test="addresseeMobile != null">addressee_mobile = #{param.addresseeMobile},</if>
+			<if test="sendDate != null">send_date = #{param.sendDate},</if>
+			<if test="addresseeProvince != null">addressee_province = #{param.addresseeProvince},</if>
+			<if test="addresseeCity != null">addressee_city = #{param.addresseeCity},</if>
+			<if test="addresseeTown != null">addressee_town = #{param.addresseeTown},</if>
+			<if test="addresseeDetails != null">addressee_details = #{param.addresseeDetails},</if>
+			<if test="insuredAddresseeDetails != null">insured_addressee_details = #{param.insuredAddresseeDetails},</if>
+			<if test="insureInfo != null">insure_info = #{param.insureInfo},</if>
+			<if test="createTime != null">create_time = #{param.createTime},</if>
+			<if test="updateTime != null">update_time = #{param.updateTime},</if>
+		</where>
+	</update>
+	<update id="updateOrderDetailByUniqueIndexOnOrderId">
+		update t_order_detail
+		<set>
+			order_id={orderDetail.orderId},
+			insure_city={orderDetail.insureCity},
+			car_plate_no={orderDetail.carPlateNo},
+			has_plate={orderDetail.hasPlate},
+			customer_name={orderDetail.customerName},
+			id_card={orderDetail.idCard},
+			phone_no={orderDetail.phoneNo},
+			email={orderDetail.email},
+			vehicle_id_no={orderDetail.vehicleIdNo},
+			engine_no={orderDetail.engineNo},
+			brand_modal={orderDetail.brandModal},
+			brand_modal_ch={orderDetail.brandModalCh},
+			register_date={orderDetail.registerDate},
+			is_secondhand={orderDetail.isSecondhand},
+			transfor_date={orderDetail.transforDate},
+			total_price={orderDetail.totalPrice},
+			price_total_compulsory={orderDetail.priceTotalCompulsory},
+			price_total_business={orderDetail.priceTotalBusiness},
+			price_compulsory={orderDetail.priceCompulsory},
+			price_tax={orderDetail.priceTax},
+			date_compulsory={orderDetail.dateCompulsory},
+			date_business={orderDetail.dateBusiness},
+			applicant_name={orderDetail.applicantName},
+			applicant_id_no={orderDetail.applicantIdNo},
+			applicant_phone_no={orderDetail.applicantPhoneNo},
+			applicant_email={orderDetail.applicantEmail},
+			insured_name={orderDetail.insuredName},
+			insured_id_no={orderDetail.insuredIdNo},
+			insured_phone_no={orderDetail.insuredPhoneNo},
+			insured_email={orderDetail.insuredEmail},
+			addressee_name={orderDetail.addresseeName},
+			addressee_mobile={orderDetail.addresseeMobile},
+			send_date={orderDetail.sendDate},
+			addressee_province={orderDetail.addresseeProvince},
+			addressee_city={orderDetail.addresseeCity},
+			addressee_town={orderDetail.addresseeTown},
+			addressee_details={orderDetail.addresseeDetails},
+			insured_addressee_details={orderDetail.insuredAddresseeDetails},
+			insure_info={orderDetail.insureInfo},
+			create_time={orderDetail.createTime},
+			update_time={orderDetail.updateTime}
+		</set>
+		<where>
+			AND order_id={orderId}
+		</where>
+	</update>
+	<select id="selectOrderDetailByClass" resultMap="orderDetailMap"  resultType="yyj.entity.OrderDetail" parameterType="yyj.entity.OrderDetail">
+		select
+			order_id,insure_city,car_plate_no,has_plate,customer_name,id_card,phone_no,email,vehicle_id_no,engine_no,brand_modal,brand_modal_ch,register_date,is_secondhand,transfor_date,total_price,price_total_compulsory,price_total_business,price_compulsory,price_tax,date_compulsory,date_business,applicant_name,applicant_id_no,applicant_phone_no,applicant_email,insured_name,insured_id_no,insured_phone_no,insured_email,addressee_name,addressee_mobile,send_date,addressee_province,addressee_city,addressee_town,addressee_details,insured_addressee_details,insure_info,create_time,update_time
+		from t_order_detail
+		<where>
+			<if test="orderId != null">order_id = #{orderId},</if>
+			<if test="insureCity != null">insure_city = #{insureCity},</if>
+			<if test="carPlateNo != null">car_plate_no = #{carPlateNo},</if>
+			<if test="hasPlate != null">has_plate = #{hasPlate},</if>
+			<if test="customerName != null">customer_name = #{customerName},</if>
+			<if test="idCard != null">id_card = #{idCard},</if>
+			<if test="phoneNo != null">phone_no = #{phoneNo},</if>
+			<if test="email != null">email = #{email},</if>
+			<if test="vehicleIdNo != null">vehicle_id_no = #{vehicleIdNo},</if>
+			<if test="engineNo != null">engine_no = #{engineNo},</if>
+			<if test="brandModal != null">brand_modal = #{brandModal},</if>
+			<if test="brandModalCh != null">brand_modal_ch = #{brandModalCh},</if>
+			<if test="registerDate != null">register_date = #{registerDate},</if>
+			<if test="isSecondhand != null">is_secondhand = #{isSecondhand},</if>
+			<if test="transforDate != null">transfor_date = #{transforDate},</if>
+			<if test="totalPrice != null">total_price = #{totalPrice},</if>
+			<if test="priceTotalCompulsory != null">price_total_compulsory = #{priceTotalCompulsory},</if>
+			<if test="priceTotalBusiness != null">price_total_business = #{priceTotalBusiness},</if>
+			<if test="priceCompulsory != null">price_compulsory = #{priceCompulsory},</if>
+			<if test="priceTax != null">price_tax = #{priceTax},</if>
+			<if test="dateCompulsory != null">date_compulsory = #{dateCompulsory},</if>
+			<if test="dateBusiness != null">date_business = #{dateBusiness},</if>
+			<if test="applicantName != null">applicant_name = #{applicantName},</if>
+			<if test="applicantIdNo != null">applicant_id_no = #{applicantIdNo},</if>
+			<if test="applicantPhoneNo != null">applicant_phone_no = #{applicantPhoneNo},</if>
+			<if test="applicantEmail != null">applicant_email = #{applicantEmail},</if>
+			<if test="insuredName != null">insured_name = #{insuredName},</if>
+			<if test="insuredIdNo != null">insured_id_no = #{insuredIdNo},</if>
+			<if test="insuredPhoneNo != null">insured_phone_no = #{insuredPhoneNo},</if>
+			<if test="insuredEmail != null">insured_email = #{insuredEmail},</if>
+			<if test="addresseeName != null">addressee_name = #{addresseeName},</if>
+			<if test="addresseeMobile != null">addressee_mobile = #{addresseeMobile},</if>
+			<if test="sendDate != null">send_date = #{sendDate},</if>
+			<if test="addresseeProvince != null">addressee_province = #{addresseeProvince},</if>
+			<if test="addresseeCity != null">addressee_city = #{addresseeCity},</if>
+			<if test="addresseeTown != null">addressee_town = #{addresseeTown},</if>
+			<if test="addresseeDetails != null">addressee_details = #{addresseeDetails},</if>
+			<if test="insuredAddresseeDetails != null">insured_addressee_details = #{insuredAddresseeDetails},</if>
+			<if test="insureInfo != null">insure_info = #{insureInfo},</if>
+			<if test="createTime != null">create_time = #{createTime},</if>
+			<if test="updateTime != null">update_time = #{updateTime},</if>
+		</where>
+	</select>
+	<select id="selectOrderDetailByUniqueIndexOnOrderId" resultType="yyj.entity.OrderDetail" resultMap="orderDetailMap" >
+		select
+			order_id,insure_city,car_plate_no,has_plate,customer_name,id_card,phone_no,email,vehicle_id_no,engine_no,brand_modal,brand_modal_ch,register_date,is_secondhand,transfor_date,total_price,price_total_compulsory,price_total_business,price_compulsory,price_tax,date_compulsory,date_business,applicant_name,applicant_id_no,applicant_phone_no,applicant_email,insured_name,insured_id_no,insured_phone_no,insured_email,addressee_name,addressee_mobile,send_date,addressee_province,addressee_city,addressee_town,addressee_details,insured_addressee_details,insure_info,create_time,update_time
+		from t_order_detail
+		<where>
+			AND order_id={orderId}
+		</where>
+	</select>
+	<resultMap id="orderDetailMap" type="yyj.entity.OrderDetail">
+		<result property="orderId" 			column="order_id"></result>
+		<result property="insureCity" 			column="insure_city"></result>
+		<result property="carPlateNo" 			column="car_plate_no"></result>
+		<result property="hasPlate" 			column="has_plate"></result>
+		<result property="customerName" 			column="customer_name"></result>
+		<result property="idCard" 			column="id_card"></result>
+		<result property="phoneNo" 			column="phone_no"></result>
+		<result property="email" 			column="email"></result>
+		<result property="vehicleIdNo" 			column="vehicle_id_no"></result>
+		<result property="engineNo" 			column="engine_no"></result>
+		<result property="brandModal" 			column="brand_modal"></result>
+		<result property="brandModalCh" 			column="brand_modal_ch"></result>
+		<result property="registerDate" 			column="register_date"></result>
+		<result property="isSecondhand" 			column="is_secondhand"></result>
+		<result property="transforDate" 			column="transfor_date"></result>
+		<result property="totalPrice" 			column="total_price"></result>
+		<result property="priceTotalCompulsory" 			column="price_total_compulsory"></result>
+		<result property="priceTotalBusiness" 			column="price_total_business"></result>
+		<result property="priceCompulsory" 			column="price_compulsory"></result>
+		<result property="priceTax" 			column="price_tax"></result>
+		<result property="dateCompulsory" 			column="date_compulsory"></result>
+		<result property="dateBusiness" 			column="date_business"></result>
+		<result property="applicantName" 			column="applicant_name"></result>
+		<result property="applicantIdNo" 			column="applicant_id_no"></result>
+		<result property="applicantPhoneNo" 			column="applicant_phone_no"></result>
+		<result property="applicantEmail" 			column="applicant_email"></result>
+		<result property="insuredName" 			column="insured_name"></result>
+		<result property="insuredIdNo" 			column="insured_id_no"></result>
+		<result property="insuredPhoneNo" 			column="insured_phone_no"></result>
+		<result property="insuredEmail" 			column="insured_email"></result>
+		<result property="addresseeName" 			column="addressee_name"></result>
+		<result property="addresseeMobile" 			column="addressee_mobile"></result>
+		<result property="sendDate" 			column="send_date"></result>
+		<result property="addresseeProvince" 			column="addressee_province"></result>
+		<result property="addresseeCity" 			column="addressee_city"></result>
+		<result property="addresseeTown" 			column="addressee_town"></result>
+		<result property="addresseeDetails" 			column="addressee_details"></result>
+		<result property="insuredAddresseeDetails" 			column="insured_addressee_details"></result>
+		<result property="insureInfo" 			column="insure_info"></result>
+		<result property="createTime" 			column="create_time"></result>
+		<result property="updateTime" 			column="update_time"></result>
+	</resultMap>
+</mapper>

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="yyj.dao.CarOwnerDao">
+	<insert id="addCarOwner" parameterType="yyj.entity.CarOwner">
+		insert into t_car_owner
+		(car_plate_no,customer_name,id_card,vehicle_id_no,engine_no,brand_modal,brand_modal_ch,register_date,is_secondhand,transfor_date)
+		values
+		(
+			<if test="carPlateNo != null">#{carPlateNo},</if>
+			<if test="carPlateNo == null">default,</if>
+			<if test="customerName != null">#{customerName},</if>
+			<if test="customerName == null">default,</if>
+			<if test="idCard != null">#{idCard},</if>
+			<if test="idCard == null">default,</if>
+			<if test="vehicleIdNo != null">#{vehicleIdNo},</if>
+			<if test="vehicleIdNo == null">default,</if>
+			<if test="engineNo != null">#{engineNo},</if>
+			<if test="engineNo == null">default,</if>
+			<if test="brandModal != null">#{brandModal},</if>
+			<if test="brandModal == null">default,</if>
+			<if test="brandModalCh != null">#{brandModalCh},</if>
+			<if test="brandModalCh == null">default,</if>
+			<if test="registerDate != null">#{registerDate},</if>
+			<if test="registerDate == null">default,</if>
+			<if test="isSecondhand != null">#{isSecondhand},</if>
+			<if test="isSecondhand == null">default,</if>
+			<if test="transforDate != null">#{transforDate},</if>
+			<if test="transforDate == null">default,</if>
+		)
+	</insert>
+	<delete id="deleteCarOwnerByClass" parameterType="yyj.entity.CarOwner">
+		delete from t_car_owner
+		<where>
+			<if test="carPlateNo != null"> and car_plate_no = #{carPlateNo}  </if>
+			<if test="customerName != null"> and customer_name = #{customerName}  </if>
+			<if test="idCard != null"> and id_card = #{idCard}  </if>
+			<if test="vehicleIdNo != null"> and vehicle_id_no = #{vehicleIdNo}  </if>
+			<if test="engineNo != null"> and engine_no = #{engineNo}  </if>
+			<if test="brandModal != null"> and brand_modal = #{brandModal}  </if>
+			<if test="brandModalCh != null"> and brand_modal_ch = #{brandModalCh}  </if>
+			<if test="registerDate != null"> and register_date = #{registerDate}  </if>
+			<if test="isSecondhand != null"> and is_secondhand = #{isSecondhand}  </if>
+			<if test="transforDate != null"> and transfor_date = #{transforDate}  </if>
+		</where>
+	</delete>
+	<delete id="deleteCarOwnerByPkCarPlateNo" parameterType="java.lang.String">
+		delete from t_car_owner
+		<where>
+			car_plate_no={CarPlateNo}
+		</where>
+	</delete>
+	<delete id="deleteCarOwnerByPkCustomerName" parameterType="java.lang.String">
+		delete from t_car_owner
+		<where>
+			customer_name={CustomerName}
+		</where>
+	</delete>
+	<delete id="deleteCarOwnerByUniqueIndexOnCarPlateNoAndCustomerName">
+		delete from t_car_owner
+		<where>
+			AND car_plate_no = #{carPlateNo}
+			AND customer_name = #{customerName}
+		</where>
+	</delete>
+	<delete id="deleteCarOwnerByUniqueIndexOnCarPlateNo">
+		delete from t_car_owner
+		<where>
+			AND car_plate_no = #{carPlateNo}
+		</where>
+	</delete>
+	<update id="updateCarOwnerByClass">
+		update t_car_owner
+		<set>
+			car_plate_no={carOwner.carPlateNo},
+			customer_name={carOwner.customerName},
+			id_card={carOwner.idCard},
+			vehicle_id_no={carOwner.vehicleIdNo},
+			engine_no={carOwner.engineNo},
+			brand_modal={carOwner.brandModal},
+			brand_modal_ch={carOwner.brandModalCh},
+			register_date={carOwner.registerDate},
+			is_secondhand={carOwner.isSecondhand},
+			transfor_date={carOwner.transforDate}
+		</set>
+		<where>
+			<if test="carPlateNo != null">car_plate_no = #{param.carPlateNo},</if>
+			<if test="customerName != null">customer_name = #{param.customerName},</if>
+			<if test="idCard != null">id_card = #{param.idCard},</if>
+			<if test="vehicleIdNo != null">vehicle_id_no = #{param.vehicleIdNo},</if>
+			<if test="engineNo != null">engine_no = #{param.engineNo},</if>
+			<if test="brandModal != null">brand_modal = #{param.brandModal},</if>
+			<if test="brandModalCh != null">brand_modal_ch = #{param.brandModalCh},</if>
+			<if test="registerDate != null">register_date = #{param.registerDate},</if>
+			<if test="isSecondhand != null">is_secondhand = #{param.isSecondhand},</if>
+			<if test="transforDate != null">transfor_date = #{param.transforDate},</if>
+		</where>
+	</update>
+	<update id="updateCarOwnerByPkCarPlateNo" parameterType="java.lang.String">
+		update t_car_owner
+		<set>
+			car_plate_no={carOwner.carPlateNo},
+			customer_name={carOwner.customerName},
+			id_card={carOwner.idCard},
+			vehicle_id_no={carOwner.vehicleIdNo},
+			engine_no={carOwner.engineNo},
+			brand_modal={carOwner.brandModal},
+			brand_modal_ch={carOwner.brandModalCh},
+			register_date={carOwner.registerDate},
+			is_secondhand={carOwner.isSecondhand},
+			transfor_date={carOwner.transforDate}
+		</set>
+		<where>
+			car_plate_no={CarPlateNo}
+		</where>
+	</update>
+	<update id="updateCarOwnerByPkCustomerName" parameterType="java.lang.String">
+		update t_car_owner
+		<set>
+			car_plate_no={carOwner.carPlateNo},
+			customer_name={carOwner.customerName},
+			id_card={carOwner.idCard},
+			vehicle_id_no={carOwner.vehicleIdNo},
+			engine_no={carOwner.engineNo},
+			brand_modal={carOwner.brandModal},
+			brand_modal_ch={carOwner.brandModalCh},
+			register_date={carOwner.registerDate},
+			is_secondhand={carOwner.isSecondhand},
+			transfor_date={carOwner.transforDate}
+		</set>
+		<where>
+			customer_name={CustomerName}
+		</where>
+	</update>
+	<update id="updateCarOwnerByUniqueIndexOnCarPlateNoAndCustomerName">
+		update t_car_owner
+		<set>
+			car_plate_no={carOwner.carPlateNo},
+			customer_name={carOwner.customerName},
+			id_card={carOwner.idCard},
+			vehicle_id_no={carOwner.vehicleIdNo},
+			engine_no={carOwner.engineNo},
+			brand_modal={carOwner.brandModal},
+			brand_modal_ch={carOwner.brandModalCh},
+			register_date={carOwner.registerDate},
+			is_secondhand={carOwner.isSecondhand},
+			transfor_date={carOwner.transforDate}
+		</set>
+		<where>
+			AND car_plate_no={carPlateNo}
+			AND customer_name={customerName}
+		</where>
+	</update>
+	<update id="updateCarOwnerByUniqueIndexOnCarPlateNo">
+		update t_car_owner
+		<set>
+			car_plate_no={carOwner.carPlateNo},
+			customer_name={carOwner.customerName},
+			id_card={carOwner.idCard},
+			vehicle_id_no={carOwner.vehicleIdNo},
+			engine_no={carOwner.engineNo},
+			brand_modal={carOwner.brandModal},
+			brand_modal_ch={carOwner.brandModalCh},
+			register_date={carOwner.registerDate},
+			is_secondhand={carOwner.isSecondhand},
+			transfor_date={carOwner.transforDate}
+		</set>
+		<where>
+			AND car_plate_no={carPlateNo}
+		</where>
+	</update>
+	<select id="selectCarOwnerByClass" resultMap="carOwnerMap"  resultType="yyj.entity.CarOwner" parameterType="yyj.entity.CarOwner">
+		select
+			car_plate_no,customer_name,id_card,vehicle_id_no,engine_no,brand_modal,brand_modal_ch,register_date,is_secondhand,transfor_date
+		from t_car_owner
+		<where>
+			<if test="carPlateNo != null">car_plate_no = #{carPlateNo},</if>
+			<if test="customerName != null">customer_name = #{customerName},</if>
+			<if test="idCard != null">id_card = #{idCard},</if>
+			<if test="vehicleIdNo != null">vehicle_id_no = #{vehicleIdNo},</if>
+			<if test="engineNo != null">engine_no = #{engineNo},</if>
+			<if test="brandModal != null">brand_modal = #{brandModal},</if>
+			<if test="brandModalCh != null">brand_modal_ch = #{brandModalCh},</if>
+			<if test="registerDate != null">register_date = #{registerDate},</if>
+			<if test="isSecondhand != null">is_secondhand = #{isSecondhand},</if>
+			<if test="transforDate != null">transfor_date = #{transforDate},</if>
+		</where>
+	</select>
+	<select id="selectCarOwnerByPkCarPlateNo"  resultMap="carOwnerMap"  resultType="yyj.entity.CarOwner" parameterType="java.lang.String">
+		select
+			car_plate_no,customer_name,id_card,vehicle_id_no,engine_no,brand_modal,brand_modal_ch,register_date,is_secondhand,transfor_date
+		from t_car_owner
+		<where>
+			car_plate_no={CarPlateNo}
+		</where>
+	</select>
+	<select id="selectCarOwnerByPkCustomerName"  resultMap="carOwnerMap"  resultType="yyj.entity.CarOwner" parameterType="java.lang.String">
+		select
+			car_plate_no,customer_name,id_card,vehicle_id_no,engine_no,brand_modal,brand_modal_ch,register_date,is_secondhand,transfor_date
+		from t_car_owner
+		<where>
+			customer_name={CustomerName}
+		</where>
+	</select>
+	<select id="selectCarOwnerByUniqueIndexOnCarPlateNoAndCustomerName" resultType="yyj.entity.CarOwner" resultMap="carOwnerMap" >
+		select
+			car_plate_no,customer_name,id_card,vehicle_id_no,engine_no,brand_modal,brand_modal_ch,register_date,is_secondhand,transfor_date
+		from t_car_owner
+		<where>
+			AND car_plate_no={carPlateNo}
+			AND customer_name={customerName}
+		</where>
+	</select>
+	<select id="selectCarOwnerByUniqueIndexOnCarPlateNo" resultType="yyj.entity.CarOwner" resultMap="carOwnerMap" >
+		select
+			car_plate_no,customer_name,id_card,vehicle_id_no,engine_no,brand_modal,brand_modal_ch,register_date,is_secondhand,transfor_date
+		from t_car_owner
+		<where>
+			AND car_plate_no={carPlateNo}
+		</where>
+	</select>
+	<resultMap id="carOwnerMap" type="yyj.entity.CarOwner">
+		<result property="carPlateNo" 			column="car_plate_no"></result>
+		<result property="customerName" 			column="customer_name"></result>
+		<result property="idCard" 			column="id_card"></result>
+		<result property="vehicleIdNo" 			column="vehicle_id_no"></result>
+		<result property="engineNo" 			column="engine_no"></result>
+		<result property="brandModal" 			column="brand_modal"></result>
+		<result property="brandModalCh" 			column="brand_modal_ch"></result>
+		<result property="registerDate" 			column="register_date"></result>
+		<result property="isSecondhand" 			column="is_secondhand"></result>
+		<result property="transforDate" 			column="transfor_date"></result>
+	</resultMap>
+</mapper>

@@ -7,18 +7,19 @@ import java.sql.Blob;
 import java.sql.Clob;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.sql.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
 
@@ -26,6 +27,7 @@ import javax.sql.DataSource;
 import javax.swing.JOptionPane;
 
 import org.apache.commons.dbcp.BasicDataSourceFactory;
+
 
 
 public class SqlUtilForDB {
@@ -609,7 +611,7 @@ public class SqlUtilForDB {
 	 * @param tableName
 	 * @return
 	 */
-	public static List<IndexInfo> 	   getIndexInfos(Connection conn,String tableName){
+	public static List<IndexInfo> 	   getIndexList(Connection conn,String tableName){
 		try {
 			DatabaseMetaData metaData=conn.getMetaData();
 			return getIndexInfos(metaData, tableName);
@@ -617,6 +619,32 @@ public class SqlUtilForDB {
 			throw new RuntimeException("获取索引信息异常3",e);
 		}
 	}
+	/**
+	 * 以map形式获取索引信息
+	 * @param conn 		
+	 * @param tableName
+	 * @return
+	 * 		map<indexPosition,List<indexInfo>>
+	 */
+	public static Map<String , List<IndexInfo>> getIndexInfos(Connection conn,String tableName){
+		try {
+			Map<String , List<IndexInfo>>map=new LinkedHashMap<>();
+			List<IndexInfo> indexInfos=getIndexList(conn, tableName);
+			for(IndexInfo each:indexInfos){
+				if(map.containsKey(each.getIndexName()))
+					map.get(each.getIndexName()).add(each);
+				else{
+					List<IndexInfo> list=new ArrayList<>();
+					list.add(each);
+					map.put(each.getIndexName(),list);
+				}
+			}
+			return map;
+		} catch (Exception e) {
+			throw new RuntimeException("获取索引信息异常4",e);
+		}
+	}
+	
 	/**
 	 * 获取指定名称的表
 	 * @param conn
@@ -642,6 +670,7 @@ public class SqlUtilForDB {
 			throw new RuntimeException("获取表信息异常",e);
 		}
 	}
+	
 	/**
 	 * 获取数据库中的所有表及视图
 	 * 
@@ -674,41 +703,44 @@ public class SqlUtilForDB {
 	 * @param annotationFlag  
 	 * 			true  会增加hibernate注解
 	 * 			false 不会增加注解
+	 * @prefix 表前缀,配置后生成的javaBean名称会过滤前缀
 	 * @return
 	 */
-	public static String makeBeanFile(DBTable table,boolean annotationFlag,String prefix){
+	public static String makeBeanFile(DBTable table,boolean annotationFlag,String prefix,boolean remind){
 		String fileContent=null;
 		try {
+			prefix=prefix==null?"":prefix;
 			StringBuffer buffer=new StringBuffer();
+			Map<String , String> map=getSomeElement(table, prefix); 
 			//-------------------------------package---------------------------------
-			String packagePath=SqlUtilForDB.class.getPackage().getName();
-			packagePath=packagePath.substring(0,packagePath.lastIndexOf('.')+1);
-			packagePath+="entity";
-			buffer.append("package "+packagePath+";\n");
+			String packagePath=map.get("package");
+			buffer.append("package "+packagePath+";\n\n");
 			//--------------------------------import---------------------------------
 			List<ColumnInfo> columnInfos=table.getColumnInfos();
 			List<PrimaryKeyInfo> pkInfos=table.getPkInfo();
 			Map<String , PrimaryKeyInfo> pkMap=listToMap(pkInfos);
 			Set<String> tempSet=new HashSet<>();
-			for(ColumnInfo each:columnInfos)
-				tempSet.add(each.getJavaType());
+			for(ColumnInfo each:columnInfos){
+				String paramType=each.getJavaType();
+				paramType=paramType.startsWith("[L")?paramType.substring(2):paramType;
+				paramType=paramType.endsWith(";")?paramType.substring(0, paramType.length()-1):paramType;
+				tempSet.add(paramType);
+			}
 			for(String each:tempSet)
 				if(each.startsWith("[L")||each.endsWith(";"))
 					continue;
 				else
-					buffer.append("import "+each+";\n");	
+					buffer.append("import "+each+";\n");
+			buffer.append("\n");
 			if(annotationFlag){
 				buffer.append("import "+"javax.persistence.Column"+";\n");
 				buffer.append("import "+"javax.persistence.Entity"+";\n");
 				buffer.append("import "+"javax.persistence.Table"+";\n");
 				buffer.append("import "+"javax.persistence.Id"+";\n");
+				buffer.append("\n");
 			}
 			//--------------------------------class name------------------------------
-			String className=table.getTableInfo().getTableName();
-			if(prefix!=null&&!prefix.isEmpty())
-				className=className.startsWith(prefix)?className.replaceFirst(prefix, ""):className;
-			className=CheckReplaceUtil.firstCharUpcase(className);
-			className=CheckReplaceUtil.underlineLowcaserToUpcase(className);
+			String className=map.get("className");
 			//---------------------------------class comment---------------------------
 			String classRemark=table.getTableInfo().getRemark();
 			buffer.append("/**\n");
@@ -722,6 +754,7 @@ public class SqlUtilForDB {
 				buffer.append("@Entity"+"\n");
 				buffer.append("@Table"+"(name=\""+table.getTableInfo().getTableName()+"\")\n");
 			}
+			buffer.append("\n");
 			//----------------------------------class body-------------------------------
 			buffer.append("public class "+className+"{"+"\n");
 			//---------------------------------- field ---------------------------------
@@ -742,7 +775,7 @@ public class SqlUtilForDB {
 					buffer.append("unique="+pkMap.containsKey(each.getColumnName())+",");
 					buffer.append("nullable="+each.getNullAble()+")\n");
 				}
-				buffer.append("private "+javaType+" "+name+";\n");
+				buffer.append("private "+javaType+" "+name+";\n\n");
 			}
 			//---------------------------------------set & get method------------------------
 			for(ColumnInfo each:columnInfos){
@@ -757,12 +790,12 @@ public class SqlUtilForDB {
 				buffer.append("*/\n");
 				buffer.append("public "+javaType+" get"+CheckReplaceUtil.firstCharUpcase(name)+"(){\n");
 				buffer.append("return this."+name+";\n");
-				buffer.append("}\n");
+				buffer.append("}\n\n");
 				buffer.append("/**设置");
 				buffer.append(remark==null|remark.isEmpty()?name:remark);
 				buffer.append("*/\n");
 				buffer.append("public "+"void"+" set"+CheckReplaceUtil.firstCharUpcase(name)+"("+javaType+" "+name+"){\n");
-				buffer.append("this."+name+"="+name+";\n");
+				buffer.append("this."+name+"="+name+";\n\n");
 				buffer.append("}\n");
 			}
 			buffer.append("}\n");
@@ -780,6 +813,8 @@ public class SqlUtilForDB {
 			path+=className+".java";
 			file=new File(path);
 			FileUtil.writeStrToFile(fileContent, file, "utf-8");
+			if(remind)
+				JOptionPane.showMessageDialog(null, "生成单个javaBean成功\n路径:"+packagePath+"\n请刷新项目", "提示", JOptionPane.ERROR_MESSAGE); 
 			return fileContent;
 		} catch (Exception e) {
 			throw new RuntimeException("构建bean文件内容异常",e);
@@ -790,14 +825,673 @@ public class SqlUtilForDB {
 	 * @param list
 	 * @param annotationFlag
 	 */
-	public static void makeBeanFiles(List<DBTable> list,boolean annotationFlag,String prefix){
+	public static void makeBeanFiles(List<DBTable> list,String prefix,boolean annotationFlag,boolean remind){
+		prefix=prefix==null?"":prefix;
 		String packagePath=SqlUtilForDB.class.getPackage().getName();
 		packagePath=packagePath.substring(0,packagePath.lastIndexOf('.')+1);
 		packagePath+="entity";
 		for(DBTable each:list)
-			makeBeanFile(each, annotationFlag,prefix);
-		JOptionPane.showMessageDialog(null, "生成javaBean成功\n路径:"+packagePath+"\n请刷新项目", "提示", JOptionPane.ERROR_MESSAGE); 
+			makeBeanFile(each, annotationFlag,prefix,false);
+		if(remind)
+			JOptionPane.showMessageDialog(null, "生成所有javaBean成功\n路径:"+packagePath+"\n请刷新项目", "提示", JOptionPane.ERROR_MESSAGE); 
 	}
+	/**
+	 * 根据表信息生成mybatis映射文件
+	 * @param table
+	 * @return
+	 */
+	
+	public static String makeMybatisFile(DBTable table,String prefix,String descOrAsc,boolean paging,boolean remind){
+		try {
+			String fileContent=null;
+			prefix=prefix==null?"":prefix;
+			StringBuffer temp = new StringBuffer();
+			Map<String , String> map=getSomeElement(table, prefix); 
+			temp.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + "<!DOCTYPE mapper PUBLIC "
+					+ "\"-//ibatis.apache.org//DTD Mapper 3.0//EN\" "
+					+ "\"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd\">\n");
+			temp.append("<mapper namespace=\""+map.get("package").replaceFirst("entity", "dao.")+map.get("className").replace("Bean","")+"Dao\">\n");
+			temp.append(createInsert(table, prefix));
+			temp.append(createDelete(table, prefix));
+			temp.append(createUpdate(table, prefix));
+			temp.append(createSelect(table, prefix,descOrAsc,paging));
+			temp.append(createResultMap(table,prefix));
+			temp.append("</mapper>");
+			fileContent=temp.toString();
+			//--------------------------------------------------------------------------------------
+			String packagePath=SqlUtilForDB.class.getPackage().getName();
+			packagePath=packagePath.substring(0,packagePath.lastIndexOf('.')+1);
+			packagePath+="dao";
+			String path=SqlUtilForDB.class.getClassLoader().getResource("").toURI().getPath();
+			path=path.substring(0,path.indexOf("target"))+"src/main/java/";
+			String[] strs=packagePath.split("\\.");
+			for(String each:strs)
+				path+=each+"/";
+			File file=new File(path);
+			if(!file.exists()||!file.isDirectory())
+				file.mkdir();
+			path+=map.get("className").replace("Bean","");
+			path+="Mapper.xml";
+			file=new File(path);
+			fileContent=FileUtil.xmlFormat(fileContent);
+			FileUtil.writeStrToFile(fileContent, file, "utf-8");
+			if(remind)
+				JOptionPane.showMessageDialog(null, "生成mybatis Mapper文件成功\n路径:"+packagePath+"\n请刷新项目", "提示", JOptionPane.ERROR_MESSAGE); 
+			return fileContent;
+		} catch (Exception e) {
+			throw new RuntimeException("");
+		}
+	}
+	/**
+	 * 传入DBTable列表生成mybatis mapper文件
+	 * @param list 		DBTable列表
+	 * @param prefix	表名前缀修复
+	 * @param descOrAsc 选择时倒序或者正序
+	 * @param paging 	分页|不分页
+	 * @param remind 	是否弹窗提示
+	 */
+	public static void makeMybatisFiles(List<DBTable> list,String prefix,String descOrAsc,boolean paging,boolean remind){
+		prefix=prefix==null?"":prefix;
+		String packagePath=SqlUtilForDB.class.getPackage().getName();
+		packagePath=packagePath.substring(0,packagePath.lastIndexOf('.')+1);
+		packagePath+="dao";
+		for(DBTable each:list)
+			makeMybatisFile(each, prefix,descOrAsc,paging, false);
+		if(remind)
+			JOptionPane.showMessageDialog(null, "生成mybatis Mapper成功\n路径:"+packagePath+"\n请刷新项目", "提示", JOptionPane.ERROR_MESSAGE); 
+	}
+	/**
+	 * 根据DBtable信息生成 mybatisDao
+	 * @param table 			表信息
+	 * @param prefix 			表名前缀过滤	
+	 * @param remind 			是否弹窗提示
+	 * @return
+	 */
+	public static String makeMybatisDao(DBTable table,String prefix,boolean remind){
+		
+		String fileContent=null;
+		try {
+			prefix=prefix==null?"":prefix;
+			StringBuffer buffer=new StringBuffer();
+			//-------------------------------package---------------------------------
+			String packagePath=SqlUtilForDB.class.getPackage().getName();
+			packagePath=packagePath.substring(0,packagePath.lastIndexOf('.')+1);
+			packagePath+="dao";
+			buffer.append("package "+packagePath+";\n\n");
+			Map<String , String> map=getSomeElement(table, prefix); 
+			String className=map.get("className");
+			//--------------------------------import---------------------------------
+			List<ColumnInfo> columnInfos=table.getColumnInfos();
+			List<PrimaryKeyInfo> pkInfos=table.getPkInfo();
+			Map<String, ColumnInfo>columnMap=listToMap(columnInfos);
+			Map<String , List<IndexInfo>> indexInfos=table.getIndexInfo();
+			buffer.append("import "+map.get("class")+";\n");
+			buffer.append("import org.apache.ibatis.annotations.Param;\n");
+			buffer.append("import java.util.*;\n");
+			//---------------------------------class comment---------------------------
+			String classRemark=table.getTableInfo().getRemark();
+			buffer.append("/**\n");
+			buffer.append("*");
+			buffer.append(classRemark==null||classRemark.isEmpty()?"no comment":classRemark);
+			buffer.append("\n");
+			buffer.append("*"+"@author yyj | auto generator\n");
+			buffer.append("*"+"@version "+"1.0.0 "+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date())+"\n");
+			buffer.append("*/\n");
+			buffer.append("\n");
+			//----------------------------------class body-------------------------------
+			buffer.append("public interface "+map.get("className").replaceFirst("Bean", "")+"Dao"+"{"+"\n");
+			buffer.append("\n\n"); 
+			//----------------------------------insert-----------------------------------------------
+			buffer.append("public void add"+map.get("className")+"("+map.get("className")+" "+CheckReplaceUtil.firstCharLowcase(map.get("className"))+");\n");
+			buffer.append("\n"); 
+			//----------------------------------delete-----------------------------------------------
+			buffer.append("public void delete"+map.get("className")+"ByClass("+map.get("className")+" "+CheckReplaceUtil.firstCharLowcase(map.get("className"))+");\n");
+			String paramType=null;
+			if(pkInfos!=null&&!pkInfos.isEmpty()){
+				for(PrimaryKeyInfo each:pkInfos){
+					String name=each.getColumnName();
+					name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+					name=CheckReplaceUtil.firstCharUpcase(name);
+					paramType=columnMap.get(each.getColumnName()).getJavaType();
+					paramType=paramType.startsWith("[L")?paramType.substring(2):paramType;
+					paramType=paramType.endsWith(";")?paramType.substring(0, paramType.length()-1)+"[]":paramType;
+					paramType=paramType.substring(paramType.lastIndexOf(".")+1);
+					buffer.append("public void delete"+map.get("className")+"ByPk"+name+"("+paramType+" "+CheckReplaceUtil.firstCharLowcase(name)+");\n");
+				}
+			}
+			if(indexInfos!=null&&!indexInfos.isEmpty()){
+				for(Entry<String, List<IndexInfo>> each:indexInfos.entrySet()){					
+					List<IndexInfo> value=each.getValue();
+					if(value.get(0).getIsUnique().equals("true"))
+						buffer.append("public void delete"+map.get("className")+"ByUniqueIndexOn");
+					else
+						buffer.append("public void delete"+map.get("className")+"ByIndexOn");
+					for(IndexInfo one:value){
+						String name=one.getColumnName();
+						name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+						buffer.append(CheckReplaceUtil.firstCharUpcase(name)+"And");
+					}
+					buffer.replace(buffer.length() - 3, buffer.length(), "");
+					buffer.append("(");
+					for(IndexInfo one:value){
+						String name=one.getColumnName();
+						name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+						name=CheckReplaceUtil.firstCharUpcase(name);
+						paramType=columnMap.get(one.getColumnName()).getJavaType();
+						paramType=paramType.startsWith("[L")?paramType.substring(2):paramType;
+						paramType=paramType.endsWith(";")?paramType.substring(0, paramType.length()-1)+"[]":paramType;
+						paramType=paramType.substring(paramType.lastIndexOf(".")+1);
+						buffer.append("@Param(value=\""+CheckReplaceUtil.firstCharLowcase(name)+"\")"+paramType+" "+CheckReplaceUtil.firstCharLowcase(name)+",");
+					}
+					buffer.replace(buffer.length()-1,buffer.length(),"");
+					buffer.append(");\n");
+				}
+			}
+			buffer.append("\n"); 
+			//----------------------------------update-----------------------------------------------
+			buffer.append("public void update"+map.get("className")+"ByClass(@Param(value=\""+CheckReplaceUtil.firstCharLowcase(map.get("className"))+"\")"+map.get("className")+" "+CheckReplaceUtil.firstCharLowcase(map.get("className"))+",@Param(value=\"param\")"+map.get("className")+" param);\n");
+			if(pkInfos!=null&&!pkInfos.isEmpty()){
+				for(PrimaryKeyInfo each:pkInfos){
+					String name=each.getColumnName();
+					name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+					name=CheckReplaceUtil.firstCharUpcase(name);
+					paramType=columnMap.get(each.getColumnName()).getJavaType();
+					paramType=paramType.startsWith("[L")?paramType.substring(2):paramType;
+					paramType=paramType.endsWith(";")?paramType.substring(0, paramType.length()-1)+"[]":paramType;
+					paramType=paramType.substring(paramType.lastIndexOf(".")+1);
+					buffer.append("public void update"+map.get("className")+"ByPk"+name+"(@Param(value=\""+CheckReplaceUtil.firstCharLowcase(map.get("className"))+"\")"+map.get("className")+" "+CheckReplaceUtil.firstCharLowcase(map.get("className"))+","+paramType+" "+CheckReplaceUtil.firstCharLowcase(name)+");\n");
+				}
+				if(indexInfos!=null&&!indexInfos.isEmpty()){
+					for(Entry<String, List<IndexInfo>> each:indexInfos.entrySet()){
+						List<IndexInfo> value=each.getValue();
+						if(value.get(0).getIsUnique().equals("true"))
+							buffer.append("public void update"+map.get("className")+"ByUniqueIndexOn");
+						else
+							buffer.append("public void update"+map.get("className")+"ByIndexOn");
+						for(IndexInfo one:value){
+							String name=one.getColumnName();
+							name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+							buffer.append(CheckReplaceUtil.firstCharUpcase(name)+"And");
+						}
+						buffer.replace(buffer.length() - 3, buffer.length(), "");
+						buffer.append("(@Param(value=\""+CheckReplaceUtil.firstCharLowcase(map.get("className"))+"\")"+map.get("className")+" "+CheckReplaceUtil.firstCharLowcase(map.get("className"))+",");
+						for(IndexInfo one:value){
+							String name=one.getColumnName();
+							name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+							name=CheckReplaceUtil.firstCharUpcase(name);
+							paramType=columnMap.get(one.getColumnName()).getJavaType();
+							paramType=paramType.startsWith("[L")?paramType.substring(2):paramType;
+							paramType=paramType.endsWith(";")?paramType.substring(0, paramType.length()-1)+"[]":paramType;
+							paramType=paramType.substring(paramType.lastIndexOf(".")+1);
+							buffer.append("@Param(value=\""+CheckReplaceUtil.firstCharLowcase(name)+"\")"+paramType+" "+CheckReplaceUtil.firstCharLowcase(name)+",");
+						}
+						buffer.replace(buffer.length()-1,buffer.length(),"");
+						buffer.append(");\n");
+					}
+				}
+			}
+			buffer.append("\n"); 
+			//----------------------------------select-----------------------------------------------
+			buffer.append("public List<"+map.get("className")+"> select"+map.get("className")+"ByClass");
+			buffer.append("("+map.get("className")+" "+CheckReplaceUtil.firstCharLowcase(map.get("className"))+");\n");
+		
+			if(pkInfos!=null&&!pkInfos.isEmpty()){
+				for(PrimaryKeyInfo each:pkInfos){
+					String name=each.getColumnName();
+					name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+					name=CheckReplaceUtil.firstCharUpcase(name);
+					paramType=columnMap.get(each.getColumnName()).getJavaType();
+					paramType=paramType.startsWith("[L")?paramType.substring(2):paramType;
+					paramType=paramType.endsWith(";")?paramType.substring(0, paramType.length()-1)+"[]":paramType;
+					paramType=paramType.substring(paramType.lastIndexOf(".")+1);
+					buffer.append("public "+map.get("className")+" select"+map.get("className")+"ByPk"+name);
+					buffer.append("("+paramType+" "+CheckReplaceUtil.firstCharLowcase(name)+");\n");
+				}
+			}
+			
+			if(indexInfos!=null&&!indexInfos.isEmpty()){
+				for(Entry<String, List<IndexInfo>> each:indexInfos.entrySet()){
+					List<IndexInfo> value=each.getValue();
+					if(value.get(0).getIsUnique().equals("true"))
+						buffer.append("public "+map.get("className")+" select"+map.get("className")+"ByUniqueIndexOn");
+					else
+						buffer.append("public List<"+map.get("className")+"> select"+map.get("className")+"ByIndexOn");
+					for(IndexInfo one:value){
+						String name=one.getColumnName();
+						name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+						buffer.append(CheckReplaceUtil.firstCharUpcase(name)+"And");
+					}
+					buffer.replace(buffer.length() - 3, buffer.length(), "");
+					buffer.append("(");
+					for(IndexInfo one:value){
+						String name=one.getColumnName();
+						name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+						name=CheckReplaceUtil.firstCharUpcase(name);
+						paramType=columnMap.get(one.getColumnName()).getJavaType();
+						paramType=paramType.startsWith("[L")?paramType.substring(2):paramType;
+						paramType=paramType.endsWith(";")?paramType.substring(0, paramType.length()-1)+"[]":paramType;
+						paramType=paramType.substring(paramType.lastIndexOf(".")+1);
+						buffer.append("@Param(value=\""+CheckReplaceUtil.firstCharLowcase(name)+"\")"+paramType+" "+CheckReplaceUtil.firstCharLowcase(name)+",");
+					}
+					buffer.replace(buffer.length()-1, buffer.length(), "");
+					buffer.append(");\n");
+				}
+			}
+			buffer.append("\n"); 
+			//--------------------------------------------------------------------------------------
+			buffer.append("}");
+			fileContent=buffer.toString();
+			fileContent=FileUtil.javaFormat(buffer.toString());
+			String path=SqlUtilForDB.class.getClassLoader().getResource("").toURI().getPath();
+			path=path.substring(0,path.indexOf("target"))+"src/main/java/";
+			String[] strs=packagePath.split("\\.");
+			for(String each:strs)
+				path+=each+"/";
+			File file=new File(path);
+			if(!file.exists()||!file.isDirectory())
+				file.mkdir();
+			path+=className+"Dao.java";
+			file=new File(path);
+			FileUtil.writeStrToFile(fileContent, file, "utf-8");
+			if(remind)
+				JOptionPane.showMessageDialog(null, "生成单个Dao成功\n路径:"+packagePath+"\n请刷新项目", "提示", JOptionPane.ERROR_MESSAGE); 
+			return fileContent;
+		} catch (Exception e) {
+			throw new RuntimeException("生成单个dao文件异常",e);
+		}
+	}
+	/**
+	 * 传入 DBTable列表 生成 dao层
+	 * @param list
+	 * @param prefix
+	 * @param remind
+	 */
+	public static void makeMybatisDaoes(List<DBTable> list,String prefix,boolean remind){
+		try {
+			prefix=prefix==null?"":prefix;
+			String packagePath=SqlUtilForDB.class.getPackage().getName();
+			packagePath=packagePath.substring(0,packagePath.lastIndexOf('.')+1);
+			packagePath+="dao";
+			for(DBTable each:list)
+				makeMybatisDao(each, prefix, false);
+			if(remind)
+				JOptionPane.showMessageDialog(null, "生成所有Dao成功\n路径:"+packagePath+"\n请刷新项目", "提示", JOptionPane.ERROR_MESSAGE); 
+		} catch (Exception e) {
+			throw new RuntimeException("生成所有dao文件异常",e);
+		}
+	}
+	/**
+	 * 构建 javaBean ,mapper, dao 
+	 * @param list
+	 * @param prefix
+	 * @param descOrAsc
+	 * @param paging
+	 * @param annotationFlag
+	 */
+	public static void makeAll(List<DBTable> list,String prefix,String descOrAsc,boolean paging,boolean annotationFlag){
+		try {
+			prefix=prefix==null?"":prefix;
+			String packagePath=SqlUtilForDB.class.getPackage().getName();
+			packagePath=packagePath.substring(0,packagePath.lastIndexOf('.')+1);
+			packagePath+="dao";
+			makeBeanFiles(list, prefix, annotationFlag, false);
+			makeMybatisDaoes(list, prefix,false);
+			makeMybatisFiles(list, prefix, descOrAsc, paging, false);
+			JOptionPane.showMessageDialog(null, "生成Dao与mapper成功\n路径:"+packagePath+"\n"+"生成javaBean成功\n路径:"+packagePath.replace("dao", "entity")+"\n请刷新项目", "提示", JOptionPane.ERROR_MESSAGE);
+		} catch (Exception e) {
+			throw new RuntimeException("自动生成文件异常",e);
+		}
+	}
+	/**
+	 * 构建 javaBean ,mapper, dao 
+	 * @param conn
+	 * @param prefix
+	 * @param descOrAsc
+	 * @param paging
+	 * @param annotationFlag
+	 */
+	public static void makeAll(Connection conn,String prefix,String descOrAsc,boolean paging,boolean annotationFlag){
+		try {
+			prefix=prefix==null?"":prefix;
+			makeAll(getTables(conn), prefix, descOrAsc, paging, annotationFlag);
+		} catch (Exception e) {
+			throw new RuntimeException("自动生成文件异常",e);
+		}
+	}
+	
+	/**
+	 * 抽取 table中的 信息
+	 * @param table 	表
+	 * @param prefix 	前缀过滤
+	 * @return
+	 */
+	private static Map<String , String> getSomeElement(DBTable table,String prefix){
+		prefix=prefix==null?"":prefix;
+		Map<String,String> map=new HashMap<>(); 
+		String packagePath=SqlUtilForDB.class.getPackage().getName();
+		packagePath=packagePath.substring(0,packagePath.lastIndexOf('.')+1);
+		packagePath+="entity";
+		map.put("package",packagePath);
+		String tableName=table.getTableInfo().getTableName();
+		map.put("table",tableName);
+		
+		String className=tableName;
+		if(prefix!=null&&!prefix.isEmpty())
+			className=className.startsWith(prefix)?className.replaceFirst(prefix, ""):className;
+		className=CheckReplaceUtil.firstCharUpcase(className);
+		className=CheckReplaceUtil.underlineLowcaserToUpcase(className);
+		
+		String simpleClassName=className;
+		map.put("className", simpleClassName);
+		
+		
+		className=packagePath+"."+className;
+		map.put("class", className);
+		return map;
+	}
+	/**
+	 * 使用table中的信息创建mybatis insert部分
+	 * @param table 	数据库表
+	 * @param prefix 	表名前缀,过滤前缀后需要与实体类名称相同
+	 * @return
+	 */
+	public static String createInsert(DBTable table,String prefix){
+		try {
+			prefix=prefix==null?"":prefix;
+			StringBuffer temp = new StringBuffer();
+			Map<String , String> map=getSomeElement(table, prefix); 
+			temp.append("<insert id=\"add" + map.get("className").replace("Bean", "") + "\" " + "parameterType=\"" +  map.get("class") + "\">\n");
+			temp.append("insert into " + map.get("table") + " \n(");
+			List<ColumnInfo> columnInfos=table.getColumnInfos();
+			for(ColumnInfo each:columnInfos)
+				temp.append(each.getColumnName()+",");
+			temp.replace(temp.length()-1,temp.length(),"");
+			temp.append(")\nvalues\n(");
+			for(ColumnInfo each:columnInfos){
+				String name=each.getColumnName();
+				name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+				if(each.getIsAutoCrement().equals("true")||!each.getNullAble().equals("true")){
+					if(!temp.toString().endsWith("\n"))
+						temp.append("\n");
+					temp.append("<if test=\"" + name + " != null\">#{"+name+"},");
+					temp.append("</if>\n");
+					temp.append("<if test=\"" + name + " == null\">default,");
+					temp.append("</if>\n");
+				}else
+					temp.append("#{"+ name +"},");
+			}
+			temp.replace(temp.length() - 1, temp.length(), "");
+			temp.append("\n)");
+			temp.append("\n</insert>\n");
+			return temp.toString();
+		} catch (Exception e) {
+			throw new RuntimeException("构建mybatis mapper 文件 insert语句异常",e);
+		}
+	}
+	
+	public static String createDelete(DBTable table,String prefix){
+		try {
+			prefix=prefix==null?"":prefix;
+			StringBuffer temp = new StringBuffer();
+			Map<String , String> map=getSomeElement(table, prefix); 
+			List<ColumnInfo> columnInfos=table.getColumnInfos();
+			Map<String, ColumnInfo> columnMap=listToMap(columnInfos);
+			List<PrimaryKeyInfo> pkInfos=table.getPkInfo();
+			Map<String , List<IndexInfo>> indexInfos=table.getIndexInfo();
+			//--------------------------------delete by class-----------------------------------------
+			String paramType=map.get("class");
+			temp.append("<delete id=\"delete" + map.get("className").replace("Bean", "")+"ByClass" + "\" " + "parameterType=\"" + paramType + "\">\n");
+			temp.append("delete from " + map.get("table"));
+			temp.append("\n<where>\n");
+			for(ColumnInfo each:columnInfos){
+				String name=each.getColumnName();
+				name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+				temp.append("<if test=\"" + name + " != null\"> and " + each.getColumnName()+ " = #{" + name + "}  </if>  \n");
+			}
+			temp.append("</where>\n</delete>\n");
+			//---------------------------------delete by primary key-----------------------------------
+			if(pkInfos!=null&&!pkInfos.isEmpty()){
+				for(PrimaryKeyInfo each:pkInfos){
+					String name=each.getColumnName();
+					name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+					name=CheckReplaceUtil.firstCharUpcase(name);
+					paramType=columnMap.get(each.getColumnName()).getJavaType();
+					paramType=paramType.startsWith("[L")?paramType.substring(2):paramType;
+					paramType=paramType.endsWith(";")?paramType.substring(0, paramType.length()-1):paramType;
+					temp.append("<delete id=\"delete" + map.get("className").replace("Bean", "")+"ByPk" +name+ "\" " + "parameterType=\"" + columnMap.get(each.getColumnName()).getJavaType()+ "\">\n");
+					temp.append("delete from " + map.get("table"));
+					temp.append("\n<where>\n");
+					temp.append(each.getColumnName()+"="+"{"+name+"}\n");
+					temp.append("</where>\n</delete>\n");
+				}
+			}
+			//---------------------------------delete by index----------------------------------
+			if(indexInfos!=null&&!indexInfos.isEmpty()){
+				for(Entry<String, List<IndexInfo>> each:indexInfos.entrySet()){
+					List<IndexInfo> value=each.getValue();
+					if(value.get(0).getIsUnique().equals("true"))
+						temp.append("<delete id=\"delete" + map.get("className").replace("Bean", "")+"ByUniqueIndexOn");
+					else
+						temp.append("<delete id=\"delete" + map.get("className").replace("Bean", "")+"ByIndexOn");
+					for(IndexInfo one:value){
+						String name=one.getColumnName();
+						name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+						temp.append(CheckReplaceUtil.firstCharUpcase(name)+"And");
+					}
+					temp.replace(temp.length() - 3, temp.length(), "");
+					temp.append("\">\n");
+					temp.append("delete from " + map.get("table"));
+					temp.append("\n<where>\n");
+					for(IndexInfo one:value){
+						String name=one.getColumnName();
+						name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+						temp.append("AND " + one.getColumnName()+ " = #{" + name + "}\n");
+					}
+					temp.append("</where>\n</delete>\n");
+				}
+			}
+			return temp.toString(); 
+ 		} catch (Exception e) {
+			throw new RuntimeException("构建mybatis mapper 文件 delete语句异常",e);
+		}
+	}
+	
+	public static String createUpdate(DBTable table,String prefix){
+		try {
+			prefix=prefix==null?"":prefix;
+			StringBuffer temp = new StringBuffer();
+			Map<String , String> map=getSomeElement(table, prefix); 
+			List<ColumnInfo> columnInfos=table.getColumnInfos();
+			Map<String, ColumnInfo> columnMap=listToMap(columnInfos);
+			List<PrimaryKeyInfo> pKeyInfos=table.getPkInfo();
+			Map<String , List<IndexInfo>> indexInfos=table.getIndexInfo();
+			String paramType=map.get("class");
+			//-----------------------------------------by class---------------------------------------
+			temp.append("<update id=\"update" + map.get("className").replace("Bean", "")+"ByClass" + "\">\n");
+			temp.append("update " + map.get("table") + "\n<set> \n");
+			for(ColumnInfo one:columnInfos){
+				String columnName=one.getColumnName();
+				columnName=CheckReplaceUtil.underlineLowcaserToUpcase(columnName);
+				temp.append(one.getColumnName()+"="+"{"+CheckReplaceUtil.firstCharLowcase(map.get("className"))+"."+columnName+"},\n");
+			}
+			temp.replace(temp.length()-2, temp.length(), "\n");
+			temp.append("</set>\n<where>\n");
+			for(ColumnInfo one:columnInfos){
+				String columnName=one.getColumnName();
+				columnName=CheckReplaceUtil.underlineLowcaserToUpcase(columnName);
+				temp.append("<if test=\"" + columnName + " != null\">" +one.getColumnName() + " = #{"+"param."+ columnName + "},</if>  \n");
+			}
+			temp.append("</where>\n</update>\n");
+			//-----------------------------------------by primary key----------------------------------
+			if(pKeyInfos!=null&&!pKeyInfos.isEmpty()){
+				for(PrimaryKeyInfo each:pKeyInfos){
+					String name=each.getColumnName();
+					name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+					name=CheckReplaceUtil.firstCharUpcase(name);
+					paramType=columnMap.get(each.getColumnName()).getJavaType();
+					paramType=paramType.startsWith("[L")?paramType.substring(2):paramType;
+					paramType=paramType.endsWith(";")?paramType.substring(0, paramType.length()-1):paramType;
+					temp.append("<update id=\"update" + map.get("className").replace("Bean", "") + "ByPk"+name+"\" " + "parameterType=\"" + paramType + "\">\n");
+					temp.append("update " + map.get("table") + "\n<set> \n");
+					for(ColumnInfo one:columnInfos){
+						String columnName=one.getColumnName();
+						columnName=CheckReplaceUtil.underlineLowcaserToUpcase(columnName);
+						temp.append(one.getColumnName()+"="+"{"+CheckReplaceUtil.firstCharLowcase(map.get("className"))+"."+columnName+"},\n");
+					}
+					temp.replace(temp.length()-2, temp.length(), "\n");
+					temp.append("</set>\n<where>\n");
+					temp.append(each.getColumnName()+"="+"{"+name+"}\n");
+					temp.append("</where>\n</update>\n");
+				}
+			}
+			//-----------------------------------------by unique index----------------------------------
+			if(indexInfos!=null&&!indexInfos.isEmpty()){
+				for(Entry<String, List<IndexInfo>> each:indexInfos.entrySet()){
+					List<IndexInfo> value=each.getValue();
+					if(value.get(0).getIsUnique().equals("true"))
+						temp.append("<update id=\"update" + map.get("className").replace("Bean", "")+"ByUniqueIndexOn");
+					else
+						temp.append("<update id=\"update" + map.get("className").replace("Bean", "")+"ByIndexOn");
+					for(IndexInfo one:value){
+						String name=one.getColumnName();
+						name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+						temp.append(CheckReplaceUtil.firstCharUpcase(name)+"And");
+					}
+					temp.replace(temp.length() - 3, temp.length(), "");
+					temp.append("\">\n");
+					temp.append("update " + map.get("table") + "\n<set> \n");
+					for(ColumnInfo one:columnInfos){
+						String columnName=one.getColumnName();
+						columnName=CheckReplaceUtil.underlineLowcaserToUpcase(columnName);
+						temp.append(one.getColumnName()+"="+"{"+CheckReplaceUtil.firstCharLowcase(map.get("className"))+"."+columnName+"},\n");
+					}
+					temp.replace(temp.length()-2, temp.length(), "\n");
+					temp.append("</set>\n<where>\n");
+					for(IndexInfo one:value){
+						String name=one.getColumnName();
+						name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+						temp.append("AND "+one.getColumnName()+"="+"{"+name+"}\n");
+					}
+					temp.append("</where>\n</update>\n");
+				}				
+			}
+			return temp.toString();
+		} catch (Exception e) {
+			throw new RuntimeException("构建mybatis mapper 文件 update语句异常",e);
+		}
+	}
+	
+	public static String createSelect(DBTable table,String prefix,String descOrAsc,boolean paging){
+		try {
+			prefix=prefix==null?"":prefix;
+			descOrAsc=descOrAsc==null?"ASC":descOrAsc;
+			descOrAsc=descOrAsc.equalsIgnoreCase("asc")?"ASC":descOrAsc.equalsIgnoreCase("desc")?"DESC":"ASC";
+			StringBuffer temp = new StringBuffer();
+			Map<String , String> map=getSomeElement(table, prefix); 
+			List<ColumnInfo> columnInfos=table.getColumnInfos();
+			Map<String, ColumnInfo> columnMap=listToMap(columnInfos);
+			List<PrimaryKeyInfo> pkInfos=table.getPkInfo();
+			Map<String , List<IndexInfo>> indexInfos=table.getIndexInfo();
+			String paramType=map.get("class");
+			//--------------------------------by class-------------------------------------------------
+			temp.append("<select id=\"select" + map.get("className").replace("Bean", "")+"ByClass" + "\"");
+			temp.append(" resultMap=\""+CheckReplaceUtil.firstCharLowcase(map.get("className").replace("Bean", ""))+ "Map\" ");
+			temp.append(" resultType=\""+map.get("class")+"\"");
+			temp.append(" parameterType=\"" + paramType + "\">\n");
+			temp.append("select \n");
+			for(ColumnInfo each:columnInfos)
+				temp.append(each.getColumnName()+",");
+			temp.replace(temp.length() - 1, temp.length(), "");
+			temp.append("\nfrom " + map.get("table"));
+			temp.append("\n<where> \n");
+			for(ColumnInfo one:columnInfos){
+				String columnName=one.getColumnName();
+				columnName=CheckReplaceUtil.underlineLowcaserToUpcase(columnName);
+				temp.append("<if test=\"" + columnName + " != null\">" + one.getColumnName() + " = #{"+ columnName + "},</if>  \n");
+			}
+			temp.append("</where>\n</select>\n");
+			//--------------------------------by primary key-------------------------------------------
+			if(pkInfos!=null&&!pkInfos.isEmpty()){
+				for(PrimaryKeyInfo each:pkInfos){
+					String name=each.getColumnName();
+					name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+					name=CheckReplaceUtil.firstCharUpcase(name);
+					paramType=columnMap.get(each.getColumnName()).getJavaType();
+					paramType=paramType.startsWith("[L")?paramType.substring(2):paramType;
+					paramType=paramType.endsWith(";")?paramType.substring(0, paramType.length()-1):paramType;
+					temp.append("<select id=\"select" + map.get("className").replace("Bean", "") + "ByPk"+name+"\" ");
+					temp.append(" resultMap=\""+CheckReplaceUtil.firstCharLowcase(map.get("className").replace("Bean", ""))+ "Map\" ");
+					temp.append(" resultType=\""+map.get("class")+"\"");
+					temp.append(" parameterType=\"" + paramType + "\">\n");
+					temp.append("select \n");
+					for(ColumnInfo one:columnInfos)
+						temp.append(one.getColumnName()+",");
+					temp.replace(temp.length() - 1, temp.length(), "");
+					temp.append("\nfrom " + map.get("table"));
+					temp.append("\n<where> \n");
+					temp.append(each.getColumnName()+"="+"{"+name+"}\n");
+					temp.append("</where>\n</select>\n");
+				}
+			}
+			//--------------------------------by index------------------------------------------
+			if(indexInfos!=null&&!indexInfos.isEmpty()){
+				for(Entry<String, List<IndexInfo>> each:indexInfos.entrySet()){
+					List<IndexInfo> value=each.getValue();
+					if(value.get(0).getIsUnique().equals("true"))
+						temp.append("<select id=\"select" + map.get("className").replace("Bean", "")+"ByUniqueIndexOn");
+					else
+						temp.append("<select id=\"select" + map.get("className").replace("Bean", "")+"ByIndexOn");
+					for(IndexInfo one:value){
+						String name=one.getColumnName();
+						name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+						temp.append(CheckReplaceUtil.firstCharUpcase(name)+"And");
+					}
+					temp.replace(temp.length() - 3, temp.length(), "");
+					temp.append("\"");
+					temp.append(" resultType=\""+map.get("class")+"\"");
+					temp.append(" resultMap=\""+CheckReplaceUtil.firstCharLowcase(map.get("className").replace("Bean", ""))+ "Map\" ");
+					temp.append(">\n");
+					temp.append("select \n");
+					for(ColumnInfo one:columnInfos)
+						temp.append(one.getColumnName()+",");
+					temp.replace(temp.length() - 1, temp.length(), "");
+					temp.append("\nfrom " + map.get("table"));
+					temp.append("\n<where> \n");
+					for(IndexInfo one:value){
+						String name=one.getColumnName();
+						name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+						temp.append("AND "+one.getColumnName()+"="+"{"+name+"}\n");
+					}
+					temp.append("</where>\n</select>\n");
+				}				
+			}
+			return temp.toString();
+		} catch (Exception e) {
+			throw new RuntimeException("构建mybatis mapper 文件 select语句异常",e);
+		}
+	}
+	
+	public static String createResultMap(DBTable table,String prefix){
+		try {
+			prefix=prefix==null?"":prefix;
+			StringBuffer temp = new StringBuffer();
+			Map<String , String> map=getSomeElement(table, prefix); 
+			List<ColumnInfo> columnInfos=table.getColumnInfos();
+			String paramType=map.get("class");
+			temp.append("<resultMap id=\"" + CheckReplaceUtil.firstCharLowcase(map.get("className").replace("Bean", ""))+ "Map\" " + "type=\"" + paramType + "\">\n");
+			for(ColumnInfo each:columnInfos){
+				String columnName=each.getColumnName();
+				columnName=CheckReplaceUtil.underlineLowcaserToUpcase(columnName);
+				temp.append("<result property=\"" + columnName + "\" 			column=\"" + each.getColumnName() + "\"></result>\n");
+			}
+			temp.append("</resultMap>\n");
+			return temp.toString();
+		} catch (Exception e) {
+			throw new RuntimeException("构建mybatis mapper 文件 resultmap语句异常",e);
+		}
+	}
+	
+	
 	
 	/**
 	 * 数据库表类
@@ -832,7 +1526,7 @@ public class SqlUtilForDB {
 		/** 外键信息 */
 		private List<ForeginKeyInfo> fkInfo;
 		/** 索引信息 */
-		private List<IndexInfo> indexInfo;
+		private Map<String , List<IndexInfo>> indexInfo;
 		/** 存储过程信息 */
 		private List<ProceduresInfo> proceduresInfo;
 
@@ -840,7 +1534,7 @@ public class SqlUtilForDB {
 			columnInfos		=new ArrayList<>();
 			pkInfo			=new ArrayList<>();
 			fkInfo			=new ArrayList<>();
-			indexInfo		=new ArrayList<>();
+			indexInfo		=new LinkedHashMap<>();
 			proceduresInfo	=new ArrayList<>();
 		}
 		
@@ -894,13 +1588,13 @@ public class SqlUtilForDB {
 			this.fkInfo = fkInfo;
 		}
 
-		public List<IndexInfo> getIndexInfo() {
+		public Map<String , List<IndexInfo>> getIndexInfo() {
 			if(indexInfo==null)
-				indexInfo=new ArrayList<>();
+				indexInfo=new LinkedHashMap<>();
 			return indexInfo;
 		}
 
-		public void setIndexInfo(List<IndexInfo> indexInfo) {
+		public void setIndexInfo(Map<String , List<IndexInfo>> indexInfo) {
 			this.indexInfo = indexInfo;
 		}
 
@@ -1182,6 +1876,10 @@ public class SqlUtilForDB {
 		}
 
 		public void setIsAutoCrement(String isAutoCrement) {
+			if(isAutoCrement.equals("YES"))
+				isAutoCrement="true";
+			else
+				isAutoCrement="false";
 			this.isAutoCrement = isAutoCrement;
 		}
 
