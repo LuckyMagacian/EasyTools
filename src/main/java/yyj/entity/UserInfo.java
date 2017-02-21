@@ -6,7 +6,7 @@ import java.lang.String;
 /**
 *no comment
 *@author yyj | auto generator
-*@version 1.0.0 2017-02-20 15:54:38
+*@version 1.0.0 2017-02-21 10:43:36
 */
 
 public class UserInfo{
@@ -112,6 +112,11 @@ public class UserInfo{
 	/**设置更新时间*/
 	public void setUpdateTime(Timestamp updateTime){
 		this.updateTime=updateTime;
+		
+	}
+	@Override
+	public String toString(){
+		return "yyj.entity.UserInfo:["+"userId="+userId+","+"roleId="+roleId+","+"name="+name+","+"organization="+organization+","+"passwd="+passwd+","+"phone="+phone+","+"createTime="+createTime+","+"updateTime="+updateTime+"]";
 		
 	}
 }

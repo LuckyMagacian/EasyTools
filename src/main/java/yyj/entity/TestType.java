@@ -15,7 +15,7 @@ import java.sql.Date;
 /**
 *no comment
 *@author yyj | auto generator
-*@version 1.0.0 2017-02-20 15:54:38
+*@version 1.0.0 2017-02-21 10:43:36
 */
 
 public class TestType{
@@ -537,6 +537,11 @@ public class TestType{
 	/**设置tDeciaml*/
 	public void setTDeciaml(BigDecimal tDeciaml){
 		this.tDeciaml=tDeciaml;
+		
+	}
+	@Override
+	public String toString(){
+		return "yyj.entity.TestType:["+"tTinyint="+tTinyint+","+"tSmallint="+tSmallint+","+"tMediumint="+tMediumint+","+"tInt="+tInt+","+"tInteger="+tInteger+","+"tBigint="+tBigint+","+"tBit="+tBit+","+"tReal="+tReal+","+"tDouble="+tDouble+","+"tFloat="+tFloat+","+"tNumeric="+tNumeric+","+"tChar="+tChar+","+"tVarchar="+tVarchar+","+"tDate="+tDate+","+"tTime="+tTime+","+"tYear="+tYear+","+"tTimestamp="+tTimestamp+","+"tDatetime="+tDatetime+","+"tTinyblob="+tTinyblob+","+"tBlob="+tBlob+","+"tMediumblob="+tMediumblob+","+"tLongblob="+tLongblob+","+"tTinytext="+tTinytext+","+"tText="+tText+","+"tMediumtext="+tMediumtext+","+"tLongtext="+tLongtext+","+"tEnum="+tEnum+","+"tSet="+tSet+","+"tBinary="+tBinary+","+"tVarbinary="+tVarbinary+","+"tPoint="+tPoint+","+"tLinestring="+tLinestring+","+"tPolygon="+tPolygon+","+"tGeometry="+tGeometry+","+"tMultipoint="+tMultipoint+","+"tMultilinestring="+tMultilinestring+","+"tMultipolygon="+tMultipolygon+","+"tGeometrycollection="+tGeometrycollection+","+"tJson="+tJson+","+"tDeciaml="+tDeciaml+"]";
 		
 	}
 }

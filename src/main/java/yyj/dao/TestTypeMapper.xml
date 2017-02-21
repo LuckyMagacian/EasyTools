@@ -62,307 +62,367 @@
 			<if test="tDeciaml != null"> and t_deciaml = #{tDeciaml}  </if>
 		</where>
 	</delete>
+	<delete id="deleteTestTypeByPk">
+		delete from test_type
+		<where>
+			AND t_int=#{tInt}
+			AND t_mediumint=#{tMediumint}
+			AND t_smallint=#{tSmallint}
+			AND t_tinyint=#{tTinyint}
+		</where>
+	</delete>
 	<delete id="deleteTestTypeByPkTInt" parameterType="java.lang.Integer">
 		delete from test_type
 		<where>
-			t_int={TInt}
+			AND t_int=#{tInt}
 		</where>
 	</delete>
 	<delete id="deleteTestTypeByPkTMediumint" parameterType="java.lang.Integer">
 		delete from test_type
 		<where>
-			t_mediumint={TMediumint}
+			AND t_mediumint=#{tMediumint}
 		</where>
 	</delete>
 	<delete id="deleteTestTypeByPkTSmallint" parameterType="java.lang.Integer">
 		delete from test_type
 		<where>
-			t_smallint={TSmallint}
+			AND t_smallint=#{tSmallint}
 		</where>
 	</delete>
 	<delete id="deleteTestTypeByPkTTinyint" parameterType="java.lang.Integer">
 		delete from test_type
 		<where>
-			t_tinyint={TTinyint}
+			AND t_tinyint=#{tTinyint}
 		</where>
 	</delete>
 	<update id="updateTestTypeByClass">
 		update test_type
 		<set>
-			t_tinyint={testType.tTinyint},
-			t_smallint={testType.tSmallint},
-			t_mediumint={testType.tMediumint},
-			t_int={testType.tInt},
-			t_integer={testType.tInteger},
-			t_bigint={testType.tBigint},
-			t_bit={testType.tBit},
-			t_real={testType.tReal},
-			t_double={testType.tDouble},
-			t_float={testType.tFloat},
-			t_numeric={testType.tNumeric},
-			t_char={testType.tChar},
-			t_varchar={testType.tVarchar},
-			t_date={testType.tDate},
-			t_time={testType.tTime},
-			t_year={testType.tYear},
-			t_timestamp={testType.tTimestamp},
-			t_datetime={testType.tDatetime},
-			t_tinyblob={testType.tTinyblob},
-			t_blob={testType.tBlob},
-			t_mediumblob={testType.tMediumblob},
-			t_longblob={testType.tLongblob},
-			t_tinytext={testType.tTinytext},
-			t_text={testType.tText},
-			t_mediumtext={testType.tMediumtext},
-			t_longtext={testType.tLongtext},
-			t_enum={testType.tEnum},
-			t_set={testType.tSet},
-			t_binary={testType.tBinary},
-			t_varbinary={testType.tVarbinary},
-			t_point={testType.tPoint},
-			t_linestring={testType.tLinestring},
-			t_polygon={testType.tPolygon},
-			t_geometry={testType.tGeometry},
-			t_multipoint={testType.tMultipoint},
-			t_multilinestring={testType.tMultilinestring},
-			t_multipolygon={testType.tMultipolygon},
-			t_geometrycollection={testType.tGeometrycollection},
-			t_json={testType.tJson},
-			t_deciaml={testType.tDeciaml}
+			t_tinyint=#{testType.tTinyint},
+			t_smallint=#{testType.tSmallint},
+			t_mediumint=#{testType.tMediumint},
+			t_int=#{testType.tInt},
+			t_integer=#{testType.tInteger},
+			t_bigint=#{testType.tBigint},
+			t_bit=#{testType.tBit},
+			t_real=#{testType.tReal},
+			t_double=#{testType.tDouble},
+			t_float=#{testType.tFloat},
+			t_numeric=#{testType.tNumeric},
+			t_char=#{testType.tChar},
+			t_varchar=#{testType.tVarchar},
+			t_date=#{testType.tDate},
+			t_time=#{testType.tTime},
+			t_year=#{testType.tYear},
+			t_timestamp=#{testType.tTimestamp},
+			t_datetime=#{testType.tDatetime},
+			t_tinyblob=#{testType.tTinyblob},
+			t_blob=#{testType.tBlob},
+			t_mediumblob=#{testType.tMediumblob},
+			t_longblob=#{testType.tLongblob},
+			t_tinytext=#{testType.tTinytext},
+			t_text=#{testType.tText},
+			t_mediumtext=#{testType.tMediumtext},
+			t_longtext=#{testType.tLongtext},
+			t_enum=#{testType.tEnum},
+			t_set=#{testType.tSet},
+			t_binary=#{testType.tBinary},
+			t_varbinary=#{testType.tVarbinary},
+			t_point=#{testType.tPoint},
+			t_linestring=#{testType.tLinestring},
+			t_polygon=#{testType.tPolygon},
+			t_geometry=#{testType.tGeometry},
+			t_multipoint=#{testType.tMultipoint},
+			t_multilinestring=#{testType.tMultilinestring},
+			t_multipolygon=#{testType.tMultipolygon},
+			t_geometrycollection=#{testType.tGeometrycollection},
+			t_json=#{testType.tJson},
+			t_deciaml=#{testType.tDeciaml}
 		</set>
 		<where>
-			<if test="tTinyint != null">t_tinyint = #{param.tTinyint},</if>
-			<if test="tSmallint != null">t_smallint = #{param.tSmallint},</if>
-			<if test="tMediumint != null">t_mediumint = #{param.tMediumint},</if>
-			<if test="tInt != null">t_int = #{param.tInt},</if>
-			<if test="tInteger != null">t_integer = #{param.tInteger},</if>
-			<if test="tBigint != null">t_bigint = #{param.tBigint},</if>
-			<if test="tBit != null">t_bit = #{param.tBit},</if>
-			<if test="tReal != null">t_real = #{param.tReal},</if>
-			<if test="tDouble != null">t_double = #{param.tDouble},</if>
-			<if test="tFloat != null">t_float = #{param.tFloat},</if>
-			<if test="tNumeric != null">t_numeric = #{param.tNumeric},</if>
-			<if test="tChar != null">t_char = #{param.tChar},</if>
-			<if test="tVarchar != null">t_varchar = #{param.tVarchar},</if>
-			<if test="tDate != null">t_date = #{param.tDate},</if>
-			<if test="tTime != null">t_time = #{param.tTime},</if>
-			<if test="tYear != null">t_year = #{param.tYear},</if>
-			<if test="tTimestamp != null">t_timestamp = #{param.tTimestamp},</if>
-			<if test="tDatetime != null">t_datetime = #{param.tDatetime},</if>
-			<if test="tTinyblob != null">t_tinyblob = #{param.tTinyblob},</if>
-			<if test="tBlob != null">t_blob = #{param.tBlob},</if>
-			<if test="tMediumblob != null">t_mediumblob = #{param.tMediumblob},</if>
-			<if test="tLongblob != null">t_longblob = #{param.tLongblob},</if>
-			<if test="tTinytext != null">t_tinytext = #{param.tTinytext},</if>
-			<if test="tText != null">t_text = #{param.tText},</if>
-			<if test="tMediumtext != null">t_mediumtext = #{param.tMediumtext},</if>
-			<if test="tLongtext != null">t_longtext = #{param.tLongtext},</if>
-			<if test="tEnum != null">t_enum = #{param.tEnum},</if>
-			<if test="tSet != null">t_set = #{param.tSet},</if>
-			<if test="tBinary != null">t_binary = #{param.tBinary},</if>
-			<if test="tVarbinary != null">t_varbinary = #{param.tVarbinary},</if>
-			<if test="tPoint != null">t_point = #{param.tPoint},</if>
-			<if test="tLinestring != null">t_linestring = #{param.tLinestring},</if>
-			<if test="tPolygon != null">t_polygon = #{param.tPolygon},</if>
-			<if test="tGeometry != null">t_geometry = #{param.tGeometry},</if>
-			<if test="tMultipoint != null">t_multipoint = #{param.tMultipoint},</if>
-			<if test="tMultilinestring != null">t_multilinestring = #{param.tMultilinestring},</if>
-			<if test="tMultipolygon != null">t_multipolygon = #{param.tMultipolygon},</if>
-			<if test="tGeometrycollection != null">t_geometrycollection = #{param.tGeometrycollection},</if>
-			<if test="tJson != null">t_json = #{param.tJson},</if>
-			<if test="tDeciaml != null">t_deciaml = #{param.tDeciaml},</if>
+			<if test="param.tTinyint != null"> AND t_tinyint = #{param.tTinyint}</if>
+			<if test="param.tSmallint != null"> AND t_smallint = #{param.tSmallint}</if>
+			<if test="param.tMediumint != null"> AND t_mediumint = #{param.tMediumint}</if>
+			<if test="param.tInt != null"> AND t_int = #{param.tInt}</if>
+			<if test="param.tInteger != null"> AND t_integer = #{param.tInteger}</if>
+			<if test="param.tBigint != null"> AND t_bigint = #{param.tBigint}</if>
+			<if test="param.tBit != null"> AND t_bit = #{param.tBit}</if>
+			<if test="param.tReal != null"> AND t_real = #{param.tReal}</if>
+			<if test="param.tDouble != null"> AND t_double = #{param.tDouble}</if>
+			<if test="param.tFloat != null"> AND t_float = #{param.tFloat}</if>
+			<if test="param.tNumeric != null"> AND t_numeric = #{param.tNumeric}</if>
+			<if test="param.tChar != null"> AND t_char = #{param.tChar}</if>
+			<if test="param.tVarchar != null"> AND t_varchar = #{param.tVarchar}</if>
+			<if test="param.tDate != null"> AND t_date = #{param.tDate}</if>
+			<if test="param.tTime != null"> AND t_time = #{param.tTime}</if>
+			<if test="param.tYear != null"> AND t_year = #{param.tYear}</if>
+			<if test="param.tTimestamp != null"> AND t_timestamp = #{param.tTimestamp}</if>
+			<if test="param.tDatetime != null"> AND t_datetime = #{param.tDatetime}</if>
+			<if test="param.tTinyblob != null"> AND t_tinyblob = #{param.tTinyblob}</if>
+			<if test="param.tBlob != null"> AND t_blob = #{param.tBlob}</if>
+			<if test="param.tMediumblob != null"> AND t_mediumblob = #{param.tMediumblob}</if>
+			<if test="param.tLongblob != null"> AND t_longblob = #{param.tLongblob}</if>
+			<if test="param.tTinytext != null"> AND t_tinytext = #{param.tTinytext}</if>
+			<if test="param.tText != null"> AND t_text = #{param.tText}</if>
+			<if test="param.tMediumtext != null"> AND t_mediumtext = #{param.tMediumtext}</if>
+			<if test="param.tLongtext != null"> AND t_longtext = #{param.tLongtext}</if>
+			<if test="param.tEnum != null"> AND t_enum = #{param.tEnum}</if>
+			<if test="param.tSet != null"> AND t_set = #{param.tSet}</if>
+			<if test="param.tBinary != null"> AND t_binary = #{param.tBinary}</if>
+			<if test="param.tVarbinary != null"> AND t_varbinary = #{param.tVarbinary}</if>
+			<if test="param.tPoint != null"> AND t_point = #{param.tPoint}</if>
+			<if test="param.tLinestring != null"> AND t_linestring = #{param.tLinestring}</if>
+			<if test="param.tPolygon != null"> AND t_polygon = #{param.tPolygon}</if>
+			<if test="param.tGeometry != null"> AND t_geometry = #{param.tGeometry}</if>
+			<if test="param.tMultipoint != null"> AND t_multipoint = #{param.tMultipoint}</if>
+			<if test="param.tMultilinestring != null"> AND t_multilinestring = #{param.tMultilinestring}</if>
+			<if test="param.tMultipolygon != null"> AND t_multipolygon = #{param.tMultipolygon}</if>
+			<if test="param.tGeometrycollection != null"> AND t_geometrycollection = #{param.tGeometrycollection}</if>
+			<if test="param.tJson != null"> AND t_json = #{param.tJson}</if>
+			<if test="param.tDeciaml != null"> AND t_deciaml = #{param.tDeciaml}</if>
+		</where>
+	</update>
+	<update id="updateTestTypeByPk">
+		update test_type
+		<set>
+			t_tinyint=#{testType.tTinyint},
+			t_smallint=#{testType.tSmallint},
+			t_mediumint=#{testType.tMediumint},
+			t_int=#{testType.tInt},
+			t_integer=#{testType.tInteger},
+			t_bigint=#{testType.tBigint},
+			t_bit=#{testType.tBit},
+			t_real=#{testType.tReal},
+			t_double=#{testType.tDouble},
+			t_float=#{testType.tFloat},
+			t_numeric=#{testType.tNumeric},
+			t_char=#{testType.tChar},
+			t_varchar=#{testType.tVarchar},
+			t_date=#{testType.tDate},
+			t_time=#{testType.tTime},
+			t_year=#{testType.tYear},
+			t_timestamp=#{testType.tTimestamp},
+			t_datetime=#{testType.tDatetime},
+			t_tinyblob=#{testType.tTinyblob},
+			t_blob=#{testType.tBlob},
+			t_mediumblob=#{testType.tMediumblob},
+			t_longblob=#{testType.tLongblob},
+			t_tinytext=#{testType.tTinytext},
+			t_text=#{testType.tText},
+			t_mediumtext=#{testType.tMediumtext},
+			t_longtext=#{testType.tLongtext},
+			t_enum=#{testType.tEnum},
+			t_set=#{testType.tSet},
+			t_binary=#{testType.tBinary},
+			t_varbinary=#{testType.tVarbinary},
+			t_point=#{testType.tPoint},
+			t_linestring=#{testType.tLinestring},
+			t_polygon=#{testType.tPolygon},
+			t_geometry=#{testType.tGeometry},
+			t_multipoint=#{testType.tMultipoint},
+			t_multilinestring=#{testType.tMultilinestring},
+			t_multipolygon=#{testType.tMultipolygon},
+			t_geometrycollection=#{testType.tGeometrycollection},
+			t_json=#{testType.tJson},
+			t_deciaml=#{testType.tDeciaml}
+		</set>
+		<where>
+			AND t_int=#{tInt}
+			AND t_mediumint=#{tMediumint}
+			AND t_smallint=#{tSmallint}
+			AND t_tinyint=#{tTinyint}
 		</where>
 	</update>
 	<update id="updateTestTypeByPkTInt" parameterType="java.lang.Integer">
 		update test_type
 		<set>
-			t_tinyint={testType.tTinyint},
-			t_smallint={testType.tSmallint},
-			t_mediumint={testType.tMediumint},
-			t_int={testType.tInt},
-			t_integer={testType.tInteger},
-			t_bigint={testType.tBigint},
-			t_bit={testType.tBit},
-			t_real={testType.tReal},
-			t_double={testType.tDouble},
-			t_float={testType.tFloat},
-			t_numeric={testType.tNumeric},
-			t_char={testType.tChar},
-			t_varchar={testType.tVarchar},
-			t_date={testType.tDate},
-			t_time={testType.tTime},
-			t_year={testType.tYear},
-			t_timestamp={testType.tTimestamp},
-			t_datetime={testType.tDatetime},
-			t_tinyblob={testType.tTinyblob},
-			t_blob={testType.tBlob},
-			t_mediumblob={testType.tMediumblob},
-			t_longblob={testType.tLongblob},
-			t_tinytext={testType.tTinytext},
-			t_text={testType.tText},
-			t_mediumtext={testType.tMediumtext},
-			t_longtext={testType.tLongtext},
-			t_enum={testType.tEnum},
-			t_set={testType.tSet},
-			t_binary={testType.tBinary},
-			t_varbinary={testType.tVarbinary},
-			t_point={testType.tPoint},
-			t_linestring={testType.tLinestring},
-			t_polygon={testType.tPolygon},
-			t_geometry={testType.tGeometry},
-			t_multipoint={testType.tMultipoint},
-			t_multilinestring={testType.tMultilinestring},
-			t_multipolygon={testType.tMultipolygon},
-			t_geometrycollection={testType.tGeometrycollection},
-			t_json={testType.tJson},
-			t_deciaml={testType.tDeciaml}
+			t_tinyint=#{testType.tTinyint},
+			t_smallint=#{testType.tSmallint},
+			t_mediumint=#{testType.tMediumint},
+			t_int=#{testType.tInt},
+			t_integer=#{testType.tInteger},
+			t_bigint=#{testType.tBigint},
+			t_bit=#{testType.tBit},
+			t_real=#{testType.tReal},
+			t_double=#{testType.tDouble},
+			t_float=#{testType.tFloat},
+			t_numeric=#{testType.tNumeric},
+			t_char=#{testType.tChar},
+			t_varchar=#{testType.tVarchar},
+			t_date=#{testType.tDate},
+			t_time=#{testType.tTime},
+			t_year=#{testType.tYear},
+			t_timestamp=#{testType.tTimestamp},
+			t_datetime=#{testType.tDatetime},
+			t_tinyblob=#{testType.tTinyblob},
+			t_blob=#{testType.tBlob},
+			t_mediumblob=#{testType.tMediumblob},
+			t_longblob=#{testType.tLongblob},
+			t_tinytext=#{testType.tTinytext},
+			t_text=#{testType.tText},
+			t_mediumtext=#{testType.tMediumtext},
+			t_longtext=#{testType.tLongtext},
+			t_enum=#{testType.tEnum},
+			t_set=#{testType.tSet},
+			t_binary=#{testType.tBinary},
+			t_varbinary=#{testType.tVarbinary},
+			t_point=#{testType.tPoint},
+			t_linestring=#{testType.tLinestring},
+			t_polygon=#{testType.tPolygon},
+			t_geometry=#{testType.tGeometry},
+			t_multipoint=#{testType.tMultipoint},
+			t_multilinestring=#{testType.tMultilinestring},
+			t_multipolygon=#{testType.tMultipolygon},
+			t_geometrycollection=#{testType.tGeometrycollection},
+			t_json=#{testType.tJson},
+			t_deciaml=#{testType.tDeciaml}
 		</set>
 		<where>
-			t_int={TInt}
+			AND t_int=#{tInt}
 		</where>
 	</update>
 	<update id="updateTestTypeByPkTMediumint" parameterType="java.lang.Integer">
 		update test_type
 		<set>
-			t_tinyint={testType.tTinyint},
-			t_smallint={testType.tSmallint},
-			t_mediumint={testType.tMediumint},
-			t_int={testType.tInt},
-			t_integer={testType.tInteger},
-			t_bigint={testType.tBigint},
-			t_bit={testType.tBit},
-			t_real={testType.tReal},
-			t_double={testType.tDouble},
-			t_float={testType.tFloat},
-			t_numeric={testType.tNumeric},
-			t_char={testType.tChar},
-			t_varchar={testType.tVarchar},
-			t_date={testType.tDate},
-			t_time={testType.tTime},
-			t_year={testType.tYear},
-			t_timestamp={testType.tTimestamp},
-			t_datetime={testType.tDatetime},
-			t_tinyblob={testType.tTinyblob},
-			t_blob={testType.tBlob},
-			t_mediumblob={testType.tMediumblob},
-			t_longblob={testType.tLongblob},
-			t_tinytext={testType.tTinytext},
-			t_text={testType.tText},
-			t_mediumtext={testType.tMediumtext},
-			t_longtext={testType.tLongtext},
-			t_enum={testType.tEnum},
-			t_set={testType.tSet},
-			t_binary={testType.tBinary},
-			t_varbinary={testType.tVarbinary},
-			t_point={testType.tPoint},
-			t_linestring={testType.tLinestring},
-			t_polygon={testType.tPolygon},
-			t_geometry={testType.tGeometry},
-			t_multipoint={testType.tMultipoint},
-			t_multilinestring={testType.tMultilinestring},
-			t_multipolygon={testType.tMultipolygon},
-			t_geometrycollection={testType.tGeometrycollection},
-			t_json={testType.tJson},
-			t_deciaml={testType.tDeciaml}
+			t_tinyint=#{testType.tTinyint},
+			t_smallint=#{testType.tSmallint},
+			t_mediumint=#{testType.tMediumint},
+			t_int=#{testType.tInt},
+			t_integer=#{testType.tInteger},
+			t_bigint=#{testType.tBigint},
+			t_bit=#{testType.tBit},
+			t_real=#{testType.tReal},
+			t_double=#{testType.tDouble},
+			t_float=#{testType.tFloat},
+			t_numeric=#{testType.tNumeric},
+			t_char=#{testType.tChar},
+			t_varchar=#{testType.tVarchar},
+			t_date=#{testType.tDate},
+			t_time=#{testType.tTime},
+			t_year=#{testType.tYear},
+			t_timestamp=#{testType.tTimestamp},
+			t_datetime=#{testType.tDatetime},
+			t_tinyblob=#{testType.tTinyblob},
+			t_blob=#{testType.tBlob},
+			t_mediumblob=#{testType.tMediumblob},
+			t_longblob=#{testType.tLongblob},
+			t_tinytext=#{testType.tTinytext},
+			t_text=#{testType.tText},
+			t_mediumtext=#{testType.tMediumtext},
+			t_longtext=#{testType.tLongtext},
+			t_enum=#{testType.tEnum},
+			t_set=#{testType.tSet},
+			t_binary=#{testType.tBinary},
+			t_varbinary=#{testType.tVarbinary},
+			t_point=#{testType.tPoint},
+			t_linestring=#{testType.tLinestring},
+			t_polygon=#{testType.tPolygon},
+			t_geometry=#{testType.tGeometry},
+			t_multipoint=#{testType.tMultipoint},
+			t_multilinestring=#{testType.tMultilinestring},
+			t_multipolygon=#{testType.tMultipolygon},
+			t_geometrycollection=#{testType.tGeometrycollection},
+			t_json=#{testType.tJson},
+			t_deciaml=#{testType.tDeciaml}
 		</set>
 		<where>
-			t_mediumint={TMediumint}
+			AND t_mediumint=#{tMediumint}
 		</where>
 	</update>
 	<update id="updateTestTypeByPkTSmallint" parameterType="java.lang.Integer">
 		update test_type
 		<set>
-			t_tinyint={testType.tTinyint},
-			t_smallint={testType.tSmallint},
-			t_mediumint={testType.tMediumint},
-			t_int={testType.tInt},
-			t_integer={testType.tInteger},
-			t_bigint={testType.tBigint},
-			t_bit={testType.tBit},
-			t_real={testType.tReal},
-			t_double={testType.tDouble},
-			t_float={testType.tFloat},
-			t_numeric={testType.tNumeric},
-			t_char={testType.tChar},
-			t_varchar={testType.tVarchar},
-			t_date={testType.tDate},
-			t_time={testType.tTime},
-			t_year={testType.tYear},
-			t_timestamp={testType.tTimestamp},
-			t_datetime={testType.tDatetime},
-			t_tinyblob={testType.tTinyblob},
-			t_blob={testType.tBlob},
-			t_mediumblob={testType.tMediumblob},
-			t_longblob={testType.tLongblob},
-			t_tinytext={testType.tTinytext},
-			t_text={testType.tText},
-			t_mediumtext={testType.tMediumtext},
-			t_longtext={testType.tLongtext},
-			t_enum={testType.tEnum},
-			t_set={testType.tSet},
-			t_binary={testType.tBinary},
-			t_varbinary={testType.tVarbinary},
-			t_point={testType.tPoint},
-			t_linestring={testType.tLinestring},
-			t_polygon={testType.tPolygon},
-			t_geometry={testType.tGeometry},
-			t_multipoint={testType.tMultipoint},
-			t_multilinestring={testType.tMultilinestring},
-			t_multipolygon={testType.tMultipolygon},
-			t_geometrycollection={testType.tGeometrycollection},
-			t_json={testType.tJson},
-			t_deciaml={testType.tDeciaml}
+			t_tinyint=#{testType.tTinyint},
+			t_smallint=#{testType.tSmallint},
+			t_mediumint=#{testType.tMediumint},
+			t_int=#{testType.tInt},
+			t_integer=#{testType.tInteger},
+			t_bigint=#{testType.tBigint},
+			t_bit=#{testType.tBit},
+			t_real=#{testType.tReal},
+			t_double=#{testType.tDouble},
+			t_float=#{testType.tFloat},
+			t_numeric=#{testType.tNumeric},
+			t_char=#{testType.tChar},
+			t_varchar=#{testType.tVarchar},
+			t_date=#{testType.tDate},
+			t_time=#{testType.tTime},
+			t_year=#{testType.tYear},
+			t_timestamp=#{testType.tTimestamp},
+			t_datetime=#{testType.tDatetime},
+			t_tinyblob=#{testType.tTinyblob},
+			t_blob=#{testType.tBlob},
+			t_mediumblob=#{testType.tMediumblob},
+			t_longblob=#{testType.tLongblob},
+			t_tinytext=#{testType.tTinytext},
+			t_text=#{testType.tText},
+			t_mediumtext=#{testType.tMediumtext},
+			t_longtext=#{testType.tLongtext},
+			t_enum=#{testType.tEnum},
+			t_set=#{testType.tSet},
+			t_binary=#{testType.tBinary},
+			t_varbinary=#{testType.tVarbinary},
+			t_point=#{testType.tPoint},
+			t_linestring=#{testType.tLinestring},
+			t_polygon=#{testType.tPolygon},
+			t_geometry=#{testType.tGeometry},
+			t_multipoint=#{testType.tMultipoint},
+			t_multilinestring=#{testType.tMultilinestring},
+			t_multipolygon=#{testType.tMultipolygon},
+			t_geometrycollection=#{testType.tGeometrycollection},
+			t_json=#{testType.tJson},
+			t_deciaml=#{testType.tDeciaml}
 		</set>
 		<where>
-			t_smallint={TSmallint}
+			AND t_smallint=#{tSmallint}
 		</where>
 	</update>
 	<update id="updateTestTypeByPkTTinyint" parameterType="java.lang.Integer">
 		update test_type
 		<set>
-			t_tinyint={testType.tTinyint},
-			t_smallint={testType.tSmallint},
-			t_mediumint={testType.tMediumint},
-			t_int={testType.tInt},
-			t_integer={testType.tInteger},
-			t_bigint={testType.tBigint},
-			t_bit={testType.tBit},
-			t_real={testType.tReal},
-			t_double={testType.tDouble},
-			t_float={testType.tFloat},
-			t_numeric={testType.tNumeric},
-			t_char={testType.tChar},
-			t_varchar={testType.tVarchar},
-			t_date={testType.tDate},
-			t_time={testType.tTime},
-			t_year={testType.tYear},
-			t_timestamp={testType.tTimestamp},
-			t_datetime={testType.tDatetime},
-			t_tinyblob={testType.tTinyblob},
-			t_blob={testType.tBlob},
-			t_mediumblob={testType.tMediumblob},
-			t_longblob={testType.tLongblob},
-			t_tinytext={testType.tTinytext},
-			t_text={testType.tText},
-			t_mediumtext={testType.tMediumtext},
-			t_longtext={testType.tLongtext},
-			t_enum={testType.tEnum},
-			t_set={testType.tSet},
-			t_binary={testType.tBinary},
-			t_varbinary={testType.tVarbinary},
-			t_point={testType.tPoint},
-			t_linestring={testType.tLinestring},
-			t_polygon={testType.tPolygon},
-			t_geometry={testType.tGeometry},
-			t_multipoint={testType.tMultipoint},
-			t_multilinestring={testType.tMultilinestring},
-			t_multipolygon={testType.tMultipolygon},
-			t_geometrycollection={testType.tGeometrycollection},
-			t_json={testType.tJson},
-			t_deciaml={testType.tDeciaml}
+			t_tinyint=#{testType.tTinyint},
+			t_smallint=#{testType.tSmallint},
+			t_mediumint=#{testType.tMediumint},
+			t_int=#{testType.tInt},
+			t_integer=#{testType.tInteger},
+			t_bigint=#{testType.tBigint},
+			t_bit=#{testType.tBit},
+			t_real=#{testType.tReal},
+			t_double=#{testType.tDouble},
+			t_float=#{testType.tFloat},
+			t_numeric=#{testType.tNumeric},
+			t_char=#{testType.tChar},
+			t_varchar=#{testType.tVarchar},
+			t_date=#{testType.tDate},
+			t_time=#{testType.tTime},
+			t_year=#{testType.tYear},
+			t_timestamp=#{testType.tTimestamp},
+			t_datetime=#{testType.tDatetime},
+			t_tinyblob=#{testType.tTinyblob},
+			t_blob=#{testType.tBlob},
+			t_mediumblob=#{testType.tMediumblob},
+			t_longblob=#{testType.tLongblob},
+			t_tinytext=#{testType.tTinytext},
+			t_text=#{testType.tText},
+			t_mediumtext=#{testType.tMediumtext},
+			t_longtext=#{testType.tLongtext},
+			t_enum=#{testType.tEnum},
+			t_set=#{testType.tSet},
+			t_binary=#{testType.tBinary},
+			t_varbinary=#{testType.tVarbinary},
+			t_point=#{testType.tPoint},
+			t_linestring=#{testType.tLinestring},
+			t_polygon=#{testType.tPolygon},
+			t_geometry=#{testType.tGeometry},
+			t_multipoint=#{testType.tMultipoint},
+			t_multilinestring=#{testType.tMultilinestring},
+			t_multipolygon=#{testType.tMultipolygon},
+			t_geometrycollection=#{testType.tGeometrycollection},
+			t_json=#{testType.tJson},
+			t_deciaml=#{testType.tDeciaml}
 		</set>
 		<where>
-			t_tinyint={TTinyint}
+			AND t_tinyint=#{tTinyint}
 		</where>
 	</update>
 	<select id="selectTestTypeByClass" resultMap="testTypeMap"  resultType="yyj.entity.TestType" parameterType="yyj.entity.TestType">
@@ -370,46 +430,54 @@
 			t_tinyint,t_smallint,t_mediumint,t_int,t_integer,t_bigint,t_bit,t_real,t_double,t_float,t_numeric,t_char,t_varchar,t_date,t_time,t_year,t_timestamp,t_datetime,t_tinyblob,t_blob,t_mediumblob,t_longblob,t_tinytext,t_text,t_mediumtext,t_longtext,t_enum,t_set,t_binary,t_varbinary,t_point,t_linestring,t_polygon,t_geometry,t_multipoint,t_multilinestring,t_multipolygon,t_geometrycollection,t_json,t_deciaml
 		from test_type
 		<where>
-			<if test="tTinyint != null">t_tinyint = #{tTinyint},</if>
-			<if test="tSmallint != null">t_smallint = #{tSmallint},</if>
-			<if test="tMediumint != null">t_mediumint = #{tMediumint},</if>
-			<if test="tInt != null">t_int = #{tInt},</if>
-			<if test="tInteger != null">t_integer = #{tInteger},</if>
-			<if test="tBigint != null">t_bigint = #{tBigint},</if>
-			<if test="tBit != null">t_bit = #{tBit},</if>
-			<if test="tReal != null">t_real = #{tReal},</if>
-			<if test="tDouble != null">t_double = #{tDouble},</if>
-			<if test="tFloat != null">t_float = #{tFloat},</if>
-			<if test="tNumeric != null">t_numeric = #{tNumeric},</if>
-			<if test="tChar != null">t_char = #{tChar},</if>
-			<if test="tVarchar != null">t_varchar = #{tVarchar},</if>
-			<if test="tDate != null">t_date = #{tDate},</if>
-			<if test="tTime != null">t_time = #{tTime},</if>
-			<if test="tYear != null">t_year = #{tYear},</if>
-			<if test="tTimestamp != null">t_timestamp = #{tTimestamp},</if>
-			<if test="tDatetime != null">t_datetime = #{tDatetime},</if>
-			<if test="tTinyblob != null">t_tinyblob = #{tTinyblob},</if>
-			<if test="tBlob != null">t_blob = #{tBlob},</if>
-			<if test="tMediumblob != null">t_mediumblob = #{tMediumblob},</if>
-			<if test="tLongblob != null">t_longblob = #{tLongblob},</if>
-			<if test="tTinytext != null">t_tinytext = #{tTinytext},</if>
-			<if test="tText != null">t_text = #{tText},</if>
-			<if test="tMediumtext != null">t_mediumtext = #{tMediumtext},</if>
-			<if test="tLongtext != null">t_longtext = #{tLongtext},</if>
-			<if test="tEnum != null">t_enum = #{tEnum},</if>
-			<if test="tSet != null">t_set = #{tSet},</if>
-			<if test="tBinary != null">t_binary = #{tBinary},</if>
-			<if test="tVarbinary != null">t_varbinary = #{tVarbinary},</if>
-			<if test="tPoint != null">t_point = #{tPoint},</if>
-			<if test="tLinestring != null">t_linestring = #{tLinestring},</if>
-			<if test="tPolygon != null">t_polygon = #{tPolygon},</if>
-			<if test="tGeometry != null">t_geometry = #{tGeometry},</if>
-			<if test="tMultipoint != null">t_multipoint = #{tMultipoint},</if>
-			<if test="tMultilinestring != null">t_multilinestring = #{tMultilinestring},</if>
-			<if test="tMultipolygon != null">t_multipolygon = #{tMultipolygon},</if>
-			<if test="tGeometrycollection != null">t_geometrycollection = #{tGeometrycollection},</if>
-			<if test="tJson != null">t_json = #{tJson},</if>
-			<if test="tDeciaml != null">t_deciaml = #{tDeciaml},</if>
+			<if test="tTinyint != null"> AND t_tinyint = #{tTinyint}</if>
+			<if test="tSmallint != null"> AND t_smallint = #{tSmallint}</if>
+			<if test="tMediumint != null"> AND t_mediumint = #{tMediumint}</if>
+			<if test="tInt != null"> AND t_int = #{tInt}</if>
+			<if test="tInteger != null"> AND t_integer = #{tInteger}</if>
+			<if test="tBigint != null"> AND t_bigint = #{tBigint}</if>
+			<if test="tBit != null"> AND t_bit = #{tBit}</if>
+			<if test="tReal != null"> AND t_real = #{tReal}</if>
+			<if test="tDouble != null"> AND t_double = #{tDouble}</if>
+			<if test="tFloat != null"> AND t_float = #{tFloat}</if>
+			<if test="tNumeric != null"> AND t_numeric = #{tNumeric}</if>
+			<if test="tChar != null"> AND t_char = #{tChar}</if>
+			<if test="tVarchar != null"> AND t_varchar = #{tVarchar}</if>
+			<if test="tDate != null"> AND t_date = #{tDate}</if>
+			<if test="tTime != null"> AND t_time = #{tTime}</if>
+			<if test="tYear != null"> AND t_year = #{tYear}</if>
+			<if test="tTimestamp != null"> AND t_timestamp = #{tTimestamp}</if>
+			<if test="tDatetime != null"> AND t_datetime = #{tDatetime}</if>
+			<if test="tTinyblob != null"> AND t_tinyblob = #{tTinyblob}</if>
+			<if test="tBlob != null"> AND t_blob = #{tBlob}</if>
+			<if test="tMediumblob != null"> AND t_mediumblob = #{tMediumblob}</if>
+			<if test="tLongblob != null"> AND t_longblob = #{tLongblob}</if>
+			<if test="tTinytext != null"> AND t_tinytext = #{tTinytext}</if>
+			<if test="tText != null"> AND t_text = #{tText}</if>
+			<if test="tMediumtext != null"> AND t_mediumtext = #{tMediumtext}</if>
+			<if test="tLongtext != null"> AND t_longtext = #{tLongtext}</if>
+			<if test="tEnum != null"> AND t_enum = #{tEnum}</if>
+			<if test="tSet != null"> AND t_set = #{tSet}</if>
+			<if test="tBinary != null"> AND t_binary = #{tBinary}</if>
+			<if test="tVarbinary != null"> AND t_varbinary = #{tVarbinary}</if>
+			<if test="tPoint != null"> AND t_point = #{tPoint}</if>
+			<if test="tLinestring != null"> AND t_linestring = #{tLinestring}</if>
+			<if test="tPolygon != null"> AND t_polygon = #{tPolygon}</if>
+			<if test="tGeometry != null"> AND t_geometry = #{tGeometry}</if>
+			<if test="tMultipoint != null"> AND t_multipoint = #{tMultipoint}</if>
+			<if test="tMultilinestring != null"> AND t_multilinestring = #{tMultilinestring}</if>
+			<if test="tMultipolygon != null"> AND t_multipolygon = #{tMultipolygon}</if>
+			<if test="tGeometrycollection != null"> AND t_geometrycollection = #{tGeometrycollection}</if>
+			<if test="tJson != null"> AND t_json = #{tJson}</if>
+			<if test="tDeciaml != null"> AND t_deciaml = #{tDeciaml}</if>
+		</where>
+	</select>
+	<select id="selectTestTypeByPk"  resultMap="testTypeMap"  resultType="yyj.entity.TestType">
+		select
+			t_tinyint,t_smallint,t_mediumint,t_int,t_integer,t_bigint,t_bit,t_real,t_double,t_float,t_numeric,t_char,t_varchar,t_date,t_time,t_year,t_timestamp,t_datetime,t_tinyblob,t_blob,t_mediumblob,t_longblob,t_tinytext,t_text,t_mediumtext,t_longtext,t_enum,t_set,t_binary,t_varbinary,t_point,t_linestring,t_polygon,t_geometry,t_multipoint,t_multilinestring,t_multipolygon,t_geometrycollection,t_json,t_deciaml
+		from test_type
+		<where>
+			AND t_int=#{tInt} AND t_mediumint=#{tMediumint} AND t_smallint=#{tSmallint} AND t_tinyint=#{tTinyint}
 		</where>
 	</select>
 	<select id="selectTestTypeByPkTInt"  resultMap="testTypeMap"  resultType="yyj.entity.TestType" parameterType="java.lang.Integer">
@@ -417,7 +485,7 @@
 			t_tinyint,t_smallint,t_mediumint,t_int,t_integer,t_bigint,t_bit,t_real,t_double,t_float,t_numeric,t_char,t_varchar,t_date,t_time,t_year,t_timestamp,t_datetime,t_tinyblob,t_blob,t_mediumblob,t_longblob,t_tinytext,t_text,t_mediumtext,t_longtext,t_enum,t_set,t_binary,t_varbinary,t_point,t_linestring,t_polygon,t_geometry,t_multipoint,t_multilinestring,t_multipolygon,t_geometrycollection,t_json,t_deciaml
 		from test_type
 		<where>
-			t_int={TInt}
+			AND t_int=#{tInt}
 		</where>
 	</select>
 	<select id="selectTestTypeByPkTMediumint"  resultMap="testTypeMap"  resultType="yyj.entity.TestType" parameterType="java.lang.Integer">
@@ -425,7 +493,7 @@
 			t_tinyint,t_smallint,t_mediumint,t_int,t_integer,t_bigint,t_bit,t_real,t_double,t_float,t_numeric,t_char,t_varchar,t_date,t_time,t_year,t_timestamp,t_datetime,t_tinyblob,t_blob,t_mediumblob,t_longblob,t_tinytext,t_text,t_mediumtext,t_longtext,t_enum,t_set,t_binary,t_varbinary,t_point,t_linestring,t_polygon,t_geometry,t_multipoint,t_multilinestring,t_multipolygon,t_geometrycollection,t_json,t_deciaml
 		from test_type
 		<where>
-			t_mediumint={TMediumint}
+			AND t_mediumint=#{tMediumint}
 		</where>
 	</select>
 	<select id="selectTestTypeByPkTSmallint"  resultMap="testTypeMap"  resultType="yyj.entity.TestType" parameterType="java.lang.Integer">
@@ -433,7 +501,7 @@
 			t_tinyint,t_smallint,t_mediumint,t_int,t_integer,t_bigint,t_bit,t_real,t_double,t_float,t_numeric,t_char,t_varchar,t_date,t_time,t_year,t_timestamp,t_datetime,t_tinyblob,t_blob,t_mediumblob,t_longblob,t_tinytext,t_text,t_mediumtext,t_longtext,t_enum,t_set,t_binary,t_varbinary,t_point,t_linestring,t_polygon,t_geometry,t_multipoint,t_multilinestring,t_multipolygon,t_geometrycollection,t_json,t_deciaml
 		from test_type
 		<where>
-			t_smallint={TSmallint}
+			AND t_smallint=#{tSmallint}
 		</where>
 	</select>
 	<select id="selectTestTypeByPkTTinyint"  resultMap="testTypeMap"  resultType="yyj.entity.TestType" parameterType="java.lang.Integer">
@@ -441,7 +509,7 @@
 			t_tinyint,t_smallint,t_mediumint,t_int,t_integer,t_bigint,t_bit,t_real,t_double,t_float,t_numeric,t_char,t_varchar,t_date,t_time,t_year,t_timestamp,t_datetime,t_tinyblob,t_blob,t_mediumblob,t_longblob,t_tinytext,t_text,t_mediumtext,t_longtext,t_enum,t_set,t_binary,t_varbinary,t_point,t_linestring,t_polygon,t_geometry,t_multipoint,t_multilinestring,t_multipolygon,t_geometrycollection,t_json,t_deciaml
 		from test_type
 		<where>
-			t_tinyint={TTinyint}
+			AND t_tinyint=#{tTinyint}
 		</where>
 	</select>
 	<resultMap id="testTypeMap" type="yyj.entity.TestType">

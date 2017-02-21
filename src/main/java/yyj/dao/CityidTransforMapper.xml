@@ -12,8 +12,8 @@
 			<if test="icCityid == null">default,</if>
 			<if test="insuranceCompany != null">#{insuranceCompany},</if>
 			<if test="insuranceCompany == null">default,</if>
-			<if test="createTime != null">#{createTime},</if>
-			<if test="createTime == null">default,</if>
+			<if test="createTime != null">#{createTime}</if>
+			<if test="createTime == null">default</if>
 		)
 	</insert>
 	<delete id="deleteCityidTransforByClass" parameterType="yyj.entity.CityidTransfor">
@@ -35,29 +35,29 @@
 	<update id="updateCityidTransforByClass">
 		update t_cityid_transfor
 		<set>
-			lx_cityid={cityidTransfor.lxCityid},
-			ic_cityid={cityidTransfor.icCityid},
-			insurance_company={cityidTransfor.insuranceCompany},
-			create_time={cityidTransfor.createTime}
+			lx_cityid=#{cityidTransfor.lxCityid},
+			ic_cityid=#{cityidTransfor.icCityid},
+			insurance_company=#{cityidTransfor.insuranceCompany},
+			create_time=#{cityidTransfor.createTime}
 		</set>
 		<where>
-			<if test="lxCityid != null">lx_cityid = #{param.lxCityid},</if>
-			<if test="icCityid != null">ic_cityid = #{param.icCityid},</if>
-			<if test="insuranceCompany != null">insurance_company = #{param.insuranceCompany},</if>
-			<if test="createTime != null">create_time = #{param.createTime},</if>
+			<if test="param.lxCityid != null"> AND lx_cityid = #{param.lxCityid}</if>
+			<if test="param.icCityid != null"> AND ic_cityid = #{param.icCityid}</if>
+			<if test="param.insuranceCompany != null"> AND insurance_company = #{param.insuranceCompany}</if>
+			<if test="param.createTime != null"> AND create_time = #{param.createTime}</if>
 		</where>
 	</update>
 	<update id="updateCityidTransforByUniqueIndexOnLxCityidAndInsuranceCompany">
 		update t_cityid_transfor
 		<set>
-			lx_cityid={cityidTransfor.lxCityid},
-			ic_cityid={cityidTransfor.icCityid},
-			insurance_company={cityidTransfor.insuranceCompany},
-			create_time={cityidTransfor.createTime}
+			lx_cityid=#{cityidTransfor.lxCityid},
+			ic_cityid=#{cityidTransfor.icCityid},
+			insurance_company=#{cityidTransfor.insuranceCompany},
+			create_time=#{cityidTransfor.createTime}
 		</set>
 		<where>
-			AND lx_cityid={lxCityid}
-			AND insurance_company={insuranceCompany}
+			AND lx_cityid=#{lxCityid}
+			AND insurance_company=#{insuranceCompany}
 		</where>
 	</update>
 	<select id="selectCityidTransforByClass" resultMap="cityidTransforMap"  resultType="yyj.entity.CityidTransfor" parameterType="yyj.entity.CityidTransfor">
@@ -65,10 +65,10 @@
 			lx_cityid,ic_cityid,insurance_company,create_time
 		from t_cityid_transfor
 		<where>
-			<if test="lxCityid != null">lx_cityid = #{lxCityid},</if>
-			<if test="icCityid != null">ic_cityid = #{icCityid},</if>
-			<if test="insuranceCompany != null">insurance_company = #{insuranceCompany},</if>
-			<if test="createTime != null">create_time = #{createTime},</if>
+			<if test="lxCityid != null"> AND lx_cityid = #{lxCityid}</if>
+			<if test="icCityid != null"> AND ic_cityid = #{icCityid}</if>
+			<if test="insuranceCompany != null"> AND insurance_company = #{insuranceCompany}</if>
+			<if test="createTime != null"> AND create_time = #{createTime}</if>
 		</where>
 	</select>
 	<select id="selectCityidTransforByUniqueIndexOnLxCityidAndInsuranceCompany" resultType="yyj.entity.CityidTransfor" resultMap="cityidTransforMap" >
@@ -76,8 +76,8 @@
 			lx_cityid,ic_cityid,insurance_company,create_time
 		from t_cityid_transfor
 		<where>
-			AND lx_cityid={lxCityid}
-			AND insurance_company={insuranceCompany}
+			AND lx_cityid=#{lxCityid}
+			AND insurance_company=#{insuranceCompany}
 		</where>
 	</select>
 	<resultMap id="cityidTransforMap" type="yyj.entity.CityidTransfor">

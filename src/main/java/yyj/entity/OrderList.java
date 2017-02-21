@@ -7,7 +7,7 @@ import java.lang.String;
 /**
 *no comment
 *@author yyj | auto generator
-*@version 1.0.0 2017-02-20 15:54:38
+*@version 1.0.0 2017-02-21 10:43:36
 */
 
 public class OrderList{
@@ -204,6 +204,11 @@ public class OrderList{
 	/**设置更新时间*/
 	public void setUpdateTime(Timestamp updateTime){
 		this.updateTime=updateTime;
+		
+	}
+	@Override
+	public String toString(){
+		return "yyj.entity.OrderList:["+"orderId="+orderId+","+"thirdpartOrderId="+thirdpartOrderId+","+"insuranceCompany="+insuranceCompany+","+"reqBranch="+reqBranch+","+"compulsoryPropNo="+compulsoryPropNo+","+"businessPropNo="+businessPropNo+","+"compulsoryPolicyNo="+compulsoryPolicyNo+","+"businessPolicyNo="+businessPolicyNo+","+"insureCity="+insureCity+","+"carPlateNo="+carPlateNo+","+"hasPlate="+hasPlate+","+"totalPrice="+totalPrice+","+"orderStatus="+orderStatus+","+"createTime="+createTime+","+"updateTime="+updateTime+"]";
 		
 	}
 }

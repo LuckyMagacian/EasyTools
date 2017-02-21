@@ -2,10 +2,11 @@ package yyj.dao;
 
 import yyj.entity.UserInfo;
 import org.apache.ibatis.annotations.Param;
-import java.util.*;/**
+import java.util.*;
+/**
 *no comment
 *@author yyj | auto generator
-*@version 1.0.0 2017-02-20 15:54:38
+*@version 1.0.0 2017-02-21 10:43:36
 */
 
 public interface UserInfoDao{

@@ -36,9 +36,7 @@
     <context:component-scan base-package="yyj.*"/> 
         <!-- 支持@RequestMapping请求和Controller映射 -->
     <mvc:annotation-driven/> 
-    
-  	<util:properties id="dbConfig" location="classpath:jdbc.properties"></util:properties>  
-  	
+  	<util:properties id="dbconfig" location="classpath:jdbc.properties"></util:properties>  
 	<bean id="ds" class="org.apache.commons.dbcp.BasicDataSource">
 	<property name="driverClassName" value="#{dbconfig.driver}"></property>
 	<property name="url"			 value="#{dbconfig.url}"></property> 
@@ -50,7 +48,7 @@
 	<property name="configLocations" value="classpath:config/mybatisConfig.xml"></property>
 	 -->
 		<property name="dataSource" ref="ds"></property>
-		<property name="mapperLocations" value="classpath:yyj.dao/*.xml"></property>
+		<property name="mapperLocations" value="classpath:yyj/dao/*.xml"></property>
 	</bean>
 	<!-- mapper扫描 -->
 	<bean id="mappers" class="org.mybatis.spring.mapper.MapperScannerConfigurer">

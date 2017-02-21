@@ -8,7 +8,7 @@ import java.sql.Date;
 /**
 *no comment
 *@author yyj | auto generator
-*@version 1.0.0 2017-02-20 15:54:38
+*@version 1.0.0 2017-02-21 10:43:36
 */
 
 public class OrderDetail{
@@ -543,6 +543,11 @@ public class OrderDetail{
 	/**设置更新时间*/
 	public void setUpdateTime(Timestamp updateTime){
 		this.updateTime=updateTime;
+		
+	}
+	@Override
+	public String toString(){
+		return "yyj.entity.OrderDetail:["+"orderId="+orderId+","+"insureCity="+insureCity+","+"carPlateNo="+carPlateNo+","+"hasPlate="+hasPlate+","+"customerName="+customerName+","+"idCard="+idCard+","+"phoneNo="+phoneNo+","+"email="+email+","+"vehicleIdNo="+vehicleIdNo+","+"engineNo="+engineNo+","+"brandModal="+brandModal+","+"brandModalCh="+brandModalCh+","+"registerDate="+registerDate+","+"isSecondhand="+isSecondhand+","+"transforDate="+transforDate+","+"totalPrice="+totalPrice+","+"priceTotalCompulsory="+priceTotalCompulsory+","+"priceTotalBusiness="+priceTotalBusiness+","+"priceCompulsory="+priceCompulsory+","+"priceTax="+priceTax+","+"dateCompulsory="+dateCompulsory+","+"dateBusiness="+dateBusiness+","+"applicantName="+applicantName+","+"applicantIdNo="+applicantIdNo+","+"applicantPhoneNo="+applicantPhoneNo+","+"applicantEmail="+applicantEmail+","+"insuredName="+insuredName+","+"insuredIdNo="+insuredIdNo+","+"insuredPhoneNo="+insuredPhoneNo+","+"insuredEmail="+insuredEmail+","+"addresseeName="+addresseeName+","+"addresseeMobile="+addresseeMobile+","+"sendDate="+sendDate+","+"addresseeProvince="+addresseeProvince+","+"addresseeCity="+addresseeCity+","+"addresseeTown="+addresseeTown+","+"addresseeDetails="+addresseeDetails+","+"insuredAddresseeDetails="+insuredAddresseeDetails+","+"insureInfo="+insureInfo+","+"createTime="+createTime+","+"updateTime="+updateTime+"]";
 		
 	}
 }

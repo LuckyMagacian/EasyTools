@@ -84,7 +84,7 @@ public class TestSqlUtilForDB {
 	public void testa(){
 //		Connection conn=SqlUtilForDB.getConnection();
 //		System.out.println(makeMybatisDao(getTable(conn, "t_car_owner"), "t_", false,false));
-//		makeAll(conn, "t_", null, false, false);
+
 //		System.out.println(createInsert(getTable(conn, "test_type"), null));
 //		makeMybatisFile(getTable(conn, "t_car_owner"), "t_", null, false, false);
 		String temp="http://1.202.156.227:7002/Net/netCarModelsDataWebAction.action?";
@@ -95,6 +95,12 @@ public class TestSqlUtilForDB {
 		temp+=url;
 		System.out.println(temp);
 		System.out.println();
+	}
+	@Test
+	public void test2(){
+		Connection conn=SqlUtilForDB.getConnection();
+//		makeBeanFile(getTable(conn, "t_car_owner"), false, "t_", false);
+		makeAll(conn, "t_", null, false, false);
 	}
 
 }

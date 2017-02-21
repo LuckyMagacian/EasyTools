@@ -34,8 +34,8 @@
 			<if test="orderStatus == null">default,</if>
 			<if test="createTime != null">#{createTime},</if>
 			<if test="createTime == null">default,</if>
-			<if test="updateTime != null">#{updateTime},</if>
-			<if test="updateTime == null">default,</if>
+			<if test="updateTime != null">#{updateTime}</if>
+			<if test="updateTime == null">default</if>
 		)
 	</insert>
 	<delete id="deleteOrderListByClass" parameterType="yyj.entity.OrderList">
@@ -67,61 +67,61 @@
 	<update id="updateOrderListByClass">
 		update t_order_list
 		<set>
-			order_id={orderList.orderId},
-			thirdpart_order_id={orderList.thirdpartOrderId},
-			insurance_company={orderList.insuranceCompany},
-			req_branch={orderList.reqBranch},
-			compulsory_prop_no={orderList.compulsoryPropNo},
-			business_prop_no={orderList.businessPropNo},
-			compulsory_policy_no={orderList.compulsoryPolicyNo},
-			business_policy_no={orderList.businessPolicyNo},
-			insure_city={orderList.insureCity},
-			car_plate_no={orderList.carPlateNo},
-			has_plate={orderList.hasPlate},
-			total_price={orderList.totalPrice},
-			order_status={orderList.orderStatus},
-			create_time={orderList.createTime},
-			update_time={orderList.updateTime}
+			order_id=#{orderList.orderId},
+			thirdpart_order_id=#{orderList.thirdpartOrderId},
+			insurance_company=#{orderList.insuranceCompany},
+			req_branch=#{orderList.reqBranch},
+			compulsory_prop_no=#{orderList.compulsoryPropNo},
+			business_prop_no=#{orderList.businessPropNo},
+			compulsory_policy_no=#{orderList.compulsoryPolicyNo},
+			business_policy_no=#{orderList.businessPolicyNo},
+			insure_city=#{orderList.insureCity},
+			car_plate_no=#{orderList.carPlateNo},
+			has_plate=#{orderList.hasPlate},
+			total_price=#{orderList.totalPrice},
+			order_status=#{orderList.orderStatus},
+			create_time=#{orderList.createTime},
+			update_time=#{orderList.updateTime}
 		</set>
 		<where>
-			<if test="orderId != null">order_id = #{param.orderId},</if>
-			<if test="thirdpartOrderId != null">thirdpart_order_id = #{param.thirdpartOrderId},</if>
-			<if test="insuranceCompany != null">insurance_company = #{param.insuranceCompany},</if>
-			<if test="reqBranch != null">req_branch = #{param.reqBranch},</if>
-			<if test="compulsoryPropNo != null">compulsory_prop_no = #{param.compulsoryPropNo},</if>
-			<if test="businessPropNo != null">business_prop_no = #{param.businessPropNo},</if>
-			<if test="compulsoryPolicyNo != null">compulsory_policy_no = #{param.compulsoryPolicyNo},</if>
-			<if test="businessPolicyNo != null">business_policy_no = #{param.businessPolicyNo},</if>
-			<if test="insureCity != null">insure_city = #{param.insureCity},</if>
-			<if test="carPlateNo != null">car_plate_no = #{param.carPlateNo},</if>
-			<if test="hasPlate != null">has_plate = #{param.hasPlate},</if>
-			<if test="totalPrice != null">total_price = #{param.totalPrice},</if>
-			<if test="orderStatus != null">order_status = #{param.orderStatus},</if>
-			<if test="createTime != null">create_time = #{param.createTime},</if>
-			<if test="updateTime != null">update_time = #{param.updateTime},</if>
+			<if test="param.orderId != null"> AND order_id = #{param.orderId}</if>
+			<if test="param.thirdpartOrderId != null"> AND thirdpart_order_id = #{param.thirdpartOrderId}</if>
+			<if test="param.insuranceCompany != null"> AND insurance_company = #{param.insuranceCompany}</if>
+			<if test="param.reqBranch != null"> AND req_branch = #{param.reqBranch}</if>
+			<if test="param.compulsoryPropNo != null"> AND compulsory_prop_no = #{param.compulsoryPropNo}</if>
+			<if test="param.businessPropNo != null"> AND business_prop_no = #{param.businessPropNo}</if>
+			<if test="param.compulsoryPolicyNo != null"> AND compulsory_policy_no = #{param.compulsoryPolicyNo}</if>
+			<if test="param.businessPolicyNo != null"> AND business_policy_no = #{param.businessPolicyNo}</if>
+			<if test="param.insureCity != null"> AND insure_city = #{param.insureCity}</if>
+			<if test="param.carPlateNo != null"> AND car_plate_no = #{param.carPlateNo}</if>
+			<if test="param.hasPlate != null"> AND has_plate = #{param.hasPlate}</if>
+			<if test="param.totalPrice != null"> AND total_price = #{param.totalPrice}</if>
+			<if test="param.orderStatus != null"> AND order_status = #{param.orderStatus}</if>
+			<if test="param.createTime != null"> AND create_time = #{param.createTime}</if>
+			<if test="param.updateTime != null"> AND update_time = #{param.updateTime}</if>
 		</where>
 	</update>
 	<update id="updateOrderListByUniqueIndexOnOrderId">
 		update t_order_list
 		<set>
-			order_id={orderList.orderId},
-			thirdpart_order_id={orderList.thirdpartOrderId},
-			insurance_company={orderList.insuranceCompany},
-			req_branch={orderList.reqBranch},
-			compulsory_prop_no={orderList.compulsoryPropNo},
-			business_prop_no={orderList.businessPropNo},
-			compulsory_policy_no={orderList.compulsoryPolicyNo},
-			business_policy_no={orderList.businessPolicyNo},
-			insure_city={orderList.insureCity},
-			car_plate_no={orderList.carPlateNo},
-			has_plate={orderList.hasPlate},
-			total_price={orderList.totalPrice},
-			order_status={orderList.orderStatus},
-			create_time={orderList.createTime},
-			update_time={orderList.updateTime}
+			order_id=#{orderList.orderId},
+			thirdpart_order_id=#{orderList.thirdpartOrderId},
+			insurance_company=#{orderList.insuranceCompany},
+			req_branch=#{orderList.reqBranch},
+			compulsory_prop_no=#{orderList.compulsoryPropNo},
+			business_prop_no=#{orderList.businessPropNo},
+			compulsory_policy_no=#{orderList.compulsoryPolicyNo},
+			business_policy_no=#{orderList.businessPolicyNo},
+			insure_city=#{orderList.insureCity},
+			car_plate_no=#{orderList.carPlateNo},
+			has_plate=#{orderList.hasPlate},
+			total_price=#{orderList.totalPrice},
+			order_status=#{orderList.orderStatus},
+			create_time=#{orderList.createTime},
+			update_time=#{orderList.updateTime}
 		</set>
 		<where>
-			AND order_id={orderId}
+			AND order_id=#{orderId}
 		</where>
 	</update>
 	<select id="selectOrderListByClass" resultMap="orderListMap"  resultType="yyj.entity.OrderList" parameterType="yyj.entity.OrderList">
@@ -129,21 +129,21 @@
 			order_id,thirdpart_order_id,insurance_company,req_branch,compulsory_prop_no,business_prop_no,compulsory_policy_no,business_policy_no,insure_city,car_plate_no,has_plate,total_price,order_status,create_time,update_time
 		from t_order_list
 		<where>
-			<if test="orderId != null">order_id = #{orderId},</if>
-			<if test="thirdpartOrderId != null">thirdpart_order_id = #{thirdpartOrderId},</if>
-			<if test="insuranceCompany != null">insurance_company = #{insuranceCompany},</if>
-			<if test="reqBranch != null">req_branch = #{reqBranch},</if>
-			<if test="compulsoryPropNo != null">compulsory_prop_no = #{compulsoryPropNo},</if>
-			<if test="businessPropNo != null">business_prop_no = #{businessPropNo},</if>
-			<if test="compulsoryPolicyNo != null">compulsory_policy_no = #{compulsoryPolicyNo},</if>
-			<if test="businessPolicyNo != null">business_policy_no = #{businessPolicyNo},</if>
-			<if test="insureCity != null">insure_city = #{insureCity},</if>
-			<if test="carPlateNo != null">car_plate_no = #{carPlateNo},</if>
-			<if test="hasPlate != null">has_plate = #{hasPlate},</if>
-			<if test="totalPrice != null">total_price = #{totalPrice},</if>
-			<if test="orderStatus != null">order_status = #{orderStatus},</if>
-			<if test="createTime != null">create_time = #{createTime},</if>
-			<if test="updateTime != null">update_time = #{updateTime},</if>
+			<if test="orderId != null"> AND order_id = #{orderId}</if>
+			<if test="thirdpartOrderId != null"> AND thirdpart_order_id = #{thirdpartOrderId}</if>
+			<if test="insuranceCompany != null"> AND insurance_company = #{insuranceCompany}</if>
+			<if test="reqBranch != null"> AND req_branch = #{reqBranch}</if>
+			<if test="compulsoryPropNo != null"> AND compulsory_prop_no = #{compulsoryPropNo}</if>
+			<if test="businessPropNo != null"> AND business_prop_no = #{businessPropNo}</if>
+			<if test="compulsoryPolicyNo != null"> AND compulsory_policy_no = #{compulsoryPolicyNo}</if>
+			<if test="businessPolicyNo != null"> AND business_policy_no = #{businessPolicyNo}</if>
+			<if test="insureCity != null"> AND insure_city = #{insureCity}</if>
+			<if test="carPlateNo != null"> AND car_plate_no = #{carPlateNo}</if>
+			<if test="hasPlate != null"> AND has_plate = #{hasPlate}</if>
+			<if test="totalPrice != null"> AND total_price = #{totalPrice}</if>
+			<if test="orderStatus != null"> AND order_status = #{orderStatus}</if>
+			<if test="createTime != null"> AND create_time = #{createTime}</if>
+			<if test="updateTime != null"> AND update_time = #{updateTime}</if>
 		</where>
 	</select>
 	<select id="selectOrderListByUniqueIndexOnOrderId" resultType="yyj.entity.OrderList" resultMap="orderListMap" >
@@ -151,7 +151,7 @@
 			order_id,thirdpart_order_id,insurance_company,req_branch,compulsory_prop_no,business_prop_no,compulsory_policy_no,business_policy_no,insure_city,car_plate_no,has_plate,total_price,order_status,create_time,update_time
 		from t_order_list
 		<where>
-			AND order_id={orderId}
+			AND order_id=#{orderId}
 		</where>
 	</select>
 	<resultMap id="orderListMap" type="yyj.entity.OrderList">

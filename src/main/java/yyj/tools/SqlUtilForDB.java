@@ -28,6 +28,8 @@ import javax.swing.JOptionPane;
 
 import org.apache.commons.dbcp.BasicDataSourceFactory;
 
+import com.sun.org.apache.xml.internal.resolver.helpers.PublicId;
+
 
 
 public class SqlUtilForDB {
@@ -731,7 +733,6 @@ public class SqlUtilForDB {
 					continue;
 				else
 					buffer.append("import "+each+";\n");
-			buffer.append("\n");
 			if(annotationFlag){
 				buffer.append("import "+"javax.persistence.Column"+";\n");
 				buffer.append("import "+"javax.persistence.Entity"+";\n");
@@ -739,6 +740,7 @@ public class SqlUtilForDB {
 				buffer.append("import "+"javax.persistence.Id"+";\n");
 				buffer.append("\n");
 			}
+			buffer.append("\n");
 			//--------------------------------class name------------------------------
 			String className=map.get("className");
 			//---------------------------------class comment---------------------------
@@ -798,6 +800,19 @@ public class SqlUtilForDB {
 				buffer.append("this."+name+"="+name+";\n\n");
 				buffer.append("}\n");
 			}
+			//--------------------------------------toString-------------------------------------
+			buffer.append("@Override\n");
+			buffer.append("public String toString(){\n");
+			buffer.append("return \""+map.get("class")+":[\"");
+			for(ColumnInfo each:columnInfos){
+				String name=each.getColumnName();
+				name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+				name=CheckReplaceUtil.firstCharLowcase(name);
+				buffer.append("+\""+name+"=\""+"+"+name+"+"+"\",\"");
+			}
+			buffer.replace(buffer.length()-2, buffer.length(), "]\"");
+			buffer.append(";\n");
+			buffer.append("\n}\n");
 			buffer.append("}\n");
 			//--------------------------------------java file format-----------------------------
 			fileContent=FileUtil.javaFormat(buffer.toString());
@@ -948,6 +963,21 @@ public class SqlUtilForDB {
 			buffer.append("public void delete"+map.get("className")+"ByClass("+map.get("className")+" "+CheckReplaceUtil.firstCharLowcase(map.get("className"))+");\n");
 			String paramType=null;
 			if(pkInfos!=null&&!pkInfos.isEmpty()){
+				buffer.append("public void delete"+map.get("className")+"ByPk(");
+				for(PrimaryKeyInfo each:pkInfos){
+					String name=each.getColumnName();
+					name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+					name=CheckReplaceUtil.firstCharUpcase(name);
+					paramType=columnMap.get(each.getColumnName()).getJavaType();
+					paramType=paramType.startsWith("[L")?paramType.substring(2):paramType;
+					paramType=paramType.endsWith(";")?paramType.substring(0, paramType.length()-1)+"[]":paramType;
+					paramType=paramType.substring(paramType.lastIndexOf(".")+1);
+					buffer.append("@Param(value=\""+CheckReplaceUtil.firstCharLowcase(name)+"\")"+paramType+" "+CheckReplaceUtil.firstCharLowcase(name)+",");
+				}
+				buffer.replace(buffer.length()-1, buffer.length(), ");\n");
+			}	
+			
+			if(pkInfos!=null&&!pkInfos.isEmpty()){
 				for(PrimaryKeyInfo each:pkInfos){
 					String name=each.getColumnName();
 					name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
@@ -990,6 +1020,24 @@ public class SqlUtilForDB {
 			buffer.append("\n"); 
 			//----------------------------------update-----------------------------------------------
 			buffer.append("public void update"+map.get("className")+"ByClass(@Param(value=\""+CheckReplaceUtil.firstCharLowcase(map.get("className"))+"\")"+map.get("className")+" "+CheckReplaceUtil.firstCharLowcase(map.get("className"))+",@Param(value=\"param\")"+map.get("className")+" param);\n");
+			
+			
+			if(pkInfos!=null&&!pkInfos.isEmpty()){
+				buffer.append("public void update"+map.get("className")+"ByPk(@Param(value=\""+CheckReplaceUtil.firstCharLowcase(map.get("className"))+"\")"+map.get("className")+" "+CheckReplaceUtil.firstCharLowcase(map.get("className")+","));
+				for(PrimaryKeyInfo each:pkInfos){
+					String name=each.getColumnName();
+					name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+					name=CheckReplaceUtil.firstCharUpcase(name);
+					paramType=columnMap.get(each.getColumnName()).getJavaType();
+					paramType=paramType.startsWith("[L")?paramType.substring(2):paramType;
+					paramType=paramType.endsWith(";")?paramType.substring(0, paramType.length()-1)+"[]":paramType;
+					paramType=paramType.substring(paramType.lastIndexOf(".")+1);
+					buffer.append("@Param(value=\""+CheckReplaceUtil.firstCharLowcase(name)+"\")"+paramType+" "+CheckReplaceUtil.firstCharLowcase(name)+",");
+				}
+				buffer.replace(buffer.length()-1,buffer.length(),");\n");
+			}
+			
+			
 			if(pkInfos!=null&&!pkInfos.isEmpty()){
 				for(PrimaryKeyInfo each:pkInfos){
 					String name=each.getColumnName();
@@ -999,8 +1047,9 @@ public class SqlUtilForDB {
 					paramType=paramType.startsWith("[L")?paramType.substring(2):paramType;
 					paramType=paramType.endsWith(";")?paramType.substring(0, paramType.length()-1)+"[]":paramType;
 					paramType=paramType.substring(paramType.lastIndexOf(".")+1);
-					buffer.append("public void update"+map.get("className")+"ByPk"+name+"(@Param(value=\""+CheckReplaceUtil.firstCharLowcase(map.get("className"))+"\")"+map.get("className")+" "+CheckReplaceUtil.firstCharLowcase(map.get("className"))+","+paramType+" "+CheckReplaceUtil.firstCharLowcase(name)+");\n");
+					buffer.append("public void update"+map.get("className")+"ByPk"+name+"(@Param(value=\""+CheckReplaceUtil.firstCharLowcase(map.get("className"))+"\")"+map.get("className")+" "+CheckReplaceUtil.firstCharLowcase(map.get("className"))+",@Param(value=\""+CheckReplaceUtil.firstCharLowcase(name)+"\")"+paramType+" "+CheckReplaceUtil.firstCharLowcase(name)+");\n");
 				}
+
 				if(indexInfos!=null&&!indexInfos.isEmpty()){
 					for(Entry<String, List<IndexInfo>> each:indexInfos.entrySet()){
 						List<IndexInfo> value=each.getValue();
@@ -1034,7 +1083,21 @@ public class SqlUtilForDB {
 			//----------------------------------select-----------------------------------------------
 			buffer.append("public List<"+map.get("className")+"> select"+map.get("className")+"ByClass");
 			buffer.append("("+map.get("className")+" "+CheckReplaceUtil.firstCharLowcase(map.get("className"))+");\n");
-		
+			if(pkInfos!=null&&!pkInfos.isEmpty()){
+				buffer.append("public "+map.get("className")+" select"+map.get("className")+"ByPk(");
+				for(PrimaryKeyInfo each:pkInfos){
+					String name=each.getColumnName();
+					name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+					name=CheckReplaceUtil.firstCharUpcase(name);
+					paramType=columnMap.get(each.getColumnName()).getJavaType();
+					paramType=paramType.startsWith("[L")?paramType.substring(2):paramType;
+					paramType=paramType.endsWith(";")?paramType.substring(0, paramType.length()-1)+"[]":paramType;
+					paramType=paramType.substring(paramType.lastIndexOf(".")+1);
+					buffer.append("@Param(value=\""+CheckReplaceUtil.firstCharLowcase(name)+"\")"+paramType+" "+CheckReplaceUtil.firstCharLowcase(name)+",");
+				}
+				buffer.replace(buffer.length()-1,buffer.length(),"");
+				buffer.append(");\n");
+			}
 			if(pkInfos!=null&&!pkInfos.isEmpty()){
 				for(PrimaryKeyInfo each:pkInfos){
 					String name=each.getColumnName();
@@ -1044,11 +1107,10 @@ public class SqlUtilForDB {
 					paramType=paramType.startsWith("[L")?paramType.substring(2):paramType;
 					paramType=paramType.endsWith(";")?paramType.substring(0, paramType.length()-1)+"[]":paramType;
 					paramType=paramType.substring(paramType.lastIndexOf(".")+1);
-					buffer.append("public "+map.get("className")+" select"+map.get("className")+"ByPk"+name);
+					buffer.append("public List<"+map.get("className")+"> select"+map.get("className")+"ByPk"+name);
 					buffer.append("("+paramType+" "+CheckReplaceUtil.firstCharLowcase(name)+");\n");
 				}
-			}
-			
+			}		
 			if(indexInfos!=null&&!indexInfos.isEmpty()){
 				for(Entry<String, List<IndexInfo>> each:indexInfos.entrySet()){
 					List<IndexInfo> value=each.getValue();
@@ -1128,15 +1190,34 @@ public class SqlUtilForDB {
 	 * @param paging
 	 * @param annotationFlag
 	 */
-	public static void makeAll(List<DBTable> list,String prefix,String descOrAsc,boolean paging,boolean annotationFlag){
+	public static void makeAll(final List<DBTable> list,final String prefix,final String descOrAsc,final boolean paging,final boolean annotationFlag){
 		try {
-			prefix=prefix==null?"":prefix;
 			String packagePath=SqlUtilForDB.class.getPackage().getName();
 			packagePath=packagePath.substring(0,packagePath.lastIndexOf('.')+1);
 			packagePath+="dao";
-			makeBeanFiles(list, prefix, annotationFlag, false);
-			makeMybatisDaoes(list, prefix,false);
-			makeMybatisFiles(list, prefix, descOrAsc, paging, false);
+			Thread thread1=new Thread(new Runnable() {
+				@Override
+				public void run() {
+					makeBeanFiles(list, prefix==null?"":prefix, annotationFlag, false);
+				}
+			});
+			Thread thread2=new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					makeMybatisDaoes(list, prefix,false);
+				}
+			});
+			Thread thread3=new Thread(new Runnable() {
+				@Override
+				public void run() {
+					makeMybatisFiles(list, prefix, descOrAsc, paging, false);
+				}
+			});
+			thread1.start();
+			thread2.start();
+			thread3.start();
+			while(thread1.isAlive()||thread2.isAlive()||thread3.isAlive());
 			JOptionPane.showMessageDialog(null, "生成Dao与mapper成功\n路径:"+packagePath+"\n"+"生成javaBean成功\n路径:"+packagePath.replace("dao", "entity")+"\n请刷新项目", "提示", JOptionPane.ERROR_MESSAGE);
 		} catch (Exception e) {
 			throw new RuntimeException("自动生成文件异常",e);
@@ -1207,18 +1288,26 @@ public class SqlUtilForDB {
 				temp.append(each.getColumnName()+",");
 			temp.replace(temp.length()-1,temp.length(),"");
 			temp.append(")\nvalues\n(");
+			int index=columnInfos.size();
 			for(ColumnInfo each:columnInfos){
 				String name=each.getColumnName();
 				name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+				name=CheckReplaceUtil.firstCharLowcase(name);
 				if(each.getIsAutoCrement().equals("true")||!each.getNullAble().equals("true")){
 					if(!temp.toString().endsWith("\n"))
 						temp.append("\n");
-					temp.append("<if test=\"" + name + " != null\">#{"+name+"},");
+					temp.append("<if test=\"" + name + " != null\">#{"+name+"}");
+					if(index!=1)
+						temp.append(",");
 					temp.append("</if>\n");
-					temp.append("<if test=\"" + name + " == null\">default,");
+					temp.append("<if test=\"" + name + " == null\">default");
+					if(index!=1)
+						temp.append(",");
 					temp.append("</if>\n");
-				}else
+					index--;
+				}else{
 					temp.append("#{"+ name +"},");
+				}
 			}
 			temp.replace(temp.length() - 1, temp.length(), "");
 			temp.append("\n)");
@@ -1246,10 +1335,26 @@ public class SqlUtilForDB {
 			for(ColumnInfo each:columnInfos){
 				String name=each.getColumnName();
 				name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+				name=CheckReplaceUtil.firstCharLowcase(name);
 				temp.append("<if test=\"" + name + " != null\"> and " + each.getColumnName()+ " = #{" + name + "}  </if>  \n");
 			}
 			temp.append("</where>\n</delete>\n");
 			//---------------------------------delete by primary key-----------------------------------
+			if(pkInfos!=null&&!pkInfos.isEmpty()){
+				temp.append("<delete id=\"delete" + map.get("className").replace("Bean", "")+"ByPk" + "\">\n");
+				temp.append("delete from "+map.get("table"));
+				temp.append("\n<where>\n");
+				for(PrimaryKeyInfo each:pkInfos){
+					String name=each.getColumnName();
+					name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+					name=CheckReplaceUtil.firstCharUpcase(name);
+					paramType=columnMap.get(each.getColumnName()).getJavaType();
+					paramType=paramType.startsWith("[L")?paramType.substring(2):paramType;
+					paramType=paramType.endsWith(";")?paramType.substring(0, paramType.length()-1):paramType;
+					temp.append(" AND "+each.getColumnName()+"="+"#{"+CheckReplaceUtil.firstCharLowcase(name)+"}\n");
+				}
+				temp.append("</where>\n</delete>\n");
+			}
 			if(pkInfos!=null&&!pkInfos.isEmpty()){
 				for(PrimaryKeyInfo each:pkInfos){
 					String name=each.getColumnName();
@@ -1261,7 +1366,7 @@ public class SqlUtilForDB {
 					temp.append("<delete id=\"delete" + map.get("className").replace("Bean", "")+"ByPk" +name+ "\" " + "parameterType=\"" + columnMap.get(each.getColumnName()).getJavaType()+ "\">\n");
 					temp.append("delete from " + map.get("table"));
 					temp.append("\n<where>\n");
-					temp.append(each.getColumnName()+"="+"{"+name+"}\n");
+					temp.append(" AND "+each.getColumnName()+"="+"#{"+CheckReplaceUtil.firstCharLowcase(name)+"}\n");
 					temp.append("</where>\n</delete>\n");
 				}
 			}
@@ -1285,7 +1390,7 @@ public class SqlUtilForDB {
 					for(IndexInfo one:value){
 						String name=one.getColumnName();
 						name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
-						temp.append("AND " + one.getColumnName()+ " = #{" + name + "}\n");
+						temp.append("AND " + one.getColumnName()+ " = #{" + CheckReplaceUtil.firstCharLowcase(name) + "}\n");
 					}
 					temp.append("</where>\n</delete>\n");
 				}
@@ -1312,17 +1417,36 @@ public class SqlUtilForDB {
 			for(ColumnInfo one:columnInfos){
 				String columnName=one.getColumnName();
 				columnName=CheckReplaceUtil.underlineLowcaserToUpcase(columnName);
-				temp.append(one.getColumnName()+"="+"{"+CheckReplaceUtil.firstCharLowcase(map.get("className"))+"."+columnName+"},\n");
+				temp.append(one.getColumnName()+"="+"#{"+CheckReplaceUtil.firstCharLowcase(map.get("className"))+"."+columnName+"},\n");
 			}
 			temp.replace(temp.length()-2, temp.length(), "\n");
 			temp.append("</set>\n<where>\n");
 			for(ColumnInfo one:columnInfos){
 				String columnName=one.getColumnName();
 				columnName=CheckReplaceUtil.underlineLowcaserToUpcase(columnName);
-				temp.append("<if test=\"" + columnName + " != null\">" +one.getColumnName() + " = #{"+"param."+ columnName + "},</if>  \n");
+				temp.append("<if test=\"param." + columnName + " != null\"> AND " +one.getColumnName() + " = #{"+"param."+ CheckReplaceUtil.firstCharLowcase(columnName) + "}</if>  \n");
 			}
 			temp.append("</where>\n</update>\n");
 			//-----------------------------------------by primary key----------------------------------
+			if(pKeyInfos!=null&&!pKeyInfos.isEmpty()){
+				temp.append("<update id=\"update"+ map.get("className").replace("Bean", "") + "ByPk"+"\">\n");
+				temp.append("update " + map.get("table") + "\n<set> \n");
+				for(ColumnInfo one:columnInfos){
+					String columnName=one.getColumnName();
+					columnName=CheckReplaceUtil.underlineLowcaserToUpcase(columnName);
+					temp.append(one.getColumnName()+"="+"#{"+CheckReplaceUtil.firstCharLowcase(map.get("className"))+"."+CheckReplaceUtil.firstCharLowcase(columnName)+"},\n");
+				}
+				temp.replace(temp.length()-2, temp.length(), "\n");
+				temp.append("</set>\n<where>\n");
+				for(PrimaryKeyInfo each:pKeyInfos){
+					String name=each.getColumnName();
+					name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+					name=CheckReplaceUtil.firstCharUpcase(name);
+					temp.append(" AND "+each.getColumnName()+"="+"#{"+CheckReplaceUtil.firstCharLowcase(name)+"}\n");
+				}
+				temp.append("</where>\n</update>\n");
+			}
+			
 			if(pKeyInfos!=null&&!pKeyInfos.isEmpty()){
 				for(PrimaryKeyInfo each:pKeyInfos){
 					String name=each.getColumnName();
@@ -1336,14 +1460,16 @@ public class SqlUtilForDB {
 					for(ColumnInfo one:columnInfos){
 						String columnName=one.getColumnName();
 						columnName=CheckReplaceUtil.underlineLowcaserToUpcase(columnName);
-						temp.append(one.getColumnName()+"="+"{"+CheckReplaceUtil.firstCharLowcase(map.get("className"))+"."+columnName+"},\n");
+						temp.append(one.getColumnName()+"="+"#{"+CheckReplaceUtil.firstCharLowcase(map.get("className"))+"."+CheckReplaceUtil.firstCharLowcase(columnName)+"},\n");
 					}
 					temp.replace(temp.length()-2, temp.length(), "\n");
 					temp.append("</set>\n<where>\n");
-					temp.append(each.getColumnName()+"="+"{"+name+"}\n");
+					temp.append(" AND "+each.getColumnName()+"="+"#{"+CheckReplaceUtil.firstCharLowcase(name)+"}\n");
 					temp.append("</where>\n</update>\n");
 				}
 			}
+			
+			
 			//-----------------------------------------by unique index----------------------------------
 			if(indexInfos!=null&&!indexInfos.isEmpty()){
 				for(Entry<String, List<IndexInfo>> each:indexInfos.entrySet()){
@@ -1363,14 +1489,14 @@ public class SqlUtilForDB {
 					for(ColumnInfo one:columnInfos){
 						String columnName=one.getColumnName();
 						columnName=CheckReplaceUtil.underlineLowcaserToUpcase(columnName);
-						temp.append(one.getColumnName()+"="+"{"+CheckReplaceUtil.firstCharLowcase(map.get("className"))+"."+columnName+"},\n");
+						temp.append(one.getColumnName()+"="+"#{"+CheckReplaceUtil.firstCharLowcase(map.get("className"))+"."+columnName+"},\n");
 					}
 					temp.replace(temp.length()-2, temp.length(), "\n");
 					temp.append("</set>\n<where>\n");
 					for(IndexInfo one:value){
 						String name=one.getColumnName();
 						name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
-						temp.append("AND "+one.getColumnName()+"="+"{"+name+"}\n");
+						temp.append("AND "+one.getColumnName()+"="+"#{"+name+"}\n");
 					}
 					temp.append("</where>\n</update>\n");
 				}				
@@ -1407,10 +1533,30 @@ public class SqlUtilForDB {
 			for(ColumnInfo one:columnInfos){
 				String columnName=one.getColumnName();
 				columnName=CheckReplaceUtil.underlineLowcaserToUpcase(columnName);
-				temp.append("<if test=\"" + columnName + " != null\">" + one.getColumnName() + " = #{"+ columnName + "},</if>  \n");
+				temp.append("<if test=\"" + columnName + " != null\"> AND " + one.getColumnName() + " = #{"+ columnName + "}</if>\n");
 			}
 			temp.append("</where>\n</select>\n");
 			//--------------------------------by primary key-------------------------------------------
+			if(pkInfos!=null&&!pkInfos.isEmpty()){
+				temp.append("<select id=\"select" + map.get("className").replace("Bean", "") + "ByPk"+"\" ");
+				temp.append(" resultMap=\""+CheckReplaceUtil.firstCharLowcase(map.get("className").replace("Bean", ""))+ "Map\" ");
+				temp.append(" resultType=\""+map.get("class")+"\">\n");
+				temp.append("select \n");
+				for(ColumnInfo one:columnInfos)
+					temp.append(one.getColumnName()+",");
+				temp.replace(temp.length()-1, temp.length(), "");
+				temp.append("\nfrom " + map.get("table"));
+				temp.append("\n<where>\n");
+				for(PrimaryKeyInfo each:pkInfos){
+					String name=each.getColumnName();
+					name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+					name=CheckReplaceUtil.firstCharUpcase(name);
+					temp.append(" AND " +each.getColumnName()+"="+"#{"+CheckReplaceUtil.firstCharLowcase(name)+"}");
+				}
+				temp.append("\n</where>\n</select>\n");
+			}
+			
+			
 			if(pkInfos!=null&&!pkInfos.isEmpty()){
 				for(PrimaryKeyInfo each:pkInfos){
 					String name=each.getColumnName();
@@ -1429,10 +1575,12 @@ public class SqlUtilForDB {
 					temp.replace(temp.length() - 1, temp.length(), "");
 					temp.append("\nfrom " + map.get("table"));
 					temp.append("\n<where> \n");
-					temp.append(each.getColumnName()+"="+"{"+name+"}\n");
+					temp.append(" AND "+each.getColumnName()+"="+"#{"+CheckReplaceUtil.firstCharLowcase(name)+"}\n");
 					temp.append("</where>\n</select>\n");
 				}
 			}
+			
+			
 			//--------------------------------by index------------------------------------------
 			if(indexInfos!=null&&!indexInfos.isEmpty()){
 				for(Entry<String, List<IndexInfo>> each:indexInfos.entrySet()){
@@ -1460,7 +1608,7 @@ public class SqlUtilForDB {
 					for(IndexInfo one:value){
 						String name=one.getColumnName();
 						name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
-						temp.append("AND "+one.getColumnName()+"="+"{"+name+"}\n");
+						temp.append("AND "+one.getColumnName()+"="+"#{"+CheckReplaceUtil.firstCharLowcase(name)+"}\n");
 					}
 					temp.append("</where>\n</select>\n");
 				}				

@@ -6,7 +6,7 @@ import java.sql.Date;
 /**
 *no comment
 *@author yyj | auto generator
-*@version 1.0.0 2017-02-20 15:54:38
+*@version 1.0.0 2017-02-21 10:43:36
 */
 
 public class CarOwner{
@@ -138,6 +138,11 @@ public class CarOwner{
 	/**设置二手车过户日期*/
 	public void setTransforDate(Date transforDate){
 		this.transforDate=transforDate;
+		
+	}
+	@Override
+	public String toString(){
+		return "yyj.entity.CarOwner:["+"carPlateNo="+carPlateNo+","+"customerName="+customerName+","+"idCard="+idCard+","+"vehicleIdNo="+vehicleIdNo+","+"engineNo="+engineNo+","+"brandModal="+brandModal+","+"brandModalCh="+brandModalCh+","+"registerDate="+registerDate+","+"isSecondhand="+isSecondhand+","+"transforDate="+transforDate+"]";
 		
 	}
 }

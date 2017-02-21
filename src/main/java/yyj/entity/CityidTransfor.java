@@ -6,7 +6,7 @@ import java.lang.String;
 /**
 *no comment
 *@author yyj | auto generator
-*@version 1.0.0 2017-02-20 15:54:38
+*@version 1.0.0 2017-02-21 10:43:36
 */
 
 public class CityidTransfor{
@@ -60,6 +60,11 @@ public class CityidTransfor{
 	/**设置创建时间*/
 	public void setCreateTime(Timestamp createTime){
 		this.createTime=createTime;
+		
+	}
+	@Override
+	public String toString(){
+		return "yyj.entity.CityidTransfor:["+"lxCityid="+lxCityid+","+"icCityid="+icCityid+","+"insuranceCompany="+insuranceCompany+","+"createTime="+createTime+"]";
 		
 	}
 }
