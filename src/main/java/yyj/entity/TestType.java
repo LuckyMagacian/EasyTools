@@ -8,14 +8,14 @@ import java.lang.Double;
 import java.sql.Timestamp;
 import java.lang.String;
 import java.lang.Byte;
-import java.sql.Blob;
 import java.lang.Integer;
 import java.sql.Date;
+import com.mysql.jdbc.Blob;
 
 /**
 *no comment
 *@author yyj | auto generator
-*@version 1.0.0 2017-02-21 10:43:36
+*@version 1.0.0 2017-02-21 10:53:03
 */
 
 public class TestType{

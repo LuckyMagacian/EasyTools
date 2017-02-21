@@ -3,8 +3,6 @@ package yyj.tools;
 import java.io.File;
 import java.io.FileReader;
 import java.math.BigDecimal;
-import java.sql.Blob;
-import java.sql.Clob;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.Date;
@@ -28,7 +26,8 @@ import javax.swing.JOptionPane;
 
 import org.apache.commons.dbcp.BasicDataSourceFactory;
 
-import com.sun.org.apache.xml.internal.resolver.helpers.PublicId;
+import com.mysql.jdbc.Blob;
+import com.mysql.jdbc.Clob;
 
 
 
