@@ -1,13 +1,20 @@
 package yyj.tools;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.filechooser.FileFilter;
 
 
 /**
@@ -307,6 +314,123 @@ public class FileUtil {
 			writeStrToFile(str, file, charSet);
 		}catch (Exception e) {
 			throw new AppException("写入字符串到文件异常2",e);
+		}
+	}
+	/**
+	 * 调用swing获取文件或目录
+	 * @param fileType
+	 * @return
+	 */
+	public static File loadFile(File currentPath,final String fileType){
+		final String fileFormat=fileType==null||fileType.isEmpty()?"":fileType.startsWith(".")?fileType:"."+fileType;
+		JFileChooser chooser=new JFileChooser();
+		if(currentPath!=null)
+			chooser.setCurrentDirectory(currentPath);
+		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		if(fileType!=null&&!fileType.isEmpty())
+			chooser.setFileFilter(new FileFilter() {
+				@Override
+				public String getDescription() {
+					return null;
+				}
+				
+				@Override
+				public boolean accept(File f) {
+					if(f.getName().endsWith(fileFormat))
+						return true;
+					return false;
+				}
+			});
+		chooser.showDialog(new JLabel(),"选择文件");
+		return chooser.getSelectedFile();
+	}
+	/**
+	 * 调用swing加载文件
+	 * @param fileType
+	 * @return
+	 */
+	public static File loadFile(String fileType){
+		return loadFile(null, fileType);
+	}
+	/**
+	 * 获取classpath下的文件
+	 * @param fileType
+	 * @return
+	 */
+	public static File loadFileInClassPath(final String fileType){
+		try {
+			String path=SqlUtilForDB.class.getClassLoader().getResource("").toURI().toString();
+			if(path.startsWith("file:/"))
+				path=path.substring(path.indexOf('F'),path.length());
+			path=path.substring(0,path.indexOf("target"))+"src/main/resources/";
+			return loadFile(new File(path),fileType);
+		} catch (URISyntaxException e) {
+			throw new RuntimeException("加载classpath下文件异常",e);
+		}
+	}
+	
+	
+	
+	/**
+	 * 使用swing 加载目录
+	 * @return
+	 */
+	public static File loadDir(){
+		JFileChooser chooser=new JFileChooser();
+		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		chooser.showDialog(new JLabel(),"选择目录");
+		return chooser.getSelectedFile();
+	}
+	/**
+	 * 使用swing加载目录或文件
+	 * @return
+	 */
+	public static File loadDirOrFile(){
+		JFileChooser chooser=new JFileChooser();
+		chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+		chooser.showDialog(new JLabel(),"选择文件");
+		return chooser.getSelectedFile();
+	}
+	
+	/**
+	 * 读取文本文件中指定行内容
+	 * @param file
+	 * @param index 	行号 从1开始 
+	 * @param charset
+	 * @return 			若行号大于文件行数返回null,行号小于1也会返回null
+	 */
+	public static String readFileByLineIndex(File file,int index,String charset){
+		try {
+			List<String> list=readFileByLineStartAndStop(file, index, index, charset);
+			return list==null?null:list.get(0);
+		} catch (Exception e) {
+			throw new RuntimeException("读取指定行内容异常",e);
+		}
+	}
+	
+	public static List<String> readFileByLineStartAndStop(File file,int start,int end ,String charset){
+		try {
+			if(start>end){
+				int temp=start;
+				start=end;
+				end=temp;
+			}
+			FileInputStream fin=new FileInputStream(file);
+			InputStreamReader isr=new InputStreamReader(fin, charset==null||charset.isEmpty()?"utf-8":charset);
+			BufferedReader reader=new BufferedReader(isr);
+			String temp=null;
+			List<String> list=new ArrayList<String>();
+			int    count=0;
+			while((temp=reader.readLine())!=null){
+				if(temp.isEmpty())
+					continue;
+				count++;
+				if(count>=start&&count<=end)
+					list.add(temp);
+			}
+			return list.isEmpty()?null:list;
+		} catch (Exception e) {
+			throw new RuntimeException("读取指定行内容异常",e);
 		}
 	}
 }

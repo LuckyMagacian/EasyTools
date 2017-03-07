@@ -1,0 +1,1102 @@
+2017-03-07 14:18:58,065 INFO [yyj.tools.AccountCompareUtil] - <构造对账对象>
+2017-03-07 14:19:03,466 INFO [yyj.tools.AccountCompareUtil] - <加载对账文件/F:/eworkspace/EasyTools/src/main/resources/test.txt>
+2017-03-07 14:19:06,977 INFO [yyj.tools.AccountCompareUtil] - <加载jdbc配置文件{password=131056, url=jdbc:mysql://192.168.17.62:3306/sqlUtil?useUnicode=true&characterEncoding=UTF-8, driver=com.mysql.jdbc.Driver, username=yyj}>
+2017-03-07 14:19:06,977 INFO [yyj.tools.AccountCompareUtil] - <尝试对账>
+2017-03-07 14:19:06,977 INFO [yyj.tools.AccountCompareUtil] - <尝试复制数据库表>
+2017-03-07 14:19:07,034 INFO [yyj.tools.AccountCompareUtil] - <表已存在,仅复制表中数据>
+2017-03-07 14:19:07,034 INFO [yyj.tools.AccountCompareUtil] - <尝试复制数据库中数据>
+2017-03-07 14:19:07,035 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_copy SELECT  car_plate_no, customer_name, id_card  FROM t_car_owner WHERE  customer_name=?  >
+2017-03-07 14:19:07,128 INFO [yyj.tools.AccountCompareUtil] - <复制数据完成>
+2017-03-07 14:19:07,128 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:07,128 INFO [yyj.tools.AccountCompareUtil] - <加载多条对账记录>
+2017-03-07 14:19:07,129 INFO [yyj.tools.AccountCompareUtil] - <对账文件读取结束>
+2017-03-07 14:19:07,129 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:07,129 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:07,131 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:07,131 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:07,132 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:07,132 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:07,135 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:07,187 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:07,219 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:07,222 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141907]>
+2017-03-07 14:19:07,222 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:07,222 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:07,222 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:07,225 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:07,225 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:07,225 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:07,225 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:07,226 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:07,246 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:07,278 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:07,278 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141907]>
+2017-03-07 14:19:07,278 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:07,278 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:07,278 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:07,280 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:07,280 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:07,280 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:07,280 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:07,280 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:07,305 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:07,328 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:07,328 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141907]>
+2017-03-07 14:19:07,328 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:07,328 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:07,328 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:07,330 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:07,330 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:07,330 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:07,330 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:07,331 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:07,345 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:07,377 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:07,377 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141907]>
+2017-03-07 14:19:07,377 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:07,377 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:07,377 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:07,381 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:07,382 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:07,382 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:07,382 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:07,382 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:07,397 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:07,418 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:07,418 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141907]>
+2017-03-07 14:19:07,418 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:07,418 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:07,418 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:07,420 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:07,420 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:07,421 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:07,421 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:07,421 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:07,443 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:07,470 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:07,470 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141907]>
+2017-03-07 14:19:07,470 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:07,470 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:07,470 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:07,472 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:07,476 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:07,477 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:07,477 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:07,477 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:07,491 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:07,521 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:07,521 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141907]>
+2017-03-07 14:19:07,521 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:07,522 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:07,522 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:07,522 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:07,522 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:07,525 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:07,525 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:07,525 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:07,545 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:07,571 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:07,571 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141907]>
+2017-03-07 14:19:07,571 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:07,571 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:07,571 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:07,572 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:07,572 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:07,573 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:07,573 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:07,573 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:07,591 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:07,611 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:07,615 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141907]>
+2017-03-07 14:19:07,616 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:07,616 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:07,616 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:07,617 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:07,617 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:07,617 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:07,617 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:07,617 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:07,633 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:07,653 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:07,653 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141907]>
+2017-03-07 14:19:07,653 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:07,653 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:07,653 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:07,654 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:07,655 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:07,655 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:07,655 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:07,655 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:07,670 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:07,685 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:07,685 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141907]>
+2017-03-07 14:19:07,685 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:07,685 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:07,685 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:07,686 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:07,686 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:07,687 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:07,687 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:07,687 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:07,697 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:07,711 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:07,711 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141907]>
+2017-03-07 14:19:07,711 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:07,711 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:07,711 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:07,712 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:07,713 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:07,713 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:07,713 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:07,713 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:07,727 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:07,743 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:07,743 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141907]>
+2017-03-07 14:19:07,744 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:07,744 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:07,744 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:07,745 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:07,745 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:07,745 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:07,745 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:07,745 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:07,784 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:07,828 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:07,828 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141907]>
+2017-03-07 14:19:07,828 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:07,828 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:07,828 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:07,830 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:07,830 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:07,830 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:07,830 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:07,830 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:07,863 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:07,927 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:07,928 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141907]>
+2017-03-07 14:19:07,928 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:07,928 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:07,928 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:07,930 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:07,930 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:07,930 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:07,930 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:07,930 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:08,027 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:08,044 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:08,046 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141907]>
+2017-03-07 14:19:08,046 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:08,046 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:08,046 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:08,047 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:08,047 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:08,048 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:08,048 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:08,048 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:08,059 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:08,088 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:08,088 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141908]>
+2017-03-07 14:19:08,088 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:08,088 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:08,088 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:08,089 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:08,089 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:08,090 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:08,090 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:08,090 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:08,102 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:08,118 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:08,118 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141908]>
+2017-03-07 14:19:08,118 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:08,118 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:08,118 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:08,119 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:08,120 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:08,120 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:08,120 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:08,120 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:08,136 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:08,152 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:08,153 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141908]>
+2017-03-07 14:19:08,153 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:08,153 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:08,153 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:08,154 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:08,154 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:08,155 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:08,155 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:08,155 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:08,202 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:08,218 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:08,218 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141908]>
+2017-03-07 14:19:08,218 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:08,218 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:08,218 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:08,219 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:08,219 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:08,220 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:08,220 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:08,220 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:08,239 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:08,252 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:08,253 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141908]>
+2017-03-07 14:19:08,253 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:08,253 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:08,253 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:08,254 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:08,254 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:08,254 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:08,254 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:08,254 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:08,267 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:08,284 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:08,285 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141908]>
+2017-03-07 14:19:08,285 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:08,285 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:08,285 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:08,287 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:08,287 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:08,288 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:08,288 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:08,288 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:08,297 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:08,310 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:08,311 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141908]>
+2017-03-07 14:19:08,311 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:08,311 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:08,311 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:08,312 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:08,312 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:08,312 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:08,312 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:08,312 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:08,323 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:08,334 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:08,335 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141908]>
+2017-03-07 14:19:08,335 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:08,335 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:08,335 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:08,337 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:08,337 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:08,338 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:08,338 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:08,338 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:08,349 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:08,369 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:08,369 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141908]>
+2017-03-07 14:19:08,369 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:08,369 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:08,369 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:08,371 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:08,371 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:08,371 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:08,371 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:08,371 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:08,381 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:08,402 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:08,402 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141908]>
+2017-03-07 14:19:08,402 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:08,403 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:08,403 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:08,404 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:08,404 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:08,404 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:08,404 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:08,404 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:08,420 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:08,435 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:08,435 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141908]>
+2017-03-07 14:19:08,435 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:08,435 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:08,435 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:08,437 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:08,437 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:08,438 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:08,438 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:08,438 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:08,451 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:08,469 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:08,471 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141908]>
+2017-03-07 14:19:08,471 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:08,471 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:08,472 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:08,474 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:08,474 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:08,474 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:08,474 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:08,475 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:08,484 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:08,502 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:08,502 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141908]>
+2017-03-07 14:19:08,502 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:08,502 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:08,503 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:08,505 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:08,505 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:08,505 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:08,505 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:08,506 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:08,516 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:08,536 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:08,536 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141908]>
+2017-03-07 14:19:08,536 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:08,536 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:08,536 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:08,538 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:08,539 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:08,539 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:08,539 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:08,539 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:08,551 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:08,568 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:08,568 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141908]>
+2017-03-07 14:19:08,568 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:08,568 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:08,568 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:08,569 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:08,570 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:08,570 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:08,570 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:08,570 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:08,579 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:08,610 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:08,611 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141908]>
+2017-03-07 14:19:08,611 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:08,611 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:08,611 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:08,612 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:08,612 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:08,613 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:08,613 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:08,613 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:08,622 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:08,660 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:08,661 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141908]>
+2017-03-07 14:19:08,661 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:08,661 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:08,661 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:08,662 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:08,662 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:08,662 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:08,662 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:08,662 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:08,673 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:08,694 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:08,694 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141908]>
+2017-03-07 14:19:08,694 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:08,695 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:08,695 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:08,696 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:08,696 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:08,696 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:08,697 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:08,697 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:08,706 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:08,759 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:08,760 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141908]>
+2017-03-07 14:19:08,760 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:08,760 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:08,760 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:08,761 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:08,761 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:08,762 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:08,762 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:08,762 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:08,773 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:08,794 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:08,794 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141908]>
+2017-03-07 14:19:08,794 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:08,794 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:08,794 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:08,795 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:08,795 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:08,795 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:08,795 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:08,795 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:08,805 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:08,836 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:08,836 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141908]>
+2017-03-07 14:19:08,836 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:08,836 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:08,836 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:08,838 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:08,838 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:08,839 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:08,839 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:08,839 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:08,858 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:08,977 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:08,977 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141908]>
+2017-03-07 14:19:08,977 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:08,977 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:08,977 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:08,978 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:08,979 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:08,979 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:08,979 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:08,979 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:08,995 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:09,010 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:09,010 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141908]>
+2017-03-07 14:19:09,010 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:09,010 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:09,011 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:09,012 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:09,012 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:09,012 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:09,012 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:09,012 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:09,023 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:09,061 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:09,062 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141909]>
+2017-03-07 14:19:09,062 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:09,062 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:09,062 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:09,063 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:09,063 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:09,063 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:09,064 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:09,064 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:09,080 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:09,102 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:09,102 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141909]>
+2017-03-07 14:19:09,102 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:09,102 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:09,102 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:09,104 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:09,105 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:09,105 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:09,105 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:09,105 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:09,122 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:09,137 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:09,137 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141909]>
+2017-03-07 14:19:09,137 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:09,137 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:09,137 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:09,138 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:09,139 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:09,139 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:09,139 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:09,139 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:09,150 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:09,170 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:09,170 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141909]>
+2017-03-07 14:19:09,170 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:09,170 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:09,170 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:09,171 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:09,171 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:09,171 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:09,172 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:09,172 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:09,190 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:09,202 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:09,202 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141909]>
+2017-03-07 14:19:09,202 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:09,202 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:09,202 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:09,203 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:09,204 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:09,204 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:09,204 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:09,204 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:09,214 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:09,228 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:09,228 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141909]>
+2017-03-07 14:19:09,229 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:09,229 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:09,229 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:09,230 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:09,230 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:09,231 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:09,241 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:09,242 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:09,255 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:09,268 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:09,269 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141909]>
+2017-03-07 14:19:09,269 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:09,269 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:09,271 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:09,272 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:09,273 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:09,273 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:09,273 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:09,273 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:09,283 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:09,310 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:09,311 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141909]>
+2017-03-07 14:19:09,311 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:09,311 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:09,311 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:09,312 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:09,312 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:09,313 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:09,313 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:09,313 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:09,326 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:09,344 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:09,346 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141909]>
+2017-03-07 14:19:09,346 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:09,346 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:09,346 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:09,348 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:09,348 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:09,348 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:09,348 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:09,348 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:09,361 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:09,377 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:09,377 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141909]>
+2017-03-07 14:19:09,377 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:09,377 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:09,377 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:09,379 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:09,379 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:09,380 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:09,380 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:09,380 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:09,392 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:09,411 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:09,412 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141909]>
+2017-03-07 14:19:09,412 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:09,412 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:09,412 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:09,415 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:09,415 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:09,416 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:09,416 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:09,416 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:09,445 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:09,460 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:09,460 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141909]>
+2017-03-07 14:19:09,460 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:09,461 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:09,461 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:09,462 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:09,462 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:09,465 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:09,465 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:09,465 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:09,488 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:09,503 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:09,505 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141909]>
+2017-03-07 14:19:09,505 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:09,505 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:09,505 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:09,529 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:09,529 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:09,530 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:09,530 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:09,530 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:09,542 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:09,561 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:09,561 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141909]>
+2017-03-07 14:19:09,561 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:09,561 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:09,561 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:09,562 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:09,562 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:09,563 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:09,563 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:09,563 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:09,574 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:09,594 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:09,594 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141909]>
+2017-03-07 14:19:09,594 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:09,595 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:09,595 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:09,598 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:09,598 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:09,600 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:09,601 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:09,601 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:09,611 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:09,626 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:09,627 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141909]>
+2017-03-07 14:19:09,627 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:09,627 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:09,627 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:09,628 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:09,628 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:09,628 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:09,628 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:09,628 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:09,640 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:09,661 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:09,661 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141909]>
+2017-03-07 14:19:09,661 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:09,661 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:09,661 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:09,662 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:09,662 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:09,663 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:09,663 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:09,663 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:09,671 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:09,685 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:09,685 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141909]>
+2017-03-07 14:19:09,685 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:09,686 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:09,686 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:09,688 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:09,688 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:09,688 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:09,688 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:09,688 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:09,698 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:09,719 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:09,719 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141909]>
+2017-03-07 14:19:09,719 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:09,719 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:09,719 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:09,720 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:09,721 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:09,721 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:09,721 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:09,721 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:09,733 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:09,752 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:09,753 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141909]>
+2017-03-07 14:19:09,753 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:09,753 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:09,753 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:09,754 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:09,754 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:09,754 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:09,754 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:09,755 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:09,764 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:09,776 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:09,776 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141909]>
+2017-03-07 14:19:09,776 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:09,776 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:09,776 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:09,777 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:09,777 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:09,777 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:09,777 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:09,778 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:09,788 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:09,804 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:09,804 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141909]>
+2017-03-07 14:19:09,804 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:09,804 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:09,804 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:09,805 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:09,806 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:09,806 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:09,806 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:09,806 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:09,818 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:09,838 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:09,838 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141909]>
+2017-03-07 14:19:09,838 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:09,838 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:09,838 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:09,839 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:09,839 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:09,840 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:09,840 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:09,840 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:09,850 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:09,877 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:09,878 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141909]>
+2017-03-07 14:19:09,878 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:09,878 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:09,878 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:09,879 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:09,879 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:09,880 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:09,880 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:09,880 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:09,899 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:09,919 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:09,919 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141909]>
+2017-03-07 14:19:09,919 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:09,919 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:09,919 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:09,920 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:09,921 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:09,921 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:09,921 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:09,921 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:09,931 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:09,946 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:09,946 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141909]>
+2017-03-07 14:19:09,946 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:09,946 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:09,946 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:09,948 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:09,948 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:09,948 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:09,948 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:09,948 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:09,956 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:09,969 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:09,969 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141909]>
+2017-03-07 14:19:09,969 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:09,969 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:09,969 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:09,970 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:09,970 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:09,971 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:09,971 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:09,971 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:09,981 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:09,993 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:09,993 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141909]>
+2017-03-07 14:19:09,993 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:09,993 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:09,993 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,002 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:10,003 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:10,003 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:10,003 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:10,003 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,018 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:10,061 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:10,061 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141910]>
+2017-03-07 14:19:10,061 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:10,061 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:10,061 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,062 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:10,062 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:10,062 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:10,062 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:10,063 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,072 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:10,085 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:10,086 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141910]>
+2017-03-07 14:19:10,086 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:10,086 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:10,086 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,087 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:10,087 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:10,087 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:10,087 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:10,087 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,095 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:10,109 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:10,109 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141910]>
+2017-03-07 14:19:10,109 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:10,109 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:10,109 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,110 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:10,110 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:10,110 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:10,110 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:10,111 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,120 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:10,136 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:10,136 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141910]>
+2017-03-07 14:19:10,136 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:10,136 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:10,136 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,137 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:10,137 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:10,138 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:10,138 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:10,138 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,145 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:10,159 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:10,159 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141910]>
+2017-03-07 14:19:10,159 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:10,159 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:10,159 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,166 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:10,166 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:10,167 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:10,167 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:10,167 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,175 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:10,194 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:10,194 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141910]>
+2017-03-07 14:19:10,194 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:10,194 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:10,194 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,195 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:10,195 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:10,195 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:10,195 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:10,195 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,204 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:10,217 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:10,217 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141910]>
+2017-03-07 14:19:10,217 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:10,217 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:10,217 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,218 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:10,218 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:10,219 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:10,219 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:10,219 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,227 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:10,244 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:10,244 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141910]>
+2017-03-07 14:19:10,244 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:10,244 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:10,244 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,245 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:10,245 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:10,245 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:10,245 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:10,245 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,254 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:10,267 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:10,267 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141910]>
+2017-03-07 14:19:10,268 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:10,268 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:10,268 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,275 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:10,275 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:10,276 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:10,276 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:10,276 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,288 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:10,302 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:10,303 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141910]>
+2017-03-07 14:19:10,303 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:10,303 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:10,303 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,304 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:10,304 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:10,305 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:10,305 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:10,305 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,314 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:10,326 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:10,326 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141910]>
+2017-03-07 14:19:10,326 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:10,326 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:10,326 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,327 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:10,327 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:10,327 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:10,327 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:10,327 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,339 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:10,352 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:10,352 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141910]>
+2017-03-07 14:19:10,352 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:10,352 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:10,352 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,353 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:10,353 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:10,354 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:10,354 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:10,354 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,362 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:10,375 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:10,376 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141910]>
+2017-03-07 14:19:10,376 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:10,376 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:10,376 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,377 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:10,377 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:10,377 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:10,377 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:10,377 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,387 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:10,402 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:10,402 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141910]>
+2017-03-07 14:19:10,402 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:10,402 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:10,402 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,403 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:10,403 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:10,403 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:10,403 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:10,403 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,414 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:10,425 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:10,426 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141910]>
+2017-03-07 14:19:10,426 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:10,426 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:10,426 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,426 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:10,427 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:10,427 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:10,427 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:10,427 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,436 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:10,452 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:10,453 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141910]>
+2017-03-07 14:19:10,453 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:10,453 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:10,453 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,454 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:10,454 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:10,454 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:10,454 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:10,454 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,463 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:10,476 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:10,476 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141910]>
+2017-03-07 14:19:10,476 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:10,477 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:10,477 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,478 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:10,479 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:10,479 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:10,479 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:10,479 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,490 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:10,511 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:10,511 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141910]>
+2017-03-07 14:19:10,511 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:10,511 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:10,511 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,512 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:10,512 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:10,513 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:10,513 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:10,513 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,522 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:10,535 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:10,535 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141910]>
+2017-03-07 14:19:10,535 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:10,535 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:10,535 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,536 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:10,536 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:10,537 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:10,537 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:10,537 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,547 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:10,561 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:10,561 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141910]>
+2017-03-07 14:19:10,561 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:10,561 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:10,561 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,562 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:10,562 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:10,562 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:10,562 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:10,562 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,570 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:10,585 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:10,585 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141910]>
+2017-03-07 14:19:10,585 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:10,585 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:10,585 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,586 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:10,586 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:10,586 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:10,586 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:10,586 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,595 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:10,611 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:10,611 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141910]>
+2017-03-07 14:19:10,611 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:10,611 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:10,611 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,612 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:10,613 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:10,613 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:10,613 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:10,613 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,625 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:10,644 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:10,645 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141910]>
+2017-03-07 14:19:10,645 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:10,645 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:10,645 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,646 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:10,646 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:10,646 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:10,646 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:10,646 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,654 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:10,668 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:10,668 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141910]>
+2017-03-07 14:19:10,669 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:10,669 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:10,669 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,669 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:10,670 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:10,670 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:10,670 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:10,670 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,679 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:10,694 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:10,695 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141910]>
+2017-03-07 14:19:10,695 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:10,695 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:10,695 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,696 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:10,696 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:10,696 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:10,696 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:10,696 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,705 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:10,718 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:10,719 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141910]>
+2017-03-07 14:19:10,719 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:10,719 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:10,719 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,720 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:10,720 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:10,720 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:10,720 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:10,720 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,729 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:10,744 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:10,744 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141910]>
+2017-03-07 14:19:10,744 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:10,745 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:10,745 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,745 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:10,746 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:10,746 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:10,746 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:10,746 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,754 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:10,768 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:10,768 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141910]>
+2017-03-07 14:19:10,768 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:10,768 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:10,769 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,769 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:10,770 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:10,770 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:10,770 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:10,770 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,778 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:10,794 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:10,795 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141910]>
+2017-03-07 14:19:10,795 INFO [yyj.tools.AccountCompareUtil] - <处理下一条对账记录>
+2017-03-07 14:19:10,795 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:10,795 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,796 INFO [yyj.tools.AccountCompareUtil] - <构建 唯一索引选择 preparedstatement>
+2017-03-07 14:19:10,796 INFO [yyj.tools.AccountCompareUtil] - <从数据库中获取对应的对账记录>
+2017-03-07 14:19:10,796 INFO [yyj.tools.AccountCompareUtil] - <尝试对比数据obj1:{car_plate_no=20170228, customer_name=1002, id_card=900.01}obj2:{}>
+2017-03-07 14:19:10,796 INFO [yyj.tools.AccountCompareUtil] - <我方数据丢失,对比结束,对比结果:null>
+2017-03-07 14:19:10,796 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,810 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:10,828 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:10,828 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=20170228, customer_name=1002, id_card=900.01},result=AccountCompareResult:[message=我方没有记录,code=1],time=20170307141910]>
+2017-03-07 14:19:10,828 INFO [yyj.tools.AccountCompareUtil] - <当前缓存记录对比结束>
+2017-03-07 14:19:10,828 INFO [yyj.tools.AccountCompareUtil] - <开始处理我方剩余数据>
+2017-03-07 14:19:10,828 INFO [yyj.tools.AccountCompareUtil] - <尝试获取临时表中剩余数据>
+2017-03-07 14:19:10,828 INFO [yyj.tools.AccountCompareUtil] - <sql:SELECT car_plate_no,customer_name,id_card  FROM t_car_owner_copy>
+2017-03-07 14:19:10,829 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:10,829 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,877 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:10,877 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,911 INFO [yyj.tools.AccountCompareUtil] - <尝试从临时表中删除数据>
+2017-03-07 14:19:10,911 INFO [yyj.tools.AccountCompareUtil] - <sql:DELETE FROM t_car_owner_copy WHERE  car_plate_no=? AND customer_name=? AND id_card=?  >
+2017-03-07 14:19:10,936 INFO [yyj.tools.AccountCompareUtil] - <剩余数据:[{car_plate_no=, customer_name=老司机, id_card=}, {car_plate_no=10086, customer_name=老司机, id_card=3310101010}, {car_plate_no=浙A12361, customer_name=老司机, id_card=31011219870723061x}]>
+2017-03-07 14:19:10,936 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,945 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:10,960 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:10,960 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=, customer_name=老司机, id_card=},result=AccountCompareResult:[message=对方没有记录,code=2],time=20170307141910]>
+2017-03-07 14:19:10,960 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,968 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:10,986 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:10,986 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=10086, customer_name=老司机, id_card=3310101010},result=AccountCompareResult:[message=对方没有记录,code=2],time=20170307141910]>
+2017-03-07 14:19:10,986 INFO [yyj.tools.AccountCompareUtil] - <尝试插入错账记录>
+2017-03-07 14:19:10,995 INFO [yyj.tools.AccountCompareUtil] - <sql:INSERT INTO t_car_owner_err ( car_plate_no,customer_name,id_card,message,time) values (?,?,?,?,?)>
+2017-03-07 14:19:11,010 INFO [yyj.tools.AccountCompareUtil] - <插入错账记录完成false>
+2017-03-07 14:19:11,010 INFO [yyj.tools.AccountCompareUtil] - <发现错账:ErrAccount:[value={car_plate_no=浙A12361, customer_name=老司机, id_card=31011219870723061x},result=AccountCompareResult:[message=对方没有记录,code=2],time=20170307141910]>
+2017-03-07 14:19:11,010 INFO [yyj.tools.AccountCompareUtil] - <对账完成>

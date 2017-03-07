@@ -111,10 +111,10 @@ public class HttpUtil {
 	 *            超时时间
 	 * @return 接收方返回的内容
 	 */
-	public static String post(String content, String Url, String charset, String type, Integer timeout) {
+	public static String post(String content, String Url, String charset, String type, int timeout) {
 		try {
 			charset = charset == null ? defEnCharset : charset;
-			timeout = timeout == null ? defTimeout : timeout;
+			timeout = timeout < 1 ? 0 : timeout;
 			URL url = new URL(Url);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
@@ -149,7 +149,7 @@ public class HttpUtil {
 	 * @return 接收方返回的内容
 	 */
 	public static String post(String content, String Url, String charset, String type) {
-		return post(content, Url, charset, type, null);
+		return post(content, Url, charset, type, defTimeout);
 	}
 
 	/**

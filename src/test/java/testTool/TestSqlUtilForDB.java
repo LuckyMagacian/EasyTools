@@ -5,19 +5,22 @@ import static yyj.tools.SqlUtilForDB.getIndexInfos;
 import static yyj.tools.SqlUtilForDB.getTable;
 import static yyj.tools.SqlUtilForDB.getTables;
 import static yyj.tools.SqlUtilForDB.listToMap;
+import static yyj.tools.SqlUtilForDB.makeAll;
 import static yyj.tools.SqlUtilForDB.makeBeanFiles;
-import static yyj.tools.SqlUtilForDB.*;
+import static yyj.tools.SqlUtilForDB.makeMybatisFile;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.persistence.Table;
 
-import org.apache.ibatis.annotations.Param;
 import org.junit.Test;
 
+import yyj.tools.AccountCompareUtil;
 import yyj.tools.FileUtil;
 import yyj.tools.HttpUtil;
 import yyj.tools.SqlUtilForDB;
@@ -96,11 +99,6 @@ public class TestSqlUtilForDB {
 		System.out.println(temp);
 		System.out.println();
 	}
-	@Test
-	public void test2(){
-		Connection conn=SqlUtilForDB.getConnection();
-//		makeBeanFile(getTable(conn, "t_car_owner"), false, "t_", false);
-		makeAll(conn, "t_", null, false, false);
-	}
+	
 
 }

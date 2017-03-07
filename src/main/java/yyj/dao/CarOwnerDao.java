@@ -6,12 +6,15 @@ import java.util.*;
 /**
 *no comment
 *@author yyj | auto generator
-*@version 1.0.0 2017-02-21 10:53:03
+*@version 1.0.0 2017-02-28 16:00:32
 */
 
 public interface CarOwnerDao{
 	
 	
+	/**插入CarOwner到数据库
+	 * @paramcarOwner 待插入的对象
+	 */
 	public void addCarOwner(CarOwner carOwner);
 	
 	public void deleteCarOwnerByClass(CarOwner carOwner);

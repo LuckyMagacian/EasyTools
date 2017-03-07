@@ -353,7 +353,23 @@ public class BeanUtil {
 		}
 	}
 	
+	public static Object get(Object obj,String name){
+		try {
+			Method get=obj.getClass().getMethod("get"+CheckReplaceUtil.firstCharUpcase(name));
+			return get.invoke(obj);
+		} catch (Exception e) {
+			throw new RuntimeException("映射"+obj.getClass()+"get方法异常",e);
+		}
+	}
 	
+	public static void set(Object obj,String name,Object value){
+		try {
+			Method get=obj.getClass().getMethod("set"+CheckReplaceUtil.firstCharUpcase(name),value.getClass());
+			get.invoke(obj, value);
+		} catch (Exception e) {
+			throw new RuntimeException("映射"+obj.getClass()+"set方法异常",e);
+		} 
+	}
 //	public static Map<String, GetSetPair> getGetSetPair(Object obj){
 //		Class<?> clazz=null;
 //		if(obj instanceof Class<?>)

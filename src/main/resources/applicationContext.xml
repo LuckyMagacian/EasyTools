@@ -35,7 +35,7 @@
     <!-- 设置自动搜索目录 -->
     <context:component-scan base-package="yyj.*"/> 
         <!-- 支持@RequestMapping请求和Controller映射 -->
-    <mvc:annotation-driven/> 
+    <mvc:annotation-driven/>  
   	<util:properties id="dbconfig" location="classpath:jdbc.properties"></util:properties>  
 	<bean id="ds" class="org.apache.commons.dbcp.BasicDataSource">
 	<property name="driverClassName" value="#{dbconfig.driver}"></property>

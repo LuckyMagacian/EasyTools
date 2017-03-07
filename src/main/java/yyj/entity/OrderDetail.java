@@ -8,7 +8,7 @@ import java.sql.Date;
 /**
 *no comment
 *@author yyj | auto generator
-*@version 1.0.0 2017-02-21 10:53:03
+*@version 1.0.0 2017-02-28 16:00:32
 */
 
 public class OrderDetail{

@@ -1,12 +1,14 @@
 package yyj.tools;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -136,9 +138,41 @@ public class SqlUtilForDB {
 	 */
 	public static Connection getConnection() {
 		try {
+			File file=FileUtil.loadFileInClassPath(".properties");
+			Properties properties=new Properties();
+			properties.load(new FileInputStream(file));
+			return getConnection(properties);
+		} catch (Exception e) {
+			throw new RuntimeException("获取数据库连接异常", e);
+		}
+	}
+	/**
+	 * 获取数据库链接 
+	 * @param properties jdbc配置文件
+	 * @return
+	 */
+	public static Connection getConnection(Properties properties){
+		try {
 			Class.forName(properties.getProperty("driver"));
 			Connection conn = DriverManager.getConnection(properties.getProperty("url"),
 					properties.getProperty("username"), properties.getProperty("password"));
+			return conn;
+		} catch (Exception e) {
+			throw new RuntimeException("获取数据库连接异常", e);
+		}
+	}
+	/**
+	 * 获取数据库链接
+	 * @param url 		
+	 * @param driver
+	 * @param userName
+	 * @param password
+	 * @return
+	 */
+	public static Connection getConnection(String url,String driver,String userName,String password){
+		try {
+			Class.forName(driver);
+			Connection conn = DriverManager.getConnection(url,userName,password);
 			return conn;
 		} catch (Exception e) {
 			throw new RuntimeException("获取数据库连接异常", e);
@@ -194,7 +228,45 @@ public class SqlUtilForDB {
 			throw new RuntimeException("从连接池获取连接异常", e);
 		}
 	}
-
+	/**
+	 * 从连接池获取数据库链接
+	 * @param properties jdbc配置文件
+	 * @return
+	 */
+	public static Connection getPoolConnection(Properties properties){
+		try {
+			DataSource dataSource = BasicDataSourceFactory.createDataSource(properties);
+			Connection conn = null;
+			conn = dataSource.getConnection();
+			return conn;
+		} catch (Exception e) {
+			throw new RuntimeException("从连接池获取连接异常", e);
+		}
+	}
+	
+	/**
+	 * 从连接池获取数据库链接
+	 * @param url
+	 * @param driver
+	 * @param userName
+	 * @param password
+	 * @return
+	 */
+	public static Connection getPoolConnection(String url,String driver,String userName,String password){
+		try {
+			Properties properties=new Properties();
+			properties.setProperty("url", url);
+			properties.setProperty("driver",driver);
+			properties.setProperty("username", userName);
+			properties.setProperty("password",password);
+			DataSource dataSource = BasicDataSourceFactory.createDataSource(properties);
+			Connection conn = null;
+			conn = dataSource.getConnection();
+			return conn;
+		} catch (Exception e) {
+			throw new RuntimeException("从连接池获取连接异常", e);
+		}
+	}
 	/**
 	 * 关闭连接
 	 * 
@@ -241,7 +313,25 @@ public class SqlUtilForDB {
 	public static List<String> getTableNames() {
 		return getTableNames(getConnection());
 	}
-
+	/**
+	 * 判断一张表是否存在
+	 * @param conn 			sql connection
+	 * @param tableName 	表名
+	 * @return 				表存在 true | 不存在 false
+	 */
+	public static boolean isExist(Connection conn,String tableName){
+		if(conn==null)
+			throw new RuntimeException("conn can't be null when use this method !");
+		return getTable(conn, tableName).getTableInfo().getTableName()!=null;
+	}
+	public static boolean isExist(Properties properties,String tableName){
+		Connection conn=getConnection(properties);
+		return isExist(conn, tableName);
+	}
+	public static boolean isExist(String url,String driver,String username,String password,String tableName){
+		Connection conn=getPoolConnection(url, driver, username, password);
+		return isExist(conn, tableName);
+	}
 	/**
 	 * 获取指定表中所有的字段名
 	 * 
@@ -956,6 +1046,9 @@ public class SqlUtilForDB {
 			buffer.append("public interface "+map.get("className").replaceFirst("Bean", "")+"Dao"+"{"+"\n");
 			buffer.append("\n\n"); 
 			//----------------------------------insert-----------------------------------------------
+			buffer.append("/**插入"+map.get("className")+"到数据库\n");
+			buffer.append(" * @param"+CheckReplaceUtil.firstCharLowcase(map.get("className"))+" 待插入的对象\n");
+			buffer.append(" */\n");
 			buffer.append("public void add"+map.get("className")+"("+map.get("className")+" "+CheckReplaceUtil.firstCharLowcase(map.get("className"))+");\n");
 			buffer.append("\n"); 
 			//----------------------------------delete-----------------------------------------------
@@ -1182,6 +1275,48 @@ public class SqlUtilForDB {
 		}
 	}
 	/**
+	 * 构建单个表的对应文件
+	 * @param table 		表信息
+	 * @param prefix 		前缀过滤
+	 * @param descOrAsc 	未使用
+	 * @param paging 		未使用
+	 * @param annotationFlag hibnate注解开关
+	 */
+	public static void makeOne(final DBTable table,final String prefix,final String descOrAsc,final boolean paging,final boolean annotationFlag){
+		try {
+			String packagePath=SqlUtilForDB.class.getPackage().getName();
+			packagePath=packagePath.substring(0,packagePath.lastIndexOf('.')+1);
+			packagePath+="dao";
+			Thread thread1=new Thread(new Runnable() {
+				@Override
+				public void run() {
+					makeBeanFile(table, annotationFlag, prefix==null?"":prefix, false);
+				}
+			});
+			Thread thread2=new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					makeMybatisDao(table, prefix,false);
+				}
+			});
+			Thread thread3=new Thread(new Runnable() {
+				@Override
+				public void run() {
+					makeMybatisFile(table, prefix, descOrAsc, paging, false);
+				}
+			});
+			thread1.start();
+			thread2.start();
+			thread3.start();
+			while(thread1.isAlive()||thread2.isAlive()||thread3.isAlive());
+			JOptionPane.showMessageDialog(null, "生成Dao与mapper成功\n路径:"+packagePath+"\n"+"生成javaBean成功\n路径:"+packagePath.replace("dao", "entity")+"\n请刷新项目", "提示", JOptionPane.ERROR_MESSAGE);
+		} catch (Exception e) {
+			throw new RuntimeException("自动生成文件异常",e);
+		}
+	}
+	
+	/**
 	 * 构建 javaBean ,mapper, dao 
 	 * @param list
 	 * @param prefix
@@ -1236,6 +1371,24 @@ public class SqlUtilForDB {
 			makeAll(getTables(conn), prefix, descOrAsc, paging, annotationFlag);
 		} catch (Exception e) {
 			throw new RuntimeException("自动生成文件异常",e);
+		}
+	}
+	/**
+	 * 使用swing文件选择框来生成
+	 * @param prefix
+	 * @param descOrAsc
+	 * @param paging
+	 * @param annotationFlag
+	 */
+	public static void makeAll(String prefix,String descOrAsc,boolean paging,boolean annotationFlag){
+		try {
+			prefix=prefix==null?"":prefix;
+			File jdbc=FileUtil.loadFileInClassPath(".properties");
+			Properties properties=new Properties();
+			properties.load(new FileInputStream(jdbc));
+			makeAll(getConnection(properties), prefix, descOrAsc, paging, annotationFlag);
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 	}
 	
@@ -1638,7 +1791,83 @@ public class SqlUtilForDB {
 		}
 	}
 	
+	/**
+	 * 通用的add方法
+	 * @param conn 		数据库连接
+	 * @param t 		要插入到数据库的对象
+	 * @param underline 下划线转换开关
+	 * @param prefix 	表名前缀
+	 */
+	public static <T> void add(Connection conn ,T t,boolean underline,String prefix,String tableName){
+		try {
+			if(tableName==null||tableName.isEmpty()){
+				tableName=t.getClass().getSimpleName();
+				tableName=CheckReplaceUtil.firstCharLowcase(tableName);
+				if(underline)
+					tableName=CheckReplaceUtil.upcaseToUnderlineLowcaser(tableName);
+				tableName=(prefix==null?"":prefix)+tableName;
+			}
+			DBTable table=getTable(conn, tableName);
+			StringBuffer sql=new StringBuffer();
+			sql.append("INSERT INTO "+tableName+" ");
+			sql.append(" ( ");
+			List<ColumnInfo> columns=table.getColumnInfos();
+			for(ColumnInfo each:columns)
+				sql.append(each.getColumnName()+",");
+			sql.replace(sql.length()-1,sql.length(),"");
+			sql.append(" ) ");
+			sql.append(" VALUES (");
+			for(ColumnInfo each:columns)
+				sql.append("?,");
+			sql.replace(sql.length()-1,sql.length(),"");
+			sql.append(")");
+			int index=1;
+			System.out.println(sql);
+			PreparedStatement statement=conn.prepareStatement(sql.toString());
+			for(ColumnInfo each:columns){
+				String name=each.getColumnName();
+				name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+				Object value=BeanUtil.get(t,name);
+//				if(value.getClass().equals(String.class))
+//					statement.setString(index, (String) value);
+//				if(value.getClass().equals(Date.class))
+//					statement.setDate(index,(Date) value);
+//				if(value.getClass().equals(Double.class)||value.getClass().equals(double.class))
+//					statement.setDouble(index, (double) value);
+//				if(value.getClass().equals(Integer.class)||value.getClass().equals(int.class))
+//					statement.setInt(index, (int) value);
+				statement.setObject(index, value);
+				index++;
+			}
+			statement.execute();
+		} catch (Exception e) {
+			throw new AppException("向数据库添加数据异常",e);
+		}
+	}
 	
+	public static <T> void delete(Connection conn ,T t){
+		try {
+			
+		} catch (Exception e) {
+			throw new AppException("向数据库添加数据异常",e);
+		}
+	}
+	
+	public static <T> void update(Connection conn ,T t){
+		try {
+			
+		} catch (Exception e) {
+			throw new AppException("向数据库添加数据异常",e);
+		}
+	}
+	
+	public static <T> void select(Connection conn ,T t){
+		try {
+			
+		} catch (Exception e) {
+			throw new AppException("向数据库添加数据异常",e);
+		}
+	}
 	
 	/**
 	 * 数据库表类

@@ -59,14 +59,8 @@ public class CheckReplaceUtil {
 		if(string==null)
 			return null;
 		StringBuffer temp=new StringBuffer();
-		boolean flag=true;
 		for(char each:string.toCharArray()){
 			if(each>='A'&&each<='Z'){
-				if(flag){
-					flag=false;
-					temp.append((char)(each+32));
-					continue;
-				}
 				temp.append("_").append((char)(each+32));
 			}
 			else{

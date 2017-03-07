@@ -57,7 +57,6 @@ public class SignUtil {
 	 * @throws AppException
 	 */
 	public static String md5LowerCase(String src, String charset) {
-
 		try {
 			if (src == null || src.length() < 1)
 				throw new AppException("md5摘要时,明文信息为null或为空");
@@ -310,7 +309,7 @@ public class SignUtil {
 		for (Map.Entry<String, String> each : map.entrySet()) {
 			if (each.getKey().equals("sign"))
 				continue;
-			rs.append(each.getValue());
+			rs.append(each.getValue()==null?"":each.getValue());
 		}
 		return rs.toString();
 	}
