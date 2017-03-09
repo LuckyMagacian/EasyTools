@@ -37,7 +37,7 @@ public class SignUtil {
 	 * 
 	 * @param src
 	 *            明文字节码
-	 * @return
+	 * @return   md5摘要的字节
 	 */
 	public static byte[] md5En(byte[] src) {
 		try {
@@ -52,9 +52,9 @@ public class SignUtil {
 	/**
 	 * md5摘要算法 补0
 	 * 
-	 * @param src
-	 * @return
-	 * @throws AppException
+	 * @param src  要md5摘要的字符串
+	 * @param  charset  字符串转字节的 字符集
+	 * @return 	 md5摘要的结果
 	 */
 	public static String md5LowerCase(String src, String charset) {
 		try {
@@ -82,7 +82,7 @@ public class SignUtil {
 	 * 
 	 * @param src
 	 *            明文字节
-	 * @return
+	 * @return    sha1加密后的字节数组
 	 */
 	public static byte[] sha1En(byte[] src) {
 		try {
@@ -100,7 +100,7 @@ public class SignUtil {
 	 *            明文
 	 * @param charset
 	 *            字符集
-	 * @return
+	 * @return    sha1加密后的字符串
 	 */
 	public static String sha1En(String src, String charset) {
 		try {
@@ -118,7 +118,7 @@ public class SignUtil {
 	 *            明文
 	 * @param charset
 	 *            字符集
-	 * @return
+	 * @return base64处理后的字符串
 	 */
 	public static String base64En(String src, String charset) {
 		try {
@@ -135,7 +135,7 @@ public class SignUtil {
 	 * 
 	 * @param src
 	 *            明文字节
-	 * @return
+	 * @return    base处理后的字节数组
 	 */
 	public static byte[] base64En(byte[] src) {
 		try {
@@ -154,8 +154,8 @@ public class SignUtil {
 	 * @param src
 	 *            明文
 	 * @param charset
-	 *            字符集
-	 * @return
+	 *            字符集 
+	 * @return base64解码后的字符串
 	 */
 	public static String base64De(String src, String charset) {
 		try {
@@ -173,7 +173,7 @@ public class SignUtil {
 	 * 
 	 * @param src
 	 *            明文字节
-	 * @return
+	 * @return   base64处理后的字节数组
 	 */
 	public static byte[] base64De(byte[] src) {
 		try {
@@ -189,8 +189,8 @@ public class SignUtil {
 	/**
 	 * byte数组转hex字符串
 	 * 
-	 * @param bytes
-	 * @return
+	 * @param bytes  字节组数
+	 * @return 		转换为hex字符串
 	 */
 	public static String byteToHex(byte[] bytes) {
 		try {
@@ -206,10 +206,10 @@ public class SignUtil {
 
 	// ------------------------------------signStart------------------------------------------
 	/**
-	 * map转String key=value&key2=value2 不排序 无签名
+	 * map转String key=value key2=value2 不排序 无签名
 	 * 
-	 * @param map
-	 * @return
+	 * @param map 属性-值 映射
+	 * @return 	拼装后的 字符串
 	 */
 	public static String mapToStringNoSign(Map<String, String> map) {
 		StringBuffer rs = new StringBuffer();
@@ -225,10 +225,10 @@ public class SignUtil {
 	}
 
 	/**
-	 * map转String key=value&key2=value2 不排序 有签名
+	 * map转String key=value key2=value2 不排序 有签名
 	 * 
-	 * @param map
-	 * @return
+	 * @param map  属性 - 值映射
+	 * @return     拼装后的字符串
 	 */
 	public static String mapToString(Map<String, String> map) {
 		StringBuffer rs = new StringBuffer();
@@ -242,10 +242,10 @@ public class SignUtil {
 	}
 
 	/**
-	 * map转String key=value&key2=value2 key按字典排序 无签名
+	 * map转String key=value key2=value2 key按字典排序 无签名
 	 * 
-	 * @param map
-	 * @return
+	 * @param map 属性-值映射
+	 * @return 排序拼装后的字符串
 	 */
 	public static String mapSortToStringNoSign(Map<String, String> map) {
 		List<String> list = new ArrayList<String>(map.keySet());
@@ -263,10 +263,10 @@ public class SignUtil {
 	}
 
 	/**
-	 * map转String key=value&key2=value2 key按字典排序 有签名
+	 * map转String key=value  key2=value2 key按字典排序 有签名 
 	 * 
-	 * @param map
-	 * @return
+	 * @param map 传入的map
+	 * @return 拼装后的字符串
 	 */
 	public static String mapSortToString(Map<String, String> map) {
 		List<String> list = new ArrayList<String>(map.keySet());
@@ -284,8 +284,8 @@ public class SignUtil {
 	/**
 	 * map转String 仅仅返回key拼接成的字符串
 	 * 
-	 * @param map
-	 * @return
+	 * @param map 属性-值映射
+	 * @return 拼装后的字符串
 	 */
 	public static String mapToKeyString(Map<String, String> map) {
 		List<String> list = new ArrayList<String>(map.keySet());
@@ -301,8 +301,8 @@ public class SignUtil {
 	/**
 	 * map转String 仅仅返回value拼接成的字符串
 	 * 
-	 * @param map
-	 * @return
+	 * @param map  信息映射表
+	 * @return 拼装后的信息字符串
 	 */
 	public static String mapToValueString(Map<String, String> map) {
 		StringBuffer rs = new StringBuffer();
@@ -317,8 +317,8 @@ public class SignUtil {
 	/**
 	 * 从对象中获取字段以及其对应的属性,封装成map并返回
 	 * 
-	 * @param obj
-	 * @return
+	 * @param obj 获取前的obj
+	 * @return 获取到的map信息
 	 */
 	public static Map<String, String> objToMap(Object obj) {
 		Class<?> clazz = obj.getClass();
@@ -436,7 +436,7 @@ public class SignUtil {
 	/**
 	 * 将私钥字符串转为私钥对象
 	 * 
-	 * @param key
+	 * @param priKey
 	 *            私钥字符串
 	 * @return 私钥对象
 	 */
@@ -647,7 +647,7 @@ public class SignUtil {
 	 *            密钥
 	 * @param data
 	 *            数据
-	 * @return
+	 * @return  加密后的byte数组 
 	 */
 	public static byte[] desDe(String key, byte[] data) {
 		try {

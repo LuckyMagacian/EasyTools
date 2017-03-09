@@ -4,7 +4,7 @@
 	<groupId>yyj</groupId>
 	<artifactId>EasyTools</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>war</packaging> 
 	<dependencies>
 <dependency>
   		<groupId>log4j</groupId>

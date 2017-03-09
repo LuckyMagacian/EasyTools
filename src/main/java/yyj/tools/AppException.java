@@ -45,7 +45,7 @@ public class AppException extends RuntimeException{
 	}
 	/**
 	 * 获取堆栈信息
-	 * @return 
+	 * @return  返回堆栈信息
 	 */
 	public String getStackInfo(){
 		StringWriter stringWriter=new StringWriter();
@@ -70,8 +70,8 @@ public class AppException extends RuntimeException{
 	}
 	/**
 	 * 查看测试模式状态
-	 * @return 	true ->测试模式开启
-	 * 			false->测试模式关闭
+	 * @return 	true 测试模式开启
+	 * 			false 测试模式关闭
 	 */
 	public static boolean getTestFlag(){
 		return testFlag;

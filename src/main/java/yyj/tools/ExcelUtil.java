@@ -56,8 +56,8 @@ public class ExcelUtil {
 
 	/**
 	 * 设置页名
-	 * 
-	 * @param name
+	 * @param index 页下标
+	 * @param name  页名称
 	 */
 	public static void setSheetName(int index, String name) {
 		workbook.setSheetName(0, name);
@@ -66,7 +66,7 @@ public class ExcelUtil {
 	/**
 	 * 获取普通样式
 	 * 
-	 * @return
+	 * @return 单元格样式
 	 */
 	public static HSSFCellStyle getCommonStyle() {
 		return commonStyle;
@@ -75,7 +75,7 @@ public class ExcelUtil {
 	/**
 	 * 获取标题样式
 	 * 
-	 * @return
+	 * @return	单元格样式
 	 */
 	public static HSSFCellStyle getTitleStyle() {
 		return titleStyle;
@@ -84,7 +84,7 @@ public class ExcelUtil {
 	/**
 	 * 获取工作簿
 	 * 
-	 * @return
+	 * @return	工作簿
 	 */
 	public static HSSFWorkbook getWorkBook() {
 		return workbook;
@@ -93,8 +93,8 @@ public class ExcelUtil {
 	/**
 	 * 根据索引获取页
 	 * 
-	 * @param index
-	 * @return
+	 * @param index  索引下标
+	 * @return 		 hssfSheet
 	 */
 	public static HSSFSheet getSheet(int index) {
 		if (index < 0)
@@ -121,9 +121,9 @@ public class ExcelUtil {
 	/**
 	 * 根据索引获取行
 	 * 
-	 * @param sheetIndex
-	 * @param rowIndex
-	 * @return
+	 * @param sheetIndex 	页下标
+	 * @param rowIndex 		列下标 
+	 * @return 				指定列
 	 */
 	public static HSSFRow getRow(int sheetIndex, int rowIndex) {
 		if (rowIndex < 0)
@@ -141,10 +141,10 @@ public class ExcelUtil {
 	/**
 	 * 根据索引获取 单元格
 	 * 
-	 * @param sheetIndex
-	 * @param rowIndex
-	 * @param cellIndex
-	 * @return
+	 * @param sheetIndex  		页下标
+	 * @param rowIndex 			列下标
+	 * @param cellIndex 		行下标
+	 * @return 					指定单元格
 	 */
 	public static HSSFCell getCell(int sheetIndex, int rowIndex, int cellIndex) {
 		HSSFRow row = getRow(sheetIndex, rowIndex);
@@ -159,10 +159,10 @@ public class ExcelUtil {
 	/**
 	 * 根据参数数量获取内容 1个 获取sheet 2个获取row 3个获取cell
 	 * 
-	 * @param sheetIndex
-	 * @param rowIndex
-	 * @param cellIndex
-	 * @return
+	 * @param sheetIndex 		页下标
+	 * @param rowIndex 			列下标
+	 * @param cellIndex 		行下标
+	 * @return 					指定单元格
 	 */
 	public static Object get(Integer sheetIndex, Integer rowIndex, Integer cellIndex) {
 		if (sheetIndex != null && rowIndex == null && cellIndex == null)
@@ -178,9 +178,9 @@ public class ExcelUtil {
 	/**
 	 * 将指定表中的旧字符串替换为新字符串
 	 * 
-	 * @param sheetIndex
-	 * @param oldStr
-	 * @param newStr
+	 * @param sheet 		 	         页
+	 * @param oldStr 				旧字符串
+	 * @param newStr 				新字符串
 	 */
 	public static void sheetReplace(HSSFSheet sheet, String oldStr, String newStr) {
 		if (oldStr == null || oldStr.trim().isEmpty() || newStr == null)
@@ -193,9 +193,9 @@ public class ExcelUtil {
 	/**
 	 * 将行中的旧字符串替换为新字符串
 	 * 
-	 * @param row
-	 * @param oldStr
-	 * @param newStr
+	 * @param row 		列
+	 * @param oldStr 	旧字符串
+	 * @param newStr 	新字符串
 	 */
 	public static void rowReplace(HSSFRow row, String oldStr, String newStr) {
 		for (int j = 0; j < row.getLastCellNum(); j++)
@@ -205,9 +205,9 @@ public class ExcelUtil {
 	/**
 	 * 将单元格中的旧字符串替换为新字符串
 	 * 
-	 * @param cell
-	 * @param oldStr
-	 * @param newStr
+	 * @param cell 		单元格
+	 * @param oldStr	旧字符串
+	 * @param newStr	新字符串
 	 */
 	public static void cellReplace(HSSFCell cell, String oldStr, String newStr) {
 		String str = cell.getStringCellValue();
@@ -215,10 +215,10 @@ public class ExcelUtil {
 	}
 
 	/**
-	 * 生成excel文件 若path=null -> 生成到classPath下 年月日时分秒4位随机数.xls 若path为目录 -> 生成到目录下
-	 * 年月日时分秒4位随机数.xls 若path为文件 -> 生成内容到该文件中
-	 * 
-	 * @param path
+	 * 生成excel文件 若path=null  生成到classPath下 年月日时分秒4位随机数.xls 若path为目录  生成到目录下
+	 * 年月日时分秒4位随机数.xls 若path为文件  生成内容到该文件中
+	 * @param path 文件保存路径
+	 * @return 生成的excel文件
 	 */
 	public static File generatorExcel(String path) {
 		if (path == null)
@@ -239,8 +239,8 @@ public class ExcelUtil {
 	/**
 	 * 将工作簿写入到指定的文件并返回
 	 * 
-	 * @param file
-	 * @return
+	 * @param file 		用于保存excel的文件
+	 * @return 生成的excel文件
 	 */
 	public static File generatorExcel(File file) {
 		try {

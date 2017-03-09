@@ -191,8 +191,6 @@ public class HttpUtil {
 	 * @param timeout
 	 *            超时时间
 	 * @return 接收方返回的内容
-	 *
-	 * @throws AppException
 	 */
 	public static String postStr(String str, String url, String charset, Integer timeout) {
 		return post(str, url, charset, null, timeout);
@@ -208,7 +206,6 @@ public class HttpUtil {
 	 * @param charset
 	 *            编码字符集 默认 utf-8
 	 * @return 接收方返回的内容
-	 * @throws AppException
 	 */
 	public static String postStr(String str, String url, String charset) {
 		return postStr(str, url, charset, null);
@@ -224,7 +221,6 @@ public class HttpUtil {
 	 * @param charset
 	 *            编码字符集 默认 utf-8
 	 * @return 接收方返回的内容
-	 * @throws AppException
 	 */
 	public static String postStr(String str, HttpServletResponse res, String charset) {
 		return post(str, res, charset, "txt/html");
@@ -241,7 +237,7 @@ public class HttpUtil {
 	 *            编码字符集 默认utf-8
 	 * @param timeout
 	 *            超时时间
-	 * @return
+	 * @return 发送xml的响应
 	 */
 	public static String postXml(String xml, String url, String charset, Integer timeout) {
 		return post(xml, url, charset, "txt/html", timeout);
@@ -256,7 +252,7 @@ public class HttpUtil {
 	 *            接收方的地址
 	 * @param charset
 	 *            编码字符集 默认utf-8
-	 * @return
+	 * @return 发送xml的响应
 	 */
 	public static String postXml(String xml, String url, String charset) {
 		return postXml(xml, url, charset, null);
@@ -271,7 +267,7 @@ public class HttpUtil {
 	 *            servelet的响应
 	 * @param charset
 	 *            编码字符集 默认utf-8
-	 * @return 0->发送成功 1->发送失败
+	 * @return 0 发送成功 1 发送失败
 	 */
 	public static String postXml(String xml, HttpServletResponse res, String charset) {
 		return post(xml, res, charset, "txt/html");
@@ -286,7 +282,7 @@ public class HttpUtil {
 	 *            目标url
 	 * @param charset
 	 *            编解码字符集
-	 * @return
+	 * @return 发送键值对的响应
 	 */
 	public static String postKeyValue(Map<String, String> params, String url, String charset) {
 		try {
@@ -320,7 +316,7 @@ public class HttpUtil {
 	 *            地址+直接参数跟随
 	 * @param charset
 	 *            字符集
-	 * @return
+	 * @return get到的字符串
 	 */
 	public static String get(String url, String charset) {
 		try {
@@ -349,7 +345,7 @@ public class HttpUtil {
 	 *            参数map
 	 * @param charset
 	 *            字符集
-	 * @return
+	 * @return http get方法的返回字符串
 	 */
 	public static String get(String url, Map<String, Object> param, String charset) {
 		StringBuffer params = new StringBuffer("?");

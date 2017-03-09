@@ -31,7 +31,7 @@ public class FileUtil {
 	 *            文件路径
 	 * @param fileFormat
 	 *            文件后缀名
-	 * @return File[]
+	 * @return File[]   文件数组
 	 */
 	public static File[] getFiles(String dirPath, String fileFormat) {
 		if (dirPath == null || dirPath.trim().equals(""))
@@ -64,7 +64,7 @@ public class FileUtil {
 	 *            文件路径
 	 * @param fileFormat
 	 *            文件后缀名
-	 * @return list<File>
+	 * @return list 文件列表
 	 */
 	public static List<File> getFileList(String dirPath, String fileFormat) {
 		File[] files = getFiles(dirPath, fileFormat);
@@ -74,8 +74,8 @@ public class FileUtil {
 	/**
 	 * 获取classPath目录下的文件
 	 * 
-	 * @param path
-	 * @return File
+	 * @param path  	相对于classpath的文件路径
+	 * @return File 	文件
 	 */
 	public static File getClassPathFile(String path) {
 		try {
@@ -97,9 +97,9 @@ public class FileUtil {
 	/**
 	 * 获取classPath指定目录下的目录或文件(可以指定文件后缀名)
 	 * 
-	 * @param path
-	 * @param format
-	 * @return File[]
+	 * @param path 		路径
+	 * @param format 	文件后缀名
+	 * @return File[] 	文件数组
 	 */
 	public static File[] getClassPathFiles(String path, String format) {
 		try {
@@ -112,9 +112,9 @@ public class FileUtil {
 	/**
 	 * 获取classPath指定目录下的目录或文件(可以指定文件后缀名)
 	 * 
-	 * @param path
-	 * @param format
-	 * @return List<File>
+	 * @param path 		路径
+	 * @param format 	文件后缀名
+	 * @return List 	文件列表
 	 */
 	public static List<File> getClassPathFileList(String path, String format) {
 		File[] files = getClassPathFiles(path, format);
@@ -124,8 +124,8 @@ public class FileUtil {
 	/**
 	 * 相对与classpath获取文件 ..表示上一级目录
 	 * 
-	 * @param path
-	 * @return File
+	 * @param path 		文件路径
+	 * @return File 	文件
 	 */
 	public static File getFileOppositeClassPath(String path) {
 		try {
@@ -156,9 +156,9 @@ public class FileUtil {
 	}
 	/**
 	 * 获取相对于classpath下的目录中的文件(可以指定后缀名)
-	 * @param path
-	 * @param format
-	 * @return File[]
+	 * @param path 		相对与classpath的文件路径
+	 * @param format 	文件后缀名
+	 * @return File[] 	文件数组
 	 */
 	public static File[] getFilesOppositeClassPath(String path, String format) {
 		try {
@@ -169,9 +169,9 @@ public class FileUtil {
 	}
 	/**
 	 * 获取相对于classpath下的目录中的文件(可以指定后缀名)
-	 * @param path
-	 * @param format
-	 * @return List<File>
+	 * @param path 			相对classpath 文件路径
+	 * @param format		文件后缀名
+	 * @return List	文件列表
 	 */
 	public static List<File> getFileListOppositeClassPath(String path, String format){
 		File[] files=getFilesOppositeClassPath(path, format);
@@ -179,8 +179,8 @@ public class FileUtil {
 	}
 	/**
 	 * 以Byte数组形式读取文件并返回
-	 * @param file
-	 * @return
+	 * @param file 		文件
+	 * @return 			byte[]数组形式的文件内容
 	 */
 	public static byte[] getFileContentByte(File file){
 		try{
@@ -200,8 +200,8 @@ public class FileUtil {
 	}
 	/**
 	 * 以字符串形式读取文件并返回
-	 * @param file
-	 * @return
+	 * @param file 				文件
+	 * @return 					String形式的文件内容
 	 */
 	public static String getFileContentString(File file){
 		try{
@@ -214,8 +214,8 @@ public class FileUtil {
 	}
 	/**
 	 * java代码格式化
-	 * @param str
-	 * @return
+	 * @param str 				java字符串
+	 * @return 					格式化后的java字符串
 	 */
 	public static String javaFormat(String str){
 		try {
@@ -243,7 +243,11 @@ public class FileUtil {
 			throw new RuntimeException("java代码格式化异常",e);
 		}
 	}
-	
+	/**
+	 * xml字符串格式化
+	 * @param str 	xml字符串
+	 * @return 		格式化后的xml字符串
+	 */
 	public static String xmlFormat(String str){
 		try {
 			String[] strs=str.split("\n");
@@ -274,7 +278,7 @@ public class FileUtil {
 	 * @param str		字符串内容
 	 * @param file 		文件
 	 * @param charSet 	字符集
-	 * @return
+	 * @return 			写入内容后的文件
 	 */
 	public static File writeStrToFile(String str,File file,String charSet){
 		try {
@@ -298,9 +302,9 @@ public class FileUtil {
 	}
 	/**
 	 * 将字符串写入到指定文件(路径)中
-	 * @param str
-	 * @param filePath
-	 * @param charSet
+	 * @param str 			字符串
+	 * @param filePath 		文件路径及名称
+	 * @param charSet 		字符集
 	 */
 	public static void writeStrToFile(String str,String filePath,String charSet){
 		try {
@@ -318,10 +322,11 @@ public class FileUtil {
 	}
 	/**
 	 * 调用swing获取文件或目录
-	 * @param fileType
-	 * @return
+	 * @param fileType 		文件后缀名
+	 * @param currentPath   当前目录
+	 * @return 				文件
 	 */
-	public static File loadFile(File currentPath,final String fileType){
+	public static File loadFile(File currentPath ,final String fileType){
 		final String fileFormat=fileType==null||fileType.isEmpty()?"":fileType.startsWith(".")?fileType:"."+fileType;
 		JFileChooser chooser=new JFileChooser();
 		if(currentPath!=null)
@@ -346,22 +351,22 @@ public class FileUtil {
 	}
 	/**
 	 * 调用swing加载文件
-	 * @param fileType
-	 * @return
-	 */
+	 * @param fileType 文件后缀名顾虑过滤
+	 * @return 加载的文件
+	 */ 
 	public static File loadFile(String fileType){
 		return loadFile(null, fileType);
 	}
 	/**
 	 * 获取classpath下的文件
-	 * @param fileType
-	 * @return
+	 * @param fileType 文件后缀名
+	 * @return classpath下获取到的文件
 	 */
 	public static File loadFileInClassPath(final String fileType){
 		try {
 			String path=SqlUtilForDB.class.getClassLoader().getResource("").toURI().toString();
 			if(path.startsWith("file:/"))
-				path=path.substring(path.indexOf('F'),path.length());
+				path=path.replace("file:/", "");
 			path=path.substring(0,path.indexOf("target"))+"src/main/resources/";
 			return loadFile(new File(path),fileType);
 		} catch (URISyntaxException e) {
@@ -373,7 +378,7 @@ public class FileUtil {
 	
 	/**
 	 * 使用swing 加载目录
-	 * @return
+	 * @return  加载的目录
 	 */
 	public static File loadDir(){
 		JFileChooser chooser=new JFileChooser();
@@ -383,7 +388,7 @@ public class FileUtil {
 	}
 	/**
 	 * 使用swing加载目录或文件
-	 * @return
+	 * @return 获取到的文件
 	 */
 	public static File loadDirOrFile(){
 		JFileChooser chooser=new JFileChooser();
@@ -394,9 +399,9 @@ public class FileUtil {
 	
 	/**
 	 * 读取文本文件中指定行内容
-	 * @param file
+	 * @param file      文件
 	 * @param index 	行号 从1开始 
-	 * @param charset
+	 * @param charset	文件字符集
 	 * @return 			若行号大于文件行数返回null,行号小于1也会返回null
 	 */
 	public static String readFileByLineIndex(File file,int index,String charset){
@@ -407,7 +412,14 @@ public class FileUtil {
 			throw new RuntimeException("读取指定行内容异常",e);
 		}
 	}
-	
+	/**
+	 * 读取文件中指定行之间的字符串信息
+	 * @param file 		被读取的文件
+	 * @param start 	开始读取的行下标 1开始计数
+	 * @param end 		最后读取的行下标
+	 * @param charset 	读取时采用的字符集
+	 * @return 			读取的字符串列表list
+	 */
 	public static List<String> readFileByLineStartAndStop(File file,int start,int end ,String charset){
 		try {
 			if(start>end){

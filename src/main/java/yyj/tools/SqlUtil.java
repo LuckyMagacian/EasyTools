@@ -9,7 +9,7 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Deprecated()
 public class SqlUtil {
 	/**
 	 * 私有的构造方法 禁止实例化
@@ -24,7 +24,7 @@ public class SqlUtil {
 	 *            类对象
 	 * @param tableName
 	 *            表名
-	 * @return
+	 * @return 生成的insert语句
 	 */
 	public static String createInsert(Class<?> clazz, String tableName) {
 		// logger.info("生成mybatis插入语句->类名:"+clazz.getName()+"->表名:"+tableName);
@@ -63,22 +63,23 @@ public class SqlUtil {
 		temp.append("\n</insert>\n");
 		return temp.toString();
 	}
-	
+
 	/**
-	 * 根据类对象和表名 创建 insert sql语句  所有值采用默认值 需要修改Id为正常的取值
+	 * 根据类对象和表名 创建 insert sql语句 所有值采用默认值 需要修改Id为正常的取值
 	 * 
 	 * @param clazz
 	 *            类对象
 	 * @param tableName
 	 *            表名
-	 * @return
+	 * @return 生成的insert语句
 	 */
 	public static String createInsertDefault(Class<?> clazz, String tableName) {
 		// logger.info("生成mybatis插入语句->类名:"+clazz.getName()+"->表名:"+tableName);
 		StringBuffer temp = new StringBuffer();
 		String tName = clazz.getName(); // 类全名
 		String sName = clazz.getSimpleName(); // 类名
-		temp.append("<insert id=\"add" + sName.replace("Bean", "") + "Default\" " + "parameterType=\"" + tName + "\">\n");
+		temp.append(
+				"<insert id=\"add" + sName.replace("Bean", "") + "Default\" " + "parameterType=\"" + tName + "\">\n");
 		temp.append("insert into " + tableName + " \n(");
 		Field[] fields = clazz.getDeclaredFields();
 		List<Field> list = new ArrayList<Field>();
@@ -111,7 +112,6 @@ public class SqlUtil {
 		return temp.toString();
 	}
 
-	
 	/**
 	 * 根据 类对象和表名 创建 delete sql语句
 	 * 
@@ -119,7 +119,7 @@ public class SqlUtil {
 	 *            类对象
 	 * @param tableName
 	 *            表名
-	 * @return
+	 * @return 生成的select语句
 	 */
 	public static String createDelete(Class<?> clazz, String tableName) {
 		// logger.info("生成mybatis删除语句->类名:"+clazz.getName()+"->表名:"+tableName);
@@ -141,20 +141,22 @@ public class SqlUtil {
 				if (chars[i] <= 'Z' && chars[i] >= 'A')
 					name = name.replaceFirst("" + chars[i], "_" + (char) (chars[i] + 32));
 			}
-			temp.append("<if test=\"" + each.getName() + " != null\"> and " + name
-					+ " = #{" + each.getName() + "}  </if>  \n");
+			temp.append("<if test=\"" + each.getName() + " != null\"> and " + name + " = #{" + each.getName()
+					+ "}  </if>  \n");
 		}
 		temp.append("</where>\n</delete>\n");
 		return temp.toString();
 	}
 
 	/**
-	 * 根据 类对象和表名 创建 update sql语句 where部分请根据需要手动删除!!! 若仅保留一个条件
-	 * 请把<if>标签也去掉,否则将会更新所有记录
+	 * 根据 类对象和表名 创建 update sql语句 where部分请根据需要手动删除!!! 若仅保留一个条件 请把 if
+	 * 标签也去掉,否则将会更新所有记录
 	 * 
 	 * @param clazz
+	 *            类对象
 	 * @param tableName
-	 * @return
+	 *            表名称
+	 * @return 生成的update语句
 	 */
 	public static String createUpdate(Class<?> clazz, String tableName) {
 		// logger.info("生成mybatis更新语句->类名:"+clazz.getName()+"->表名:"+tableName);
@@ -177,8 +179,8 @@ public class SqlUtil {
 				if (chars[i] <= 'Z' && chars[i] >= 'A')
 					name = name.replaceFirst("" + chars[i], "_" + (char) (chars[i] + 32));
 			}
-			temp.append("<if test=\"" + each.getName() + " != null\">" + name + " = #{"
-					+ each.getName() + "},</if>  \n");
+			temp.append(
+					"<if test=\"" + each.getName() + " != null\">" + name + " = #{" + each.getName() + "},</if>  \n");
 		}
 		temp.append("</set>\n<where>\n");
 		for (Field each : list) {
@@ -192,8 +194,8 @@ public class SqlUtil {
 				if (chars[i] <= 'Z' && chars[i] >= 'A')
 					name = name.replaceFirst("" + chars[i], "_" + (char) (chars[i] + 32));
 			}
-			temp.append("<if test=\"" + each.getName() + " != null\"> and " + name
-					+ " = #{" + each.getName() + "}  </if>  \n");
+			temp.append("<if test=\"" + each.getName() + " != null\"> and " + name + " = #{" + each.getName()
+					+ "}  </if>  \n");
 		}
 		temp.append("</where>\n</update>\n");
 		return temp.toString();
@@ -203,8 +205,10 @@ public class SqlUtil {
 	 * 根据 类对象和表名 创建 select sql语句 where部分需要根据需要手动删除
 	 * 
 	 * @param clazz
+	 *            类对象
 	 * @param tableName
-	 * @return
+	 *            表名
+	 * @return 生成的select语句
 	 */
 	public static String createSelect(Class<?> clazz, String tableName) {
 		// logger.info("生成mybatis查询语句->类名:"+clazz.getName()+"->表名:"+tableName);
@@ -245,8 +249,8 @@ public class SqlUtil {
 				if (chars[i] <= 'Z' && chars[i] >= 'A')
 					name = name.replaceFirst("" + chars[i], "_" + (char) (chars[i] + 32));
 			}
-			temp.append("<if test=\"" + each.getName() + " != null\"> and " + name
-					+ " = #{" + each.getName() + "}  </if>  \n");
+			temp.append("<if test=\"" + each.getName() + " != null\"> and " + name + " = #{" + each.getName()
+					+ "}  </if>  \n");
 		}
 		temp.append("</where>\n</select>\n");
 		return temp.toString();
@@ -256,7 +260,8 @@ public class SqlUtil {
 	 * 根据 类对象和表名 创建 resultMap
 	 * 
 	 * @param clazz
-	 * @return
+	 *            类对象
+	 * @return 生成的resultMap语句
 	 */
 	public static String createResultMap(Class<?> clazz) {
 		// logger.info("生成mybatis ResiltMap语句->类名:"+clazz.getName());
@@ -285,10 +290,12 @@ public class SqlUtil {
 	}
 
 	/**
-	 * 根据 类对象和表名 创建 mybatis映射文件,命名空间将根据类名取前< 3 段作为 公司域名+项目名
+	 * 根据 类对象和表名 创建 mybatis映射文件,命名空间将根据类名取前 3 段作为 公司域名+项目名
 	 * 
 	 * @param clazz
+	 *            类对象
 	 * @param tableName
+	 *            表名
 	 */
 	public static void createMapperFile(Class<?> clazz, String tableName) {
 		// logger.info("生成mybatis映射文件->类名:"+clazz.getName()+"->表名:"+tableName);
@@ -335,36 +342,46 @@ public class SqlUtil {
 			new AppException("生成mapper映射文件异常", e);
 		}
 	}
+
 	/**
 	 * 生成默认的方法名称
+	 * 
 	 * @param clazz
-	 * @return
+	 *            类对象
+	 * @return 生成的方法名称列表
 	 */
-	public static List<String> createMethodName(Class<?> clazz){
-		List<String> list=new ArrayList<>();
-		String name=clazz.getSimpleName();
-		list.add("public void add"+name+"("+name+" "+name.replaceFirst(""+name.charAt(0),""+(char)(name.charAt(0)+32))+");");
-		list.add("public void add"+name+"Default("+name+" "+name.replaceFirst(""+name.charAt(0),""+(char)(name.charAt(0)+32))+");");
-		list.add("public void delete"+name+"("+name+" "+name.replaceFirst(""+name.charAt(0),""+(char)(name.charAt(0)+32))+");");
-		list.add("public void update"+name+"("+name+" "+name.replaceFirst(""+name.charAt(0),""+(char)(name.charAt(0)+32))+");");
-		list.add("public List<"+name+"> select"+name+"("+name+" "+name.replaceFirst(""+name.charAt(0),""+(char)(name.charAt(0)+32))+");");
-		list.add("public "+name+" select"+name+"ById(String id);");
+	public static List<String> createMethodName(Class<?> clazz) {
+		List<String> list = new ArrayList<>();
+		String name = clazz.getSimpleName();
+		list.add("public void add" + name + "(" + name + " "
+				+ name.replaceFirst("" + name.charAt(0), "" + (char) (name.charAt(0) + 32)) + ");");
+		list.add("public void add" + name + "Default(" + name + " "
+				+ name.replaceFirst("" + name.charAt(0), "" + (char) (name.charAt(0) + 32)) + ");");
+		list.add("public void delete" + name + "(" + name + " "
+				+ name.replaceFirst("" + name.charAt(0), "" + (char) (name.charAt(0) + 32)) + ");");
+		list.add("public void update" + name + "(" + name + " "
+				+ name.replaceFirst("" + name.charAt(0), "" + (char) (name.charAt(0) + 32)) + ");");
+		list.add("public List<" + name + "> select" + name + "(" + name + " "
+				+ name.replaceFirst("" + name.charAt(0), "" + (char) (name.charAt(0) + 32)) + ");");
+		list.add("public " + name + " select" + name + "ById(String id);");
 		return list;
 	}
-	
-	
+
 	/**
 	 * 全部调用一次
+	 * 
 	 * @param clazz
+	 *            传入的类对象
 	 * @param tableName
+	 *            表名
 	 */
-	public static void createAll(Class<?> clazz,String tableName){
+	public static void createAll(Class<?> clazz, String tableName) {
 		System.out.println(createInsert(clazz, tableName));
 		System.out.println(createInsertDefault(clazz, tableName));
 		System.out.println(createDelete(clazz, tableName));
 		System.out.println(createUpdate(clazz, tableName));
 		System.out.println(createSelect(clazz, tableName));
 		System.out.println(createResultMap(clazz));
-		System.out.println(createMethodName(clazz).toString().replaceAll(",",""));
+		System.out.println(createMethodName(clazz).toString().replaceAll(",", ""));
 	}
 }

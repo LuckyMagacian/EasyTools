@@ -230,7 +230,7 @@ public class AccountCompareUtil {
 	}
 	/**
 	 * 获取缓存的下一条流水记录
-	 * @return
+	 * @return 下一条流水记录拆分后封装的map
 	 */
 	public static Map<String, Object> next(){
 		log.info("处理下一条对账记录");
@@ -248,9 +248,9 @@ public class AccountCompareUtil {
 		return record;
 	}
 	/**
-	 * 构建唯一索引 preparedstatement
-	 * @param record
-	 * @return
+	 * 通过从对账文件中解析出来的信息构建唯一索引 preparedstatement
+	 * @param 	record
+	 * @return  组装好的preparedstatement
 	 */
 	private static PreparedStatement makeStatement(Map<String, Object> record){
 		try {
@@ -280,9 +280,9 @@ public class AccountCompareUtil {
 	}
 	/**
 	 * 根据对账文件中的流水记录的解析情况 获取 数据库中的流水记录
-	 * @param record
-	 * @param statement
-	 * @return
+	 * @param record 		对账文件解析出的map
+	 * @param statement 	根据唯一索引信息组装好的preparestatement
+	 * @return 				map 数据库中获取的与参数中对应的记录 若map为空则表名数据库中没有对应的记录  或  唯一索引信息设置有误
 	 */
 	public static Map<String, Object> getDbRecord(Map<String, Object> record,PreparedStatement statement){
 		try {
@@ -346,7 +346,7 @@ public class AccountCompareUtil {
 	}
 	/**
 	 * 从临时表中删除指定的数据
-	 * @param detail
+	 * @param detail 		将要被删除的数据
 	 */
 	public static void deleteFromTemp(Map<String, Object> detail){
 		try {
@@ -367,7 +367,7 @@ public class AccountCompareUtil {
 		}
 	}
 	/**
-	 * 复制数据
+	 * 复制流水表中的数据 到 临时表
 	 */
 	public static void copyData(){
 		try {
@@ -399,8 +399,8 @@ public class AccountCompareUtil {
 	}
 	/**
 	 * 单条记录比较
-	 * @param record
-	 * @param dbRecord
+	 * @param record     对账文件中的记录
+	 * @param dbRecord 	 数据库中的记录
 	 * @return 
 	 * 			false 金额差错
 	 * 			null  我方数据缺失
@@ -419,8 +419,8 @@ public class AccountCompareUtil {
 		return flag;
 	}
 	/**
-	 * 获取我方存在而对方缺失的数据
-	 * @return
+	 * 对账文件比较结束后 ,获取我方存在而对方缺失的数据
+	 * @return list 返回临时表中的剩余数据
 	 */
 	public static List<Map<String, Object>> getSurplus(){
 		try {
@@ -631,8 +631,8 @@ public class AccountCompareUtil {
 	}
 	/**
 	 * 测试用main方法
-	 * @param args
-	 * @throws Exception
+	 * @param args  参数
+	 * @throws Exception 异常
 	 */
 	public static void main(String[] args) throws Exception{
 		AccountCompareUtil.loadFile();

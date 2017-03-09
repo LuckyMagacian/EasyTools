@@ -79,10 +79,9 @@ public class TestSqlUtilForDB {
 	}
 	@Test
 	public void testResultMap(){
-		Connection conn=SqlUtilForDB.getConnection();
-		System.out.println(FileUtil.xmlFormat(makeMybatisFile(getTable(conn, "t_car_owner"),"t_","asc",false,false)));
+			makeAll("t_",null, false, false);
 //		FileUtil.xmlFormat(makeMybatisFile(getTable(conn, "t_car_owner"),"t_","asc",false,false));
-	}
+	}   
 	@Test
 	public void testa(){
 //		Connection conn=SqlUtilForDB.getConnection();

@@ -8,9 +8,11 @@ import java.util.Properties;
 
 
 public class ConfigUtil {
+	/**该属性会包含所有加载过的配置值,若存在重名的情况将会发生覆盖*/
 	private static Properties properties;
 	/**
 	 * 初始化
+	 * 默认加载 classpath 下的properties/*.properties文件
 	 */
 	static {
 		try {
@@ -25,10 +27,10 @@ public class ConfigUtil {
 	}
 
 	/**
-	 * 加载文件
+	 * 手动加载文件
 	 * 
-	 * @param file
-	 * @return
+	 * @param file 配置文件
+	 * @return 所有加载后的properties
 	 */
 	public static Properties loadProperties(File file) {
 		try {
@@ -46,9 +48,8 @@ public class ConfigUtil {
 
 	/**
 	 * 从输入流中加载配置文件
-	 * 
-	 * @param inStream
-	 * @return
+	 * @param inStream 输入流
+	 * @return 所有加载后的properties
 	 */
 	public static Properties loadProperties(InputStream inStream) {
 		try {
@@ -63,7 +64,7 @@ public class ConfigUtil {
 	/**
 	 * 从默认的路径加载配置文件 默认路径为 classpath/properties/
 	 * 
-	 * @return
+	 * @return  所有加载后的properties
 	 */
 	public static Properties load() {
 		try {
@@ -78,8 +79,8 @@ public class ConfigUtil {
 	/**
 	 * 从指定路径加载配置文件 指定路径为文件,则加载文件 指定路径为目录,加载下所有peroperties文件
 	 * 
-	 * @param path
-	 * @return
+	 * @param path  路径名称
+	 * @return 		 所有加载后的properties
 	 */
 	public static Properties load(String path) {
 		try {
@@ -109,7 +110,7 @@ public class ConfigUtil {
 	/**
 	 * 获取配置文件
 	 * 
-	 * @return
+	 * @return 所有加载后的properties
 	 */
 	public static Properties getProperties() {
 		return properties;
@@ -118,8 +119,8 @@ public class ConfigUtil {
 	/**
 	 * 获取配置参数 若配置未初始化将会采用默认形式初始化配置文件
 	 * 
-	 * @param key
-	 * @return
+	 * @param key 属性名
+	 * @return String形式的值
 	 */
 	public static String get(String key) {
 		return null == properties ? load().getProperty(key) : properties.getProperty(key);

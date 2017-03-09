@@ -57,6 +57,9 @@ public class SqlUtilForDB {
 			throw new RuntimeException("sqlutil初始化jdbc配置异常", e);
 		}
 	}
+	/**
+	 * 初始化数据库获取到的数据类型与java中数据类型的映射
+	 */
 	private static void ddtTojdtInit(){
 		ddtTojdt = new LinkedHashMap<>();
 		ddtTojdt.put("int",Integer.class);
@@ -125,7 +128,7 @@ public class SqlUtilForDB {
 	/**
 	 * 获取jdbc配置
 	 * 
-	 * @return
+	 * @return 数据库配置文件
 	 */
 	public static Properties getProperties() {
 		return properties;
@@ -134,7 +137,7 @@ public class SqlUtilForDB {
 	/**
 	 * 获取数据库连接
 	 * 
-	 * @return
+	 * @return 数据库链接
 	 */
 	public static Connection getConnection() {
 		try {
@@ -149,7 +152,7 @@ public class SqlUtilForDB {
 	/**
 	 * 获取数据库链接 
 	 * @param properties jdbc配置文件
-	 * @return
+	 * @return 数据链接
 	 */
 	public static Connection getConnection(Properties properties){
 		try {
@@ -163,11 +166,11 @@ public class SqlUtilForDB {
 	}
 	/**
 	 * 获取数据库链接
-	 * @param url 		
-	 * @param driver
-	 * @param userName
-	 * @param password
-	 * @return
+	 * @param url 		 数据库url
+	 * @param driver 	数据库驱动
+	 * @param userName	数据库用户名
+	 * @param password	数据库密码
+	 * @return 数据库连接
 	 */
 	public static Connection getConnection(String url,String driver,String userName,String password){
 		try {
@@ -180,8 +183,9 @@ public class SqlUtilForDB {
 	}
 	/**
 	 * 将DTtable中获取的list信息转换为map形式,key为字段名称 仅限ColumnInfo,IndexInfo,PrimaryKeyInfo,ForeginKeyInfo
-	 * @param list
-	 * @return
+	 * @param list 表对象的信息的类列表
+	 * @param <T> 泛型类
+	 * @return Map  key为数据库字段名称,Value为对应的对象
 	 */
 	public final static <T> Map<String, T> listToMap(List<T> list){
 		try{
@@ -216,7 +220,7 @@ public class SqlUtilForDB {
 	/**
 	 * 从连接池获取连接
 	 * 
-	 * @return
+	 * @return  数据库链接
 	 */
 	public static Connection getPoolConnection() {
 		try {
@@ -231,7 +235,7 @@ public class SqlUtilForDB {
 	/**
 	 * 从连接池获取数据库链接
 	 * @param properties jdbc配置文件
-	 * @return
+	 * @return 数据库链接
 	 */
 	public static Connection getPoolConnection(Properties properties){
 		try {
@@ -246,12 +250,12 @@ public class SqlUtilForDB {
 	
 	/**
 	 * 从连接池获取数据库链接
-	 * @param url
-	 * @param driver
-	 * @param userName
-	 * @param password
-	 * @return
-	 */
+	 * @param url        数据库url
+	 * @param driver 	 数据库驱动
+	 * @param userName 	数据库用户名
+	 * @param password 	数据库密码
+	 * @return  数据库链接
+	 */ 
 	public static Connection getPoolConnection(String url,String driver,String userName,String password){
 		try {
 			Properties properties=new Properties();
@@ -270,7 +274,7 @@ public class SqlUtilForDB {
 	/**
 	 * 关闭连接
 	 * 
-	 * @param conn
+	 * @param conn 数据链接
 	 */
 	public static void closeConnection(Connection conn) {
 		try {
@@ -287,8 +291,8 @@ public class SqlUtilForDB {
 	/**
 	 * 获取数据库中所有表的名称
 	 * 
-	 * @param conn
-	 * @return
+	 * @param conn 数据库链接
+	 * @return  表名列表
 	 */
 	public static List<String> getTableNames(Connection conn) {
 		if (conn == null)
@@ -308,7 +312,7 @@ public class SqlUtilForDB {
 	/**
 	 * 获取数据库中所有表的名称
 	 * 
-	 * @return
+	 * @return 表名称列表
 	 */
 	public static List<String> getTableNames() {
 		return getTableNames(getConnection());
@@ -334,9 +338,9 @@ public class SqlUtilForDB {
 	}
 	/**
 	 * 获取指定表中所有的字段名
-	 * 
-	 * @param tableName
-	 * @return
+	 * @param conn      数据库链接
+	 * @param tableName	数据库表名称
+	 * @return 		    表中的字段名称
 	 */
 	public static List<String> getColumnNames(Connection conn, String tableName) {
 		try {
@@ -352,8 +356,8 @@ public class SqlUtilForDB {
 	}
 	/**
 	 * 获取数据库信息
-	 * @param conn
-	 * @return
+	 * @param conn 数据库连接
+	 * @return 		数据库信息
 	 */
 	public static DatabaseInfo getDataBaseInfo(Connection conn){
 		try {
@@ -371,7 +375,7 @@ public class SqlUtilForDB {
 	/**
 	 * 获取数据库信息
 	 * @param metaData 数据库元数据
-	 * @return
+	 * @return 		数据库信息
 	 */
 	public static DatabaseInfo getDataBaseInfo(DatabaseMetaData metaData){
 		try {
@@ -387,8 +391,8 @@ public class SqlUtilForDB {
 	}
 	/**
 	 * 获取第一张表中的表信息
-	 * @param tableSet
-	 * @return
+	 * @param tableSet   表信息元数据set
+	 * @return 				表信息
 	 */
 	public static TableInfo    getTableInfo(ResultSet tableSet){
 			try {
@@ -408,8 +412,9 @@ public class SqlUtilForDB {
 	}
 	/**
 	 * 获取指定名称的表的表信息
-	 * @param conn
-	 * @return
+	 * @param conn   数据库链接
+	 * @param tableName 表名称
+	 * @return 		表信息
 	 */
 	public static TableInfo    getTableInfo(Connection conn,String tableName){
 		try {
@@ -421,8 +426,9 @@ public class SqlUtilForDB {
 	}
 	/**
 	 * 获取指定名称的表的表信息
-	 * @param metaData
-	 * @return
+	 * @param metaData 	   数据库链接元数据
+	 * @param tableName 表名称
+	 * @return 				表信息
 	 */
 	public static TableInfo    getTableInfo(DatabaseMetaData metaData,String tableName){
 		try {
@@ -434,8 +440,8 @@ public class SqlUtilForDB {
 	}
 	/**
 	 * 获取单个字段信息
-	 * @param columnSet
-	 * @return
+	 * @param columnSet   字段信息set
+	 * @return 	字段信息对象
 	 */
 	public static ColumnInfo 		 getColumnInfo(ResultSet columnSet){
 		try{
@@ -502,8 +508,8 @@ public class SqlUtilForDB {
 	}
 	/**
 	 * 获取所有字段信息
-	 * @param columnSet
-	 * @return
+	 * @param columnSet  字段信息集合
+	 * @return 	字段信息列表 
 	 */
 	public static List<ColumnInfo>   getColumnInfos(ResultSet columnSet){
 		try {
@@ -520,9 +526,9 @@ public class SqlUtilForDB {
 	}
 	/**
 	 * 获取指定表名的所有字段信息
-	 * @param metaData
-	 * @param tableName
-	 * @return
+	 * @param metaData		数据库元数据
+	 * @param tableName 	表名称
+	 * @return 				字段信息列表
 	 */
 	public static List<ColumnInfo>   getColumnInfos(DatabaseMetaData metaData,String tableName){
 		try {
@@ -538,9 +544,9 @@ public class SqlUtilForDB {
 	}
 	/**
 	 * 获取指定表名的所有字段信息
-	 * @param conn
-	 * @param tableName
-	 * @return
+	 * @param conn 			数据库链接
+	 * @param tableName 	表名称
+	 * @return 				指定表中的字段信息对象的列表
 	 */
 	public static List<ColumnInfo> 	 getColumnInfos(Connection conn,String tableName){
 		try {
@@ -556,8 +562,8 @@ public class SqlUtilForDB {
 	}
 	/**
 	 * 获取主键信息
-	 * @param pkSet
-	 * @return
+	 * @param pkSet 		主键信息集合
+	 * @return 				主键信息列表
 	 */
 	public static List<PrimaryKeyInfo> getPrimaryKeyInfos(ResultSet pkSet){
 		try {
@@ -575,11 +581,11 @@ public class SqlUtilForDB {
 			throw new RuntimeException("获取主键信息异常1",e);
 		}
 	}
-	/**
-	 * 获取指定表的主键信息
-	 * @param metaData
-	 * @param tableName
-	 * @return
+	/** 
+	 * 获取指定表的主键信息	 	
+	 * @param metaData 		元数据
+	 * @param tableName 	表名称
+	 * @return 				主键信息列表
 	 */
 	public static List<PrimaryKeyInfo> getPrimaryKeyInfos(DatabaseMetaData metaData,String tableName){
 		try {
@@ -591,9 +597,9 @@ public class SqlUtilForDB {
 	}
 	/**
 	 * 获取指定表的主键信息
-	 * @param conn
-	 * @param tableName
-	 * @return
+	 * @param conn 			数据库链接
+	 * @param tableName 	表名称
+	 * @return 				主键信息列表
 	 */
 	public static List<PrimaryKeyInfo> getPrimaryKeyInfos(Connection conn,String tableName){
 		try {
@@ -604,9 +610,9 @@ public class SqlUtilForDB {
 		}
 	}
 	/**
-	 * 获取外键信息
-	 * @param pkSet
-	 * @return
+	 * 获取外键信息 		
+	 * @param fkSet 		外键信息集合
+	 * @return 			       外键信息列表
 	 */
 	public static List<ForeginKeyInfo> getForeginKeyInfos(ResultSet fkSet){
 		try {
@@ -628,10 +634,10 @@ public class SqlUtilForDB {
 		}
 	}
 	/**
-	 * 获取指定表的外键信息
-	 * @param metaData
-	 * @param tableName
-	 * @return
+	 * 获取指定表的外键信息 
+	 * @param metaData 			外键信息元数据
+	 * @param tableName 		 表名称
+	 * @return 					外键信息列表
 	 */
 	public static List<ForeginKeyInfo> getForeginKeyInfos(DatabaseMetaData metaData,String tableName){
 		try {
@@ -643,9 +649,9 @@ public class SqlUtilForDB {
 	}
 	/**
 	 * 获取指定表的外键信息
-	 * @param conn
-	 * @param tableName
-	 * @return
+	 * @param conn 				数据库链接
+	 * @param tableName 		表名称
+	 * @return 					外键信息列表
 	 */
 	public static List<ForeginKeyInfo> getForeginKeyInfos(Connection conn,String tableName){
 		try {
@@ -657,8 +663,8 @@ public class SqlUtilForDB {
 	}
 	/**
 	 * 获取索引信息 不包含主键
-	 * @param indexSet
-	 * @return
+	 * @param indexSet 					索引信息集合
+	 * @return  						索引信息列表
 	 */
 	public static List<IndexInfo> 	   getIndexInfos(ResultSet indexSet){
 		try {
@@ -684,9 +690,9 @@ public class SqlUtilForDB {
 	}
 	/**
 	 * 获取表中所有索引信息 不包含主键
-	 * @param metaData
-	 * @param tableName
-	 * @return
+	 * @param metaData 					元数据
+	 * @param tableName 				表名称
+	 * @return 							索引信息列表
 	 */
 	public static List<IndexInfo> 	   getIndexInfos(DatabaseMetaData metaData,String tableName){
 		try {
@@ -698,9 +704,9 @@ public class SqlUtilForDB {
 	}
 	/**
 	 * 获取表中所有索引信息 不包含主键
-	 * @param conn
-	 * @param tableName
-	 * @return
+	 * @param conn 				数据库链接
+	 * @param tableName 		表名称
+	 * @return 					索引信息列表
 	 */
 	public static List<IndexInfo> 	   getIndexList(Connection conn,String tableName){
 		try {
@@ -712,10 +718,10 @@ public class SqlUtilForDB {
 	}
 	/**
 	 * 以map形式获取索引信息
-	 * @param conn 		
-	 * @param tableName
+	 * @param conn 		 		数据库链接
+	 * @param tableName 		表名称
 	 * @return
-	 * 		map<indexPosition,List<indexInfo>>
+	 * 		map   索引信息组 , 按索引名称将多个索引设置为一组数据 ,
 	 */
 	public static Map<String , List<IndexInfo>> getIndexInfos(Connection conn,String tableName){
 		try {
@@ -738,9 +744,9 @@ public class SqlUtilForDB {
 	
 	/**
 	 * 获取指定名称的表
-	 * @param conn
-	 * @param tableName
-	 * @return
+	 * @param conn 			数据库链接 
+	 * @param tableName 	表名称
+	 * @return 				表对象
 	 */
 	public static DBTable getTable(Connection conn,String tableName){
 		try{
@@ -765,8 +771,8 @@ public class SqlUtilForDB {
 	/**
 	 * 获取数据库中的所有表及视图
 	 * 
-	 * @param conn
-	 * @return
+	 * @param conn 		数据库链接
+	 * @return 			表对象列表
 	 */
 	public static List<DBTable> getTables(Connection conn) { 
 		try {
@@ -790,12 +796,13 @@ public class SqlUtilForDB {
 	}
 	/**
 	 * 使用Table中的信息来构建javaBean类
-	 * @param table
+	 * @param table 表对象
 	 * @param annotationFlag  
 	 * 			true  会增加hibernate注解
 	 * 			false 不会增加注解
-	 * @prefix 表前缀,配置后生成的javaBean名称会过滤前缀
-	 * @return
+	 * @param prefix 表前缀,配置后生成的javaBean名称会过滤前缀
+	 * @param remind 是否弹窗提醒
+	 * @return 返回生成bean文件的字符串
 	 */
 	public static String makeBeanFile(DBTable table,boolean annotationFlag,String prefix,boolean remind){
 		String fileContent=null;
@@ -926,8 +933,12 @@ public class SqlUtilForDB {
 	}
 	/**
 	 * 构建bean
-	 * @param list
-	 * @param annotationFlag
+	 * @param list 				表对象列表
+	 * @param annotationFlag  
+	 * 			true  会增加hibernate注解
+	 * 			false 不会增加注解
+	 * @param prefix 表前缀,配置后生成的javaBean名称会过滤前缀
+	 * @param remind 是否弹窗提示
 	 */
 	public static void makeBeanFiles(List<DBTable> list,String prefix,boolean annotationFlag,boolean remind){
 		prefix=prefix==null?"":prefix;
@@ -941,10 +952,13 @@ public class SqlUtilForDB {
 	}
 	/**
 	 * 根据表信息生成mybatis映射文件
-	 * @param table
-	 * @return
-	 */
-	
+	 * @param table    	表对象
+	 * @param prefix 	表前缀过滤
+	 * @param descOrAsc 排序方式  无效 未使用的参数
+	 * @param paging 	分页标志 		未实现的功能
+	 * @param remind 	是否弹窗提醒
+	 * @return  mybatis映射文件字符串
+	 */	
 	public static String makeMybatisFile(DBTable table,String prefix,String descOrAsc,boolean paging,boolean remind){
 		try {
 			String fileContent=null;
@@ -1009,7 +1023,7 @@ public class SqlUtilForDB {
 	 * @param table 			表信息
 	 * @param prefix 			表名前缀过滤	
 	 * @param remind 			是否弹窗提示
-	 * @return
+	 * @return 生成的dao文件字符串
 	 */
 	public static String makeMybatisDao(DBTable table,String prefix,boolean remind){
 		
@@ -1047,7 +1061,7 @@ public class SqlUtilForDB {
 			buffer.append("\n\n"); 
 			//----------------------------------insert-----------------------------------------------
 			buffer.append("/**插入"+map.get("className")+"到数据库\n");
-			buffer.append(" * @param"+CheckReplaceUtil.firstCharLowcase(map.get("className"))+" 待插入的对象\n");
+			buffer.append(" * @"+CheckReplaceUtil.firstCharLowcase(map.get("className"))+" 待插入的对象\n");
 			buffer.append(" */\n");
 			buffer.append("public void add"+map.get("className")+"("+map.get("className")+" "+CheckReplaceUtil.firstCharLowcase(map.get("className"))+");\n");
 			buffer.append("\n"); 
@@ -1256,9 +1270,9 @@ public class SqlUtilForDB {
 	}
 	/**
 	 * 传入 DBTable列表 生成 dao层
-	 * @param list
-	 * @param prefix
-	 * @param remind
+	 * @param list  	表对象	
+	 * @param prefix	表名前缀过滤
+	 * @param remind 	是否弹窗提醒
 	 */
 	public static void makeMybatisDaoes(List<DBTable> list,String prefix,boolean remind){
 		try {
@@ -1318,14 +1332,15 @@ public class SqlUtilForDB {
 	
 	/**
 	 * 构建 javaBean ,mapper, dao 
-	 * @param list
-	 * @param prefix
-	 * @param descOrAsc
-	 * @param paging
-	 * @param annotationFlag
+	 * @param list 				表对象列表
+	 * @param prefix 			前缀过滤
+	 * @param descOrAsc 		无效的参数
+	 * @param paging 			分页标志  未实现
+	 * @param annotationFlag 	是否生成hibernate注解的标志
 	 */
 	public static void makeAll(final List<DBTable> list,final String prefix,final String descOrAsc,final boolean paging,final boolean annotationFlag){
 		try {
+
 			String packagePath=SqlUtilForDB.class.getPackage().getName();
 			packagePath=packagePath.substring(0,packagePath.lastIndexOf('.')+1);
 			packagePath+="dao";
@@ -1359,11 +1374,11 @@ public class SqlUtilForDB {
 	}
 	/**
 	 * 构建 javaBean ,mapper, dao 
-	 * @param conn
-	 * @param prefix
-	 * @param descOrAsc
-	 * @param paging
-	 * @param annotationFlag
+	 * @param conn 				数据库链接
+	 * @param prefix 			表名前缀过滤
+	 * @param descOrAsc 		无效的参数
+	 * @param paging 			分页标志  未实现的功能
+	 * @param annotationFlag 	是否生成hibernate注解
 	 */
 	public static void makeAll(Connection conn,String prefix,String descOrAsc,boolean paging,boolean annotationFlag){
 		try {
@@ -1375,10 +1390,10 @@ public class SqlUtilForDB {
 	}
 	/**
 	 * 使用swing文件选择框来生成
-	 * @param prefix
-	 * @param descOrAsc
-	 * @param paging
-	 * @param annotationFlag
+	 * @param prefix 			表前缀过滤
+	 * @param descOrAsc 		无效的参数
+	 * @param paging 			分页功能  未实现
+	 * @param annotationFlag 	是否生成hibernate注解
 	 */
 	public static void makeAll(String prefix,String descOrAsc,boolean paging,boolean annotationFlag){
 		try {
@@ -1388,7 +1403,7 @@ public class SqlUtilForDB {
 			properties.load(new FileInputStream(jdbc));
 			makeAll(getConnection(properties), prefix, descOrAsc, paging, annotationFlag);
 		} catch (Exception e) {
-			// TODO: handle exception
+			throw new RuntimeException("生成文件异常",e);
 		}
 	}
 	
@@ -1426,7 +1441,7 @@ public class SqlUtilForDB {
 	 * 使用table中的信息创建mybatis insert部分
 	 * @param table 	数据库表
 	 * @param prefix 	表名前缀,过滤前缀后需要与实体类名称相同
-	 * @return
+	 * @return 生成的insert语句
 	 */
 	public static String createInsert(DBTable table,String prefix){
 		try {
@@ -1469,7 +1484,12 @@ public class SqlUtilForDB {
 			throw new RuntimeException("构建mybatis mapper 文件 insert语句异常",e);
 		}
 	}
-	
+	/**
+	 * 创建delete语句
+	 * @param table 		表对象
+	 * @param prefix 		表前缀过滤
+	 * @return 				生成的字符串
+	 */
 	public static String createDelete(DBTable table,String prefix){
 		try {
 			prefix=prefix==null?"":prefix;
@@ -1552,7 +1572,12 @@ public class SqlUtilForDB {
 			throw new RuntimeException("构建mybatis mapper 文件 delete语句异常",e);
 		}
 	}
-	
+	/**
+	 * 创建更新语句
+	 * @param table 		表对象
+	 * @param prefix 		表名前缀过滤
+	 * @return 				生成的更新语句字符串
+	 */
 	public static String createUpdate(DBTable table,String prefix){
 		try {
 			prefix=prefix==null?"":prefix;
@@ -1658,7 +1683,14 @@ public class SqlUtilForDB {
 			throw new RuntimeException("构建mybatis mapper 文件 update语句异常",e);
 		}
 	}
-	
+	/**
+	 * 创建select语句
+	 * @param table 		表对象
+	 * @param prefix 		表名前缀过滤
+	 * @param descOrAsc 	无效的参数
+	 * @param paging 		分页功能  未实现
+	 * @return 				生成的select语句
+	 */
 	public static String createSelect(DBTable table,String prefix,String descOrAsc,boolean paging){
 		try {
 			prefix=prefix==null?"":prefix;
@@ -1770,7 +1802,12 @@ public class SqlUtilForDB {
 			throw new RuntimeException("构建mybatis mapper 文件 select语句异常",e);
 		}
 	}
-	
+	/**
+	 * 创建 reultmap
+	 * @param table 		表对象
+	 * @param prefix 		表名前缀过滤
+	 * @return  			生成的reultmap语句
+	 */
 	public static String createResultMap(DBTable table,String prefix){
 		try {
 			prefix=prefix==null?"":prefix;
@@ -1797,6 +1834,8 @@ public class SqlUtilForDB {
 	 * @param t 		要插入到数据库的对象
 	 * @param underline 下划线转换开关
 	 * @param prefix 	表名前缀
+	 * @param tableName 表名
+	 * @param <T>       t的类对象
 	 */
 	public static <T> void add(Connection conn ,T t,boolean underline,String prefix,String tableName){
 		try {
@@ -1844,7 +1883,12 @@ public class SqlUtilForDB {
 			throw new AppException("向数据库添加数据异常",e);
 		}
 	}
-	
+	/**
+	 * 通用的delete方法 | 未实现
+	 * @param conn 数据库链接
+	 * @param t 	被删除的对象
+	 * @param <T>   t的类对象
+	 */
 	public static <T> void delete(Connection conn ,T t){
 		try {
 			
@@ -1852,7 +1896,12 @@ public class SqlUtilForDB {
 			throw new AppException("向数据库添加数据异常",e);
 		}
 	}
-	
+	/**
+	 * 通用的update 方法 | 未实现
+	 * @param conn 数据库链接
+	 * @param t 	被更新的对象
+	 * @param <T>   t的类对象
+	 */
 	public static <T> void update(Connection conn ,T t){
 		try {
 			
@@ -1860,7 +1909,12 @@ public class SqlUtilForDB {
 			throw new AppException("向数据库添加数据异常",e);
 		}
 	}
-	
+	/**
+	 * 通用的 select 方法 |未实现
+	 * @param conn 数据库链接
+	 * @param t 	选中的条件
+	 * @param <T>   t的类对象
+	 */
 	public static <T> void select(Connection conn ,T t){
 		try {
 			

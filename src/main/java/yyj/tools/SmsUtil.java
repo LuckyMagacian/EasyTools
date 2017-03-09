@@ -10,8 +10,8 @@ import java.util.Map;
 public class SmsUtil {
 	/**
 	 * 发送短信
-	 * @param sms
-	 * @return
+	 * @param sms 短信对象
+	 * @return 短信发送结果字符串
 	 */
 	public static String postSms(TempSms sms){
 		try{
@@ -37,8 +37,8 @@ public class SmsUtil {
 	}
 	/**
 	 * 以Map形式获取短信内容
-	 * @param sms
-	 * @return
+	 * @param sms 短信对象
+	 * @return 短信属性-值映射
 	 */
 	public static Map<String, String> getKeyValue(TempSms sms){
 		try {
@@ -57,8 +57,8 @@ public class SmsUtil {
 	}
 	/**
 	 * 对短信进行签名
-	 * @param sms
-	 * @return
+	 * @param sms 短信对象
+	 * @return 签名字符串
 	 */
 	public static String signSms(TempSms sms){
 		Map<String, String> map=getKeyValue(sms);

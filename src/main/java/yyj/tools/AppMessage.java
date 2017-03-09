@@ -8,6 +8,9 @@ public class AppMessage {
 	private String errCode;		/**错误代码 0000->成功*/
 	private String errMsg;		/**错误信息*/
 	private Object content;		/**回复内容*/
+	/**
+	 * @return 错误代码 0000为成功
+	 */
 	public String getErrCode() {
 		return errCode;
 	}

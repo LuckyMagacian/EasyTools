@@ -28,7 +28,7 @@ public class TimeUtil {
 	 * 根据给定的日期格式,格式化日期时间
 	 * @param sdf	格式对象
 	 * @param date	日期时间
-	 * @return
+	 * @return 日期字符串
 	 */
 	public static String format(SimpleDateFormat sdf,Date date){
 		return sdf.format(date);
@@ -37,7 +37,7 @@ public class TimeUtil {
 	 * 根据给定的日期格式表达式,格式化日期时间
 	 * @param regex	格式表达式
 	 * @param date	日期时间
-	 * @return
+	 * @return 日期时间字符串
 	 */
 	public static String format(String regex,Date date){
 		return new SimpleDateFormat(regex).format(date);
@@ -46,7 +46,7 @@ public class TimeUtil {
 	 * 根据给定的日期格式,将字符串转日期时间
 	 * @param sdf	格式化对象
 	 * @param date	字符串形式日期时间
-	 * @return
+	 * @return 格式化日期时间对象
 	 */
 	public static Date parse(SimpleDateFormat sdf,String date){
 		try {
@@ -59,7 +59,7 @@ public class TimeUtil {
 	 * 根据给定的日期格式表达式,将字符串转日期时间
 	 * @param regex	格式表达式
 	 * @param date	字符串形式日期时间
-	 * @return
+	 * @return 日期时间对象
 	 */
 	public static Date parse(String regex,String date){
 		try {
@@ -70,8 +70,8 @@ public class TimeUtil {
 	}
 	/**
 	 * 使用默认日期格式,生成日期字符串
-	 * @param date	日期
-	 * @return
+	 * @param date	日期对象
+	 * @return 日期字符串
 	 */
 	public static String formatDate(Date date){
 		return format(defDateFormat, date);
@@ -79,23 +79,23 @@ public class TimeUtil {
 	/**
 	 * 使用默认时间格式,生成时间字符串
 	 * @param time	时间
-	 * @return
+	 * @return 时间字符串
 	 */
 	public static String formatTime(Date time){
 		return format(defTimeFormat, time);
 	}
 	/**
 	 * 使用默认格式格式化日期时间为字符串
-	 * @param date
-	 * @return
+	 * @param date 日期时间对象
+	 * @return 日期时间字符串
 	 */
 	public static String formatDateTime(Date date){
 		return format(defFormat, date);
 	}
 	/**
 	 * 使用默认时间格式,将字符串形式日期转为日期
-	 * @param time	字符串形式日期
-	 * @return
+	 * @param date	字符串形式日期
+	 * @return 日期对象
 	 */
 	public static Date parseDate(String date){
 		return parse(defDateFormat, date);
@@ -103,45 +103,45 @@ public class TimeUtil {
 	/**
 	 * 使用默认时间格式,将字符串形式时间转为时间
 	 * @param time	字符串形式时间
-	 * @return
+	 * @return 时间对象
 	 */
 	public static Date parseTime(String time){
 		return parse(defTimeFormat, time);
 	}
 	/**
 	 * 使用默认格式格式化字符串为日期时间
-	 * @param dateTime
-	 * @return
+	 * @param dateTime 日期时间字符串
+	 * @return 日期时间对象
 	 */
 	public static Date parseDateTime(String dateTime){
 		return parse(defFormat, dateTime);
 	}
 	/**
 	 * 获取当前日期(字符串)
-	 * @return
+	 * @return 日期字符串
 	 */
 	public static String getDate(){
 		return format(defDateFormat,new Date());
 	}
 	/**
 	 * 获取当前时间(字符串)
-	 * @return
+	 * @return 时间字符串
 	 */
 	public static String getTime(){
 		return format(defTimeFormat, new Date());
 	}
 	/**
 	 * 获取当前时间日期
-	 * @return
+	 * @return 日期字符串
 	 */
 	public static String getDateTime(){
 		return format(defFormat, new Date());
 	}
 	/**
 	 * 日期 时间 拼成 日期+时间
-	 * @param date
-	 * @param time
-	 * @return
+	 * @param date 日期
+	 * @param time 时间
+	 * @return 日期时间对象
 	 */
 	@SuppressWarnings("deprecation")
 	public static Date  getDateTime(Date date,Date time){
@@ -149,48 +149,48 @@ public class TimeUtil {
 	}
 	/**
 	 * 日期 时间 字符串 拼成 日期+时间字符串
-	 * @param date
-	 * @param time
-	 * @return
+	 * @param date 日期
+	 * @param time 时间
+	 * @return 日期时间字符串
 	 */
 	public static String getDateTimeStr(String date,String time){
 		return date+time;
 	}
 	/**
 	 * 日期 时间 字符串 拼成 日期+时间
-	 * @param date
-	 * @param time
-	 * @return
+	 * @param date 日期字符串
+	 * @param time 时间字符串
+  	 * @return  日期对象
 	 */
 	public static Date getDateTime(String date,String time){
 		return parse(defFormat, getDateTimeStr(date, time));
 	}
 	/**
 	 * 日期 时间  拼成 日期+时间字符串
-	 * @param date
-	 * @param time
-	 * @return
+	 * @param date 日期
+	 * @param time 时间
+	 * @return 日期时间字符串
 	 */
 	public static String getDateTimeStr(Date date,Date time){
 		return format(defFormat, getDateTime(date, time));
 	}
 	/**
 	 * 设置默认日期时间格式
-	 * @param format
+	 * @param format 日期时间格式
 	 */
 	public static void setDefFormat(String format){
 		defFormat=new SimpleDateFormat(format);
 	}
 	/**
 	 * 设置默认日期格式
-	 * @param format
+	 * @param format 日期格式
 	 */
 	public static void setDefDateFormat(String format){
 		defDateFormat=new SimpleDateFormat(format);
 	}
 	/**
 	 * 设置默认时间格式
-	 * @param format
+	 * @param format 时间格式
 	 */
 	public static void setDefTimeFormat(String format){
 		defTimeFormat=new SimpleDateFormat(format);
