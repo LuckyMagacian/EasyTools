@@ -1,4 +1,4 @@
-package yyj.tools;
+package com.lanxi.tools;
 
 import java.lang.reflect.Field;
 import java.util.Collection;
@@ -9,7 +9,11 @@ import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.dom.DOMElement;
-
+/**
+ * xml与bean转换工具类,不建议使用 
+ * @author yangyuanjian
+ *
+ */
 @Deprecated
 public class XmlUtil {
 

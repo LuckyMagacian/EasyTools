@@ -1,4 +1,4 @@
-package yyj.tools;
+package com.lanxi.tools;
 
 import java.io.File;
 
@@ -10,7 +10,11 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 
-
+/**
+ * Excel文件工具类
+ * @author yangyuanjian
+ *
+ */
 public class ExcelUtil {
 	/** 工作本 */
 	private static HSSFWorkbook workbook;

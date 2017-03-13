@@ -1,10 +1,15 @@
-package yyj.tools;
+package com.lanxi.tools;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.apache.log4j.Logger;
-
+/**
+ * 自定义应用异常  , 继承runtimeException, 增加日志记录功能
+ * 使用改异常将导致代码与该jar包耦合度增加
+ * @author yangyuanjian
+ *
+ */
 @SuppressWarnings("serial")
 public class AppException extends RuntimeException{
 	/**异常等级-系统错误*/

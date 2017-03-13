@@ -1,4 +1,4 @@
-package yyj.tools;
+package com.lanxi.tools;
 
 import java.lang.reflect.Field;
 import java.security.Key;
@@ -29,7 +29,11 @@ import javax.crypto.spec.DESKeySpec;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
 
-
+/**
+ * 签名与加密工具类
+ * @author yangyuanjian
+ *
+ */
 public class SignUtil {
 	//TODO --------------------------------baseStart-------------------------------------------
 	/**

@@ -1,4 +1,4 @@
-package yyj.tools;
+package com.lanxi.tools;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -9,7 +9,7 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.dom.DOMElement;
 
-import yyj.tools.EleServerUtil.BuyResMsg.Sku;
+import com.lanxi.tools.EleServerUtil.BuyResMsg.Sku;
 
 /**
  * 电子券通用工具类

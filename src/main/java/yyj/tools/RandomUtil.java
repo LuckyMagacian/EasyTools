@@ -1,8 +1,12 @@
-package yyj.tools;
+package com.lanxi.tools;
 
 import java.util.Random;
 import java.util.UUID;
-
+/**
+ * 随机数字|字符串 生成工具类
+ * @author yangyuanjian
+ *
+ */
 public class RandomUtil {
 	private static  Random random = new Random();
 	/**

@@ -1,4 +1,4 @@
-package yyj.tools;
+package com.lanxi.tools;
 /**
  * 应用响应信息类
  * 用于与前端交互

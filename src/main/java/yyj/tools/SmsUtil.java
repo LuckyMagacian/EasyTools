@@ -1,4 +1,4 @@
-package yyj.tools;
+package com.lanxi.tools;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -6,7 +6,11 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * 短信通道 短信类
+ * @author yangyuanjian
+ *
+ */
 public class SmsUtil {
 	/**
 	 * 发送短信

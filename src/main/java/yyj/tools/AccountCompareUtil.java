@@ -1,9 +1,9 @@
-package yyj.tools;
+package com.lanxi.tools;
 
-import static yyj.tools.FileUtil.loadFileInClassPath;
-import static yyj.tools.FileUtil.readFileByLineStartAndStop;
-import static yyj.tools.SqlUtilForDB.getConnection;
-import static yyj.tools.SqlUtilForDB.isExist;
+import static com.lanxi.tools.FileUtil.loadFileInClassPath;
+import static com.lanxi.tools.FileUtil.readFileByLineStartAndStop;
+import static com.lanxi.tools.SqlUtilForDB.getConnection;
+import static com.lanxi.tools.SqlUtilForDB.isExist;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,6 +20,11 @@ import java.util.Map.Entry;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
+/**
+ * 对账工具类
+ * @author yangyuanjian
+ *
+ */
 public class AccountCompareUtil {
 	/**配置日志记录*/
 	static{

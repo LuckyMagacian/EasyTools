@@ -1,12 +1,15 @@
-package yyj.tools;
+package com.lanxi.tools;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Properties;
-
-
+/**
+ * 配置管理工具类
+ * @author yangyuanjian
+ *
+ */
 public class ConfigUtil {
 	/**该属性会包含所有加载过的配置值,若存在重名的情况将会发生覆盖*/
 	private static Properties properties;

@@ -1,4 +1,4 @@
-package yyj.tools;
+package com.lanxi.tools;
 
 
 import org.apache.http.HttpResponse;
@@ -20,7 +20,11 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * http访问工具类
+ * @author yangyuanjian
+ *
+ */
 public class HttpUtil {
 	/** 默认编码字符集 */
 	public static final String defEnCharset = "utf-8";

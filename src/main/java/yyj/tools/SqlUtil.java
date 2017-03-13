@@ -1,4 +1,4 @@
-package yyj.tools;
+package com.lanxi.tools;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -8,7 +8,11 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * mybatis文件生成工具类  已弃用,用SqlUtilForDB替换
+ * @author yangyuanjian
+ *
+ */
 @Deprecated()
 public class SqlUtil {
 	/**

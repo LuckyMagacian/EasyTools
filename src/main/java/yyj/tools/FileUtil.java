@@ -1,4 +1,4 @@
-package yyj.tools;
+package com.lanxi.tools;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -18,6 +18,7 @@ import javax.swing.filechooser.FileFilter;
 
 
 /**
+ * 文件操作工具类
  * Created by 1 on 2016/11/9.
  */
 public class FileUtil {
@@ -331,7 +332,7 @@ public class FileUtil {
 		JFileChooser chooser=new JFileChooser();
 		if(currentPath!=null)
 			chooser.setCurrentDirectory(currentPath);
-		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 		if(fileType!=null&&!fileType.isEmpty())
 			chooser.setFileFilter(new FileFilter() {
 				@Override
@@ -440,9 +441,55 @@ public class FileUtil {
 				if(count>=start&&count<=end)
 					list.add(temp);
 			}
+			reader.close();
 			return list.isEmpty()?null:list;
 		} catch (Exception e) {
 			throw new RuntimeException("读取指定行内容异常",e);
+		}
+	}
+	/**
+	 * 传入一个文件若文件不存在则创建文件的路径中的文件夹以及该文件
+	 * @param file 需要创建的文件
+	 * @return 创建完成的文件
+	 */
+	public static File makeDirAndFile(File file){
+		try {
+			if(file.exists())
+				return file;
+			String path=file.getAbsolutePath();
+			makeDirAndFile(path);
+			return file.exists()?file:null;
+		} catch (Exception e) {
+			throw new RuntimeException("构建路径及文件异常1",e);
+		}
+	}
+	/**
+	 * 传入一个路径 构建路径上的目录 若包含.则将作为文件处理,将创建文件
+	 * @param path 文件路径
+	 */
+	public static void makeDirAndFile(String path){
+		try {
+			if(path==null||path.isEmpty())
+				throw new RuntimeException("path can't be null or empty");
+			String[] paths=path.split("\\\\");
+			StringBuffer buffer=new StringBuffer();
+			for(String each:paths){
+				if(buffer.toString().contains(".")&&each.contains("."))
+					throw new RuntimeException(buffer+"is file not dir so system  can't create new file ");
+				if(buffer.length()==0)
+					buffer.append(each);
+				else
+					buffer.append("\\"+each);
+				File temp=new File(buffer.toString());
+				if(!temp.exists()){
+					if(each.contains("."))
+						temp.createNewFile();
+					else
+						temp.mkdir();
+				}
+			}
+		} catch (Exception e) {
+			throw new RuntimeException("构建路径及文件异常2",e);
 		}
 	}
 }

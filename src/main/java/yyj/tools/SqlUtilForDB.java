@@ -1,4 +1,4 @@
-package yyj.tools;
+package com.lanxi.tools;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,7 +32,11 @@ import com.mysql.jdbc.Blob;
 import com.mysql.jdbc.Clob;
 
 
-
+/**
+ * 数据库反向生成工具类
+ * @author yangyuanjian
+ *
+ */
 public class SqlUtilForDB {
 	/** jdbc配置文件 */
 	private static Properties properties = new Properties();
@@ -40,7 +44,7 @@ public class SqlUtilForDB {
 	private static String path = "properties/jdbc.properties";
 	/** sql数据类型与java数据类型映射 */
 	private static HashMap<String, Class<?>>  ddtTojdt;
-	
+	private static String packageName=null;
 //	private static HashMap<Class<?>, String> jdtToddt;
 	/** 加载配置文件 */
 	static {
@@ -919,6 +923,7 @@ public class SqlUtilForDB {
 			for(String each:strs)
 				path+=each+"/";
 			File file=new File(path);
+			FileUtil.makeDirAndFile(file);
 			if(!file.exists()||!file.isDirectory())
 				file.mkdir();
 			path+=className+".java";
@@ -991,6 +996,7 @@ public class SqlUtilForDB {
 			path+=map.get("className").replace("Bean","");
 			path+="Mapper.xml";
 			file=new File(path);
+			FileUtil.makeDirAndFile(file);
 			fileContent=FileUtil.xmlFormat(fileContent);
 			FileUtil.writeStrToFile(fileContent, file, "utf-8");
 			if(remind)
@@ -1256,6 +1262,7 @@ public class SqlUtilForDB {
 			for(String each:strs)
 				path+=each+"/";
 			File file=new File(path);
+			FileUtil.makeDirAndFile(file);
 			if(!file.exists()||!file.isDirectory())
 				file.mkdir();
 			path+=className+"Dao.java";
@@ -1298,9 +1305,20 @@ public class SqlUtilForDB {
 	 */
 	public static void makeOne(final DBTable table,final String prefix,final String descOrAsc,final boolean paging,final boolean annotationFlag){
 		try {
+			String path = SqlUtilForDB.class.getClassLoader().getResource("").toURI().getPath();
+			
+			if (path.contains("target"))
+				path = path.substring(0, path.indexOf("target"));
+			else
+				path = path.substring(0, path.indexOf("WEB-INF"));
+			path=path.substring(0,path.length()-1);
+			path=path.substring(path.lastIndexOf("/"));
+			path=path.substring(1).toLowerCase();
+			
 			String packagePath=SqlUtilForDB.class.getPackage().getName();
 			packagePath=packagePath.substring(0,packagePath.lastIndexOf('.')+1);
-			packagePath+="dao";
+			//TODO 修正生成文件路径为com.lanxi.项目名小写.entity
+			packagePath+=path+ ".dao";
 			Thread thread1=new Thread(new Runnable() {
 				@Override
 				public void run() {
@@ -1341,9 +1359,21 @@ public class SqlUtilForDB {
 	public static void makeAll(final List<DBTable> list,final String prefix,final String descOrAsc,final boolean paging,final boolean annotationFlag){
 		try {
 
+			String path = SqlUtilForDB.class.getClassLoader().getResource("").toURI().getPath();
+			
+			if (path.contains("target"))
+				path = path.substring(0, path.indexOf("target"));
+			else
+				path = path.substring(0, path.indexOf("WEB-INF"));
+			path=path.substring(0,path.length()-1);
+			path=path.substring(path.lastIndexOf("/"));
+			path=path.substring(1).toLowerCase();
+			
 			String packagePath=SqlUtilForDB.class.getPackage().getName();
 			packagePath=packagePath.substring(0,packagePath.lastIndexOf('.')+1);
-			packagePath+="dao";
+			//TODO 修正生成文件路径为com.lanxi.项目名小写.entity
+			packagePath+=path+ ".dao";
+			packagePath=packageName==null||packageName.isEmpty()?packagePath:packageName;
 			Thread thread1=new Thread(new Runnable() {
 				@Override
 				public void run() {
@@ -1414,28 +1444,45 @@ public class SqlUtilForDB {
 	 * @return
 	 */
 	private static Map<String , String> getSomeElement(DBTable table,String prefix){
-		prefix=prefix==null?"":prefix;
-		Map<String,String> map=new HashMap<>(); 
-		String packagePath=SqlUtilForDB.class.getPackage().getName();
-		packagePath=packagePath.substring(0,packagePath.lastIndexOf('.')+1);
-		packagePath+="entity";
-		map.put("package",packagePath);
-		String tableName=table.getTableInfo().getTableName();
-		map.put("table",tableName);
-		
-		String className=tableName;
-		if(prefix!=null&&!prefix.isEmpty())
-			className=className.startsWith(prefix)?className.replaceFirst(prefix, ""):className;
-		className=CheckReplaceUtil.firstCharUpcase(className);
-		className=CheckReplaceUtil.underlineLowcaserToUpcase(className);
-		
-		String simpleClassName=className;
-		map.put("className", simpleClassName);
-		
-		
-		className=packagePath+"."+className;
-		map.put("class", className);
-		return map;
+		try{
+			prefix=prefix==null?"":prefix;
+			Map<String,String> map=new HashMap<>(); 
+			
+			String path = SqlUtilForDB.class.getClassLoader().getResource("").toURI().getPath();
+			
+			if (path.contains("target"))
+				path = path.substring(0, path.indexOf("target"));
+			else
+				path = path.substring(0, path.indexOf("WEB-INF"));
+			path=path.substring(0,path.length()-1);
+			path=path.substring(path.lastIndexOf("/"));
+			path=path.substring(1).toLowerCase();
+			
+			String packagePath=SqlUtilForDB.class.getPackage().getName();
+			packagePath=packagePath.substring(0,packagePath.lastIndexOf('.')+1);
+			//TODO 修正生成文件路径为com.lanxi.项目名小写.entity
+			packagePath+=path+ ".entity";
+
+			map.put("package",packagePath);
+			String tableName=table.getTableInfo().getTableName();
+			map.put("table",tableName);
+			
+			String className=tableName;
+			if(prefix!=null&&!prefix.isEmpty())
+				className=className.startsWith(prefix)?className.replaceFirst(prefix, ""):className;
+			className=CheckReplaceUtil.firstCharUpcase(className);
+			className=CheckReplaceUtil.underlineLowcaserToUpcase(className);
+			
+			String simpleClassName=className;
+			map.put("className", simpleClassName);
+			
+			
+			className=packagePath+"."+className;
+			map.put("class", className);
+			return map;
+		}catch (Exception e) {
+			throw new RuntimeException("构建元素异常",e);
+		}
 	}
 	/**
 	 * 使用table中的信息创建mybatis insert部分
@@ -1454,7 +1501,7 @@ public class SqlUtilForDB {
 			for(ColumnInfo each:columnInfos)
 				temp.append(each.getColumnName()+",");
 			temp.replace(temp.length()-1,temp.length(),"");
-			temp.append(")\nvalues\n(");
+			temp.append(")\nvalues\n(\n");
 			int index=columnInfos.size();
 			for(ColumnInfo each:columnInfos){
 				String name=each.getColumnName();

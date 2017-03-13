@@ -1,5 +1,9 @@
-package yyj.tools;
-
+package com.lanxi.tools;
+/**
+ * 校验与替换工具类
+ * @author yangyuanjian
+ *
+ */
 public class CheckReplaceUtil {
 	/**
 	 * 传入一个字符串,若该字符串为null则返回空,否则返回去除空字符的结果

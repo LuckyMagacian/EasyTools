@@ -1,4 +1,4 @@
-package yyj.tools;
+package com.lanxi.tools;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

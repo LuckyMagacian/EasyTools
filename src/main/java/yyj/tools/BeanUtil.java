@@ -1,4 +1,4 @@
-package yyj.tools;
+package com.lanxi.tools;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -9,7 +9,11 @@ import java.util.List;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSONObject;
-
+/**
+ * 类|对象  工具类
+ * @author yangyuanjian
+ *
+ */
 public class BeanUtil {
 	/**
 	 * get/set 封装过的 get|set方法对, 未使用
