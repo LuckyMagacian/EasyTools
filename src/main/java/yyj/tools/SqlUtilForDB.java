@@ -982,9 +982,7 @@ public class SqlUtilForDB {
 			temp.append("</mapper>");
 			fileContent=temp.toString();
 			//--------------------------------------------------------------------------------------
-			String packagePath=SqlUtilForDB.class.getPackage().getName();
-			packagePath=packagePath.substring(0,packagePath.lastIndexOf('.')+1);
-			packagePath+="dao";
+			String packagePath=map.get("package").replaceFirst("entity", "dao");
 			String path=SqlUtilForDB.class.getClassLoader().getResource("").toURI().getPath();
 			path=path.substring(0,path.indexOf("target"))+"src/main/java/";
 			String[] strs=packagePath.split("\\.");
@@ -1038,11 +1036,9 @@ public class SqlUtilForDB {
 			prefix=prefix==null?"":prefix;
 			StringBuffer buffer=new StringBuffer();
 			//-------------------------------package---------------------------------
-			String packagePath=SqlUtilForDB.class.getPackage().getName();
-			packagePath=packagePath.substring(0,packagePath.lastIndexOf('.')+1);
-			packagePath+="dao";
-			buffer.append("package "+packagePath+";\n\n");
 			Map<String , String> map=getSomeElement(table, prefix); 
+			String packagePath=map.get("package").replaceFirst("entity", "dao");
+			buffer.append("package "+packagePath+";\n\n");
 			String className=map.get("className");
 			//--------------------------------import---------------------------------
 			List<ColumnInfo> columnInfos=table.getColumnInfos();
@@ -1435,6 +1431,19 @@ public class SqlUtilForDB {
 		} catch (Exception e) {
 			throw new RuntimeException("生成文件异常",e);
 		}
+	}
+	/**
+	 * 重载的makeall 方法 仅接收表前缀过滤参数,其他参数为 null false false
+	 * @param prefix 表名前缀过滤
+	 */
+	public static void makeAll(String prefix){
+		makeAll(prefix,null,false,false);
+	}
+	/**
+	 * 重载的makeall 方法 默认参数为 "" null false false
+	 */
+	public static void makeAll(){
+		makeAll("");
 	}
 	
 	/**
