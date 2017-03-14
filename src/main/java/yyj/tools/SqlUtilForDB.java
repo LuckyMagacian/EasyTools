@@ -912,7 +912,7 @@ public class SqlUtilForDB {
 			}
 			buffer.replace(buffer.length()-2, buffer.length(), "]\"");
 			buffer.append(";\n");
-			buffer.append("\n}\n");
+			buffer.append("}\n");
 			buffer.append("}\n");
 			//--------------------------------------java file format-----------------------------
 			fileContent=FileUtil.javaFormat(buffer.toString());
@@ -1097,6 +1097,7 @@ public class SqlUtilForDB {
 					buffer.append("public void delete"+map.get("className")+"ByPk"+name+"("+paramType+" "+CheckReplaceUtil.firstCharLowcase(name)+");\n");
 				}
 			}
+			
 			if(indexInfos!=null&&!indexInfos.isEmpty()){
 				for(Entry<String, List<IndexInfo>> each:indexInfos.entrySet()){					
 					List<IndexInfo> value=each.getValue();
@@ -1128,8 +1129,7 @@ public class SqlUtilForDB {
 			buffer.append("\n"); 
 			//----------------------------------update-----------------------------------------------
 			buffer.append("public void update"+map.get("className")+"ByClass(@Param(value=\""+CheckReplaceUtil.firstCharLowcase(map.get("className"))+"\")"+map.get("className")+" "+CheckReplaceUtil.firstCharLowcase(map.get("className"))+",@Param(value=\"param\")"+map.get("className")+" param);\n");
-			
-			
+	
 			if(pkInfos!=null&&!pkInfos.isEmpty()){
 				buffer.append("public void update"+map.get("className")+"ByPk(@Param(value=\""+CheckReplaceUtil.firstCharLowcase(map.get("className"))+"\")"+map.get("className")+" "+CheckReplaceUtil.firstCharLowcase(map.get("className")+","));
 				for(PrimaryKeyInfo each:pkInfos){
@@ -1157,34 +1157,34 @@ public class SqlUtilForDB {
 					paramType=paramType.substring(paramType.lastIndexOf(".")+1);
 					buffer.append("public void update"+map.get("className")+"ByPk"+name+"(@Param(value=\""+CheckReplaceUtil.firstCharLowcase(map.get("className"))+"\")"+map.get("className")+" "+CheckReplaceUtil.firstCharLowcase(map.get("className"))+",@Param(value=\""+CheckReplaceUtil.firstCharLowcase(name)+"\")"+paramType+" "+CheckReplaceUtil.firstCharLowcase(name)+");\n");
 				}
-
-				if(indexInfos!=null&&!indexInfos.isEmpty()){
-					for(Entry<String, List<IndexInfo>> each:indexInfos.entrySet()){
-						List<IndexInfo> value=each.getValue();
-						if(value.get(0).getIsUnique().equals("true"))
-							buffer.append("public void update"+map.get("className")+"ByUniqueIndexOn");
-						else
-							buffer.append("public void update"+map.get("className")+"ByIndexOn");
-						for(IndexInfo one:value){
-							String name=one.getColumnName();
-							name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
-							buffer.append(CheckReplaceUtil.firstCharUpcase(name)+"And");
-						}
-						buffer.replace(buffer.length() - 3, buffer.length(), "");
-						buffer.append("(@Param(value=\""+CheckReplaceUtil.firstCharLowcase(map.get("className"))+"\")"+map.get("className")+" "+CheckReplaceUtil.firstCharLowcase(map.get("className"))+",");
-						for(IndexInfo one:value){
-							String name=one.getColumnName();
-							name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
-							name=CheckReplaceUtil.firstCharUpcase(name);
-							paramType=columnMap.get(one.getColumnName()).getJavaType();
-							paramType=paramType.startsWith("[L")?paramType.substring(2):paramType;
-							paramType=paramType.endsWith(";")?paramType.substring(0, paramType.length()-1)+"[]":paramType;
-							paramType=paramType.substring(paramType.lastIndexOf(".")+1);
-							buffer.append("@Param(value=\""+CheckReplaceUtil.firstCharLowcase(name)+"\")"+paramType+" "+CheckReplaceUtil.firstCharLowcase(name)+",");
-						}
-						buffer.replace(buffer.length()-1,buffer.length(),"");
-						buffer.append(");\n");
+			}
+				
+			if(indexInfos!=null&&!indexInfos.isEmpty()){
+				for(Entry<String, List<IndexInfo>> each:indexInfos.entrySet()){
+					List<IndexInfo> value=each.getValue();
+					if(value.get(0).getIsUnique().equals("true"))
+						buffer.append("public void update"+map.get("className")+"ByUniqueIndexOn");
+					else
+						buffer.append("public void update"+map.get("className")+"ByIndexOn");
+					for(IndexInfo one:value){
+						String name=one.getColumnName();
+						name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+						buffer.append(CheckReplaceUtil.firstCharUpcase(name)+"And");
 					}
+					buffer.replace(buffer.length() - 3, buffer.length(), "");
+					buffer.append("(@Param(value=\""+CheckReplaceUtil.firstCharLowcase(map.get("className"))+"\")"+map.get("className")+" "+CheckReplaceUtil.firstCharLowcase(map.get("className"))+",");
+					for(IndexInfo one:value){
+						String name=one.getColumnName();
+						name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+						name=CheckReplaceUtil.firstCharUpcase(name);
+						paramType=columnMap.get(one.getColumnName()).getJavaType();
+						paramType=paramType.startsWith("[L")?paramType.substring(2):paramType;
+						paramType=paramType.endsWith(";")?paramType.substring(0, paramType.length()-1)+"[]":paramType;
+						paramType=paramType.substring(paramType.lastIndexOf(".")+1);
+						buffer.append("@Param(value=\""+CheckReplaceUtil.firstCharLowcase(name)+"\")"+paramType+" "+CheckReplaceUtil.firstCharLowcase(name)+",");
+					}
+					buffer.replace(buffer.length()-1,buffer.length(),"");
+					buffer.append(");\n");
 				}
 			}
 			buffer.append("\n"); 
