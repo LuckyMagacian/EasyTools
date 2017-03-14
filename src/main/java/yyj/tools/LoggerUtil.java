@@ -42,19 +42,23 @@ public class LoggerUtil {
 				temp.createNewFile();
 
 			Properties properties = new Properties();
-			properties.setProperty("log4j.rootLogger", "INFO,stdout,logfile");
-			properties.setProperty("INFO,stdout,logfile", "org.apache.log4j.ConsoleAppender");
+			properties.setProperty("log4j.rootLogger", "stdout,logfile");
+
+			properties.setProperty("log4j.appender.stdout", "org.apache.log4j.ConsoleAppender");
 			properties.setProperty("log4j.appender.stdout.layout", "org.apache.log4j.PatternLayout");
 			properties.setProperty("log4j.appender.stdout.layout.ConversionPattern", "%d %p [%c] - <%m>%n");
+			
 			properties.setProperty("log4j.appender.logfile", "org.apache.log4j.DailyRollingFileAppender");
-			properties.setProperty("log4j.appender.logfile.Encoding", "UTF-8");
 			properties.setProperty("log4j.appender.logfile.File", path);
-			properties.setProperty("log4j.appender.logfile.DatePattern", "yyyy-MM-dd'.log'");
+			properties.setProperty("log4j.appender.logfile.Encoding", "UTF-8");
 			properties.setProperty("log4j.appender.logfile.File.Append", "true");
-			properties.setProperty("log4j.appender.CONSOLE", "org.apache.log4j.ConsoleAppender");
-			properties.setProperty("log4j.appender.CONSOLE.layout", "org.apache.log4j.PatternLayout");
+			properties.setProperty("log4j.appender.logfile.DatePattern", "yyyy-MM-dd'.log'");
 			properties.setProperty("log4j.appender.logfile.layout", "org.apache.log4j.PatternLayout");
 			properties.setProperty("log4j.appender.logfile.layout.ConversionPattern", "%d %p [%c] - <%m>%n");
+			
+//			properties.setProperty("log4j.appender.CONSOLE", "org.apache.log4j.ConsoleAppender");
+//			properties.setProperty("log4j.appender.CONSOLE.layout", "org.apache.log4j.PatternLayout");
+//			properties.setProperty("log4j.appender.CONSOLE.layout.ConversionPattern", "%d %p [%c] - <%m>%n");
 			PropertyConfigurator.configure(properties);
 		} catch (Exception e) {
 			throw new RuntimeException("加载log4j配置异常", e);

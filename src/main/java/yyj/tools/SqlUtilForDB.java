@@ -1063,7 +1063,7 @@ public class SqlUtilForDB {
 			buffer.append("\n\n"); 
 			//----------------------------------insert-----------------------------------------------
 			buffer.append("/**插入"+map.get("className")+"到数据库\n");
-			buffer.append(" * @"+CheckReplaceUtil.firstCharLowcase(map.get("className"))+" 待插入的对象\n");
+			buffer.append(" * @param "+CheckReplaceUtil.firstCharLowcase(map.get("className"))+" 待插入的对象\n");
 			buffer.append(" */\n");
 			buffer.append("public void add"+map.get("className")+"("+map.get("className")+" "+CheckReplaceUtil.firstCharLowcase(map.get("className"))+");\n");
 			buffer.append("\n"); 
@@ -1313,7 +1313,6 @@ public class SqlUtilForDB {
 			
 			String packagePath=SqlUtilForDB.class.getPackage().getName();
 			packagePath=packagePath.substring(0,packagePath.lastIndexOf('.')+1);
-			//TODO 修正生成文件路径为com.lanxi.项目名小写.entity
 			packagePath+=path+ ".dao";
 			Thread thread1=new Thread(new Runnable() {
 				@Override
@@ -1367,7 +1366,6 @@ public class SqlUtilForDB {
 			
 			String packagePath=SqlUtilForDB.class.getPackage().getName();
 			packagePath=packagePath.substring(0,packagePath.lastIndexOf('.')+1);
-			//TODO 修正生成文件路径为com.lanxi.项目名小写.entity
 			packagePath+=path+ ".dao";
 			packagePath=packageName==null||packageName.isEmpty()?packagePath:packageName;
 			Thread thread1=new Thread(new Runnable() {
@@ -1469,7 +1467,7 @@ public class SqlUtilForDB {
 			
 			String packagePath=SqlUtilForDB.class.getPackage().getName();
 			packagePath=packagePath.substring(0,packagePath.lastIndexOf('.')+1);
-			//TODO 修正生成文件路径为com.lanxi.项目名小写.entity
+			//TODO 修正生成文件路径为com.lanxi.项目名小写.entity 
 			packagePath+=path+ ".entity";
 
 			map.put("package",packagePath);

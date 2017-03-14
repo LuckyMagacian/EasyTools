@@ -131,14 +131,12 @@ public class FileUtil {
 	public static File getFileOppositeClassPath(String path) {
 		try {
 			String classPath = FileUtil.class.getClassLoader().getResource("").toURI().getPath();
-			System.out.println(classPath);
 			File file = new File(classPath);
 			if (path == null || "".equals(path.trim()))
 				return file;
 			if (path.startsWith("/"))
 				path = path.substring(1);
 			if(classPath.contains("test-classes")){
-				System.out.println("调用测试路径");
 				path=testPath+path;
 			}
 			String[] strs = path.split("/");
@@ -332,7 +330,7 @@ public class FileUtil {
 		JFileChooser chooser=new JFileChooser();
 		if(currentPath!=null)
 			chooser.setCurrentDirectory(currentPath);
-		chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+		chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES); 
 		if(fileType!=null&&!fileType.isEmpty())
 			chooser.setFileFilter(new FileFilter() {
 				@Override
