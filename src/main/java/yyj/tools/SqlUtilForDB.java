@@ -846,12 +846,12 @@ public class SqlUtilForDB {
 			//---------------------------------class comment---------------------------
 			String classRemark=table.getTableInfo().getRemark();
 			buffer.append("/**\n");
-			buffer.append("*");
+			buffer.append(" * ");
 			buffer.append(classRemark==null||classRemark.isEmpty()?"no comment":classRemark);
 			buffer.append("\n");
-			buffer.append("*"+"@author yyj | auto generator\n");
-			buffer.append("*"+"@version "+"1.0.0 "+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date())+"\n");
-			buffer.append("*/\n");
+			buffer.append(" * "+"@author yyj | auto generator\n");
+			buffer.append(" * "+"@version "+"1.0.0 "+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date())+"\n");
+			buffer.append(" */\n");
 			if(annotationFlag){
 				buffer.append("@Entity"+"\n");
 				buffer.append("@Table"+"(name=\""+table.getTableInfo().getTableName()+"\")\n");
@@ -1051,16 +1051,16 @@ public class SqlUtilForDB {
 			//---------------------------------class comment---------------------------
 			String classRemark=table.getTableInfo().getRemark();
 			buffer.append("/**\n");
-			buffer.append("*");
+			buffer.append(" * ");
 			buffer.append(classRemark==null||classRemark.isEmpty()?"no comment":classRemark);
 			buffer.append("\n");
-			buffer.append("*"+"@author yyj | auto generator\n");
-			buffer.append("*"+"@version "+"1.0.0 "+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date())+"\n");
-			buffer.append("*/\n");
+			buffer.append(" * "+"@author yyj | auto generator\n");
+			buffer.append(" * "+"@version "+"1.0.0 "+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date())+"\n");
+			buffer.append(" */\n");
 			buffer.append("\n");
 			//----------------------------------class body-------------------------------
 			buffer.append("public interface "+map.get("className").replaceFirst("Bean", "")+"Dao"+"{"+"\n");
-			buffer.append("\n\n"); 
+			buffer.append("\n"); 
 			//----------------------------------insert-----------------------------------------------
 			buffer.append("/**插入"+map.get("className")+"到数据库\n");
 			buffer.append(" * @param "+CheckReplaceUtil.firstCharLowcase(map.get("className"))+" 待插入的对象\n");
@@ -1068,9 +1068,20 @@ public class SqlUtilForDB {
 			buffer.append("public void add"+map.get("className")+"("+map.get("className")+" "+CheckReplaceUtil.firstCharLowcase(map.get("className"))+");\n");
 			buffer.append("\n"); 
 			//----------------------------------delete-----------------------------------------------
+			buffer.append("/**从数据库中删除符合条件的或者指定的数据\n");
+			buffer.append(" * @param "+CheckReplaceUtil.firstCharLowcase(map.get("className"))+" 删除的条件|被删除的数据本身\n");
+			buffer.append(" */\n");
 			buffer.append("public void delete"+map.get("className")+"ByClass("+map.get("className")+" "+CheckReplaceUtil.firstCharLowcase(map.get("className"))+");\n");
 			String paramType=null;
 			if(pkInfos!=null&&!pkInfos.isEmpty()){
+				buffer.append("/**根据所有主键从数据库中数据\n");
+				for(PrimaryKeyInfo each:pkInfos){
+					String name=each.getColumnName();
+					name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+					name=CheckReplaceUtil.firstCharLowcase(name);
+					buffer.append(" * @param "+name+" 主键:"+columnMap.get(each.getColumnName()).getRemark()+"\n");
+				}
+				buffer.append(" */\n");
 				buffer.append("public void delete"+map.get("className")+"ByPk(");
 				for(PrimaryKeyInfo each:pkInfos){
 					String name=each.getColumnName();
@@ -1094,6 +1105,9 @@ public class SqlUtilForDB {
 					paramType=paramType.startsWith("[L")?paramType.substring(2):paramType;
 					paramType=paramType.endsWith(";")?paramType.substring(0, paramType.length()-1)+"[]":paramType;
 					paramType=paramType.substring(paramType.lastIndexOf(".")+1);
+					buffer.append("/**根据单一主键从数据库中删除数据数据\n");
+					buffer.append(" * @param "+CheckReplaceUtil.firstCharLowcase(name)+" 主键:"+columnMap.get(each.getColumnName()).getRemark()+"\n");
+					buffer.append(" */\n");
 					buffer.append("public void delete"+map.get("className")+"ByPk"+name+"("+paramType+" "+CheckReplaceUtil.firstCharLowcase(name)+");\n");
 				}
 			}
@@ -1101,10 +1115,28 @@ public class SqlUtilForDB {
 			if(indexInfos!=null&&!indexInfos.isEmpty()){
 				for(Entry<String, List<IndexInfo>> each:indexInfos.entrySet()){					
 					List<IndexInfo> value=each.getValue();
-					if(value.get(0).getIsUnique().equals("true"))
+					if(value.get(0).getIsUnique().equals("true")){
+						buffer.append("/**根据唯一索引从数据库中删除数据\n");
+						for(IndexInfo one:value){
+							String name=one.getColumnName();
+							name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+							name=CheckReplaceUtil.firstCharUpcase(name);
+							buffer.append(" * @param "+name+" 索引:"+columnMap.get(one.getColumnName()).getRemark()+"\n");
+						}
+						buffer.append(" */\n");
 						buffer.append("public void delete"+map.get("className")+"ByUniqueIndexOn");
-					else
+					}
+					else{
+						buffer.append("/**根据索引从数据库中删除数据\n");
+						for(IndexInfo one:value){
+							String name=one.getColumnName();
+							name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+							name=CheckReplaceUtil.firstCharUpcase(name);
+							buffer.append(" * @param "+name+" 索引:"+columnMap.get(one.getColumnName()).getRemark()+"\n");
+						}
+						buffer.append(" */\n");
 						buffer.append("public void delete"+map.get("className")+"ByIndexOn");
+					}
 					for(IndexInfo one:value){
 						String name=one.getColumnName();
 						name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
@@ -1128,9 +1160,23 @@ public class SqlUtilForDB {
 			}
 			buffer.append("\n"); 
 			//----------------------------------update-----------------------------------------------
+			buffer.append("/**更新数据库中符合条件的数据\n");
+			buffer.append(" * @param "+CheckReplaceUtil.firstCharLowcase(map.get("className"))+" 更新后的数据\n");
+			buffer.append(" * @param param 更新的条件");
+			buffer.append(" */\n");
 			buffer.append("public void update"+map.get("className")+"ByClass(@Param(value=\""+CheckReplaceUtil.firstCharLowcase(map.get("className"))+"\")"+map.get("className")+" "+CheckReplaceUtil.firstCharLowcase(map.get("className"))+",@Param(value=\"param\")"+map.get("className")+" param);\n");
 	
 			if(pkInfos!=null&&!pkInfos.isEmpty()){
+				buffer.append("/**根据所有主键更新数据库中数据\n");
+				buffer.append(" * @param "+CheckReplaceUtil.firstCharLowcase(map.get("className"))+" 更新后的数据\n");
+				
+				for(PrimaryKeyInfo each:pkInfos){
+					String name=each.getColumnName();
+					name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+					name=CheckReplaceUtil.firstCharLowcase(name);
+					buffer.append(" * @param "+name+" 主键:"+columnMap.get(each.getColumnName()).getRemark()+"\n");
+				}
+				buffer.append(" */\n");
 				buffer.append("public void update"+map.get("className")+"ByPk(@Param(value=\""+CheckReplaceUtil.firstCharLowcase(map.get("className"))+"\")"+map.get("className")+" "+CheckReplaceUtil.firstCharLowcase(map.get("className")+","));
 				for(PrimaryKeyInfo each:pkInfos){
 					String name=each.getColumnName();
@@ -1145,7 +1191,7 @@ public class SqlUtilForDB {
 				buffer.replace(buffer.length()-1,buffer.length(),");\n");
 			}
 			
-			
+
 			if(pkInfos!=null&&!pkInfos.isEmpty()){
 				for(PrimaryKeyInfo each:pkInfos){
 					String name=each.getColumnName();
@@ -1155,6 +1201,10 @@ public class SqlUtilForDB {
 					paramType=paramType.startsWith("[L")?paramType.substring(2):paramType;
 					paramType=paramType.endsWith(";")?paramType.substring(0, paramType.length()-1)+"[]":paramType;
 					paramType=paramType.substring(paramType.lastIndexOf(".")+1);
+					buffer.append("/**根据单一主键更新数据\n");
+					buffer.append(" * @param "+CheckReplaceUtil.firstCharLowcase(map.get("className"))+" 更新后的数据\n");
+					buffer.append(" * @param "+CheckReplaceUtil.firstCharLowcase(name)+" 主键:"+columnMap.get(each.getColumnName()).getRemark());
+					buffer.append(" */\n");
 					buffer.append("public void update"+map.get("className")+"ByPk"+name+"(@Param(value=\""+CheckReplaceUtil.firstCharLowcase(map.get("className"))+"\")"+map.get("className")+" "+CheckReplaceUtil.firstCharLowcase(map.get("className"))+",@Param(value=\""+CheckReplaceUtil.firstCharLowcase(name)+"\")"+paramType+" "+CheckReplaceUtil.firstCharLowcase(name)+");\n");
 				}
 			}
@@ -1162,10 +1212,30 @@ public class SqlUtilForDB {
 			if(indexInfos!=null&&!indexInfos.isEmpty()){
 				for(Entry<String, List<IndexInfo>> each:indexInfos.entrySet()){
 					List<IndexInfo> value=each.getValue();
-					if(value.get(0).getIsUnique().equals("true"))
+					if(value.get(0).getIsUnique().equals("true")){
+						buffer.append("/**根据唯一索引更新数据库中的数据\n");
+						buffer.append(" * @param "+CheckReplaceUtil.firstCharLowcase(map.get("className"))+" 更新后的数据\n");
+						for(IndexInfo one:value){
+							String name=one.getColumnName();
+							name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+							name=CheckReplaceUtil.firstCharUpcase(name);
+							buffer.append(" * @param "+name+" 索引:"+columnMap.get(one.getColumnName()).getRemark()+"\n");
+						}
+						buffer.append(" */\n");
 						buffer.append("public void update"+map.get("className")+"ByUniqueIndexOn");
-					else
+					}
+					else{
+						buffer.append("/**根据索引更新数据库中符合条件的数据\n");
+						buffer.append(" * @param "+CheckReplaceUtil.firstCharLowcase(map.get("className"))+" 更新后的数据\n");
+						for(IndexInfo one:value){
+							String name=one.getColumnName();
+							name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+							name=CheckReplaceUtil.firstCharUpcase(name);
+							buffer.append(" * @param "+name+" 索引:"+columnMap.get(one.getColumnName()).getRemark()+"\n");
+						}
+						buffer.append(" */\n");
 						buffer.append("public void update"+map.get("className")+"ByIndexOn");
+					}
 					for(IndexInfo one:value){
 						String name=one.getColumnName();
 						name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
@@ -1189,9 +1259,23 @@ public class SqlUtilForDB {
 			}
 			buffer.append("\n"); 
 			//----------------------------------select-----------------------------------------------
+			buffer.append("/**选中数据库中符合条件的数据|数据本身\n");
+			buffer.append(" * @param param 更新的条件|数据本身");
+			buffer.append(" * @return 符合条件的数据列表");
+			buffer.append(" */\n");
 			buffer.append("public List<"+map.get("className")+"> select"+map.get("className")+"ByClass");
 			buffer.append("("+map.get("className")+" "+CheckReplaceUtil.firstCharLowcase(map.get("className"))+");\n");
 			if(pkInfos!=null&&!pkInfos.isEmpty()){
+				buffer.append("/**根据所有主键选中数据库中数据\n");
+				for(PrimaryKeyInfo each:pkInfos){
+					String name=each.getColumnName();
+					name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+					name=CheckReplaceUtil.firstCharLowcase(name);
+					buffer.append(" * @param "+name+" 主键:"+columnMap.get(each.getColumnName()).getRemark()+"\n");
+				}
+				buffer.append(" * @return 符合条件的数据对象");
+				buffer.append(" */\n");
+				
 				buffer.append("public "+map.get("className")+" select"+map.get("className")+"ByPk(");
 				for(PrimaryKeyInfo each:pkInfos){
 					String name=each.getColumnName();
@@ -1215,6 +1299,10 @@ public class SqlUtilForDB {
 					paramType=paramType.startsWith("[L")?paramType.substring(2):paramType;
 					paramType=paramType.endsWith(";")?paramType.substring(0, paramType.length()-1)+"[]":paramType;
 					paramType=paramType.substring(paramType.lastIndexOf(".")+1);
+					buffer.append("/**根据单一主键选中数据\n");
+					buffer.append(" * @param "+CheckReplaceUtil.firstCharLowcase(name)+" 主键:"+columnMap.get(each.getColumnName()).getRemark());
+					buffer.append(" * @return 符合条件的数据列表");
+					buffer.append(" */\n");
 					buffer.append("public List<"+map.get("className")+"> select"+map.get("className")+"ByPk"+name);
 					buffer.append("("+paramType+" "+CheckReplaceUtil.firstCharLowcase(name)+");\n");
 				}
@@ -1222,10 +1310,30 @@ public class SqlUtilForDB {
 			if(indexInfos!=null&&!indexInfos.isEmpty()){
 				for(Entry<String, List<IndexInfo>> each:indexInfos.entrySet()){
 					List<IndexInfo> value=each.getValue();
-					if(value.get(0).getIsUnique().equals("true"))
+					if(value.get(0).getIsUnique().equals("true")){
+						buffer.append("/**根据唯一索引选中数据库中的数据\n");
+						for(IndexInfo one:value){
+							String name=one.getColumnName();
+							name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+							name=CheckReplaceUtil.firstCharUpcase(name);
+							buffer.append(" * @param "+name+" 索引:"+columnMap.get(one.getColumnName()).getRemark()+"\n");
+						}
+						buffer.append(" * @return 符合条件的数据对象");
+						buffer.append(" */\n");
 						buffer.append("public "+map.get("className")+" select"+map.get("className")+"ByUniqueIndexOn");
-					else
+					}
+					else{
+						buffer.append("/**根据索引选中数据库中的符合条件数据\n");
+						for(IndexInfo one:value){
+							String name=one.getColumnName();
+							name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
+							name=CheckReplaceUtil.firstCharUpcase(name);
+							buffer.append(" * @param "+name+" 索引:"+columnMap.get(one.getColumnName()).getRemark()+"\n");
+						}
+						buffer.append(" * @return 符合条件的数据列表");
+						buffer.append(" */\n");
 						buffer.append("public List<"+map.get("className")+"> select"+map.get("className")+"ByIndexOn");
+					}
 					for(IndexInfo one:value){
 						String name=one.getColumnName();
 						name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
