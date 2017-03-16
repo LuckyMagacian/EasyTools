@@ -42,23 +42,30 @@ public class LoggerUtil {
 				temp.createNewFile();
 
 			Properties properties = new Properties();
-			properties.setProperty("log4j.rootLogger", "stdout,logfile");
+			//配置日志等级 以及 日志对象
+			properties.setProperty("log4j.rootLogger", "INFO,logfile,console");
 
-			properties.setProperty("log4j.appender.stdout", "org.apache.log4j.ConsoleAppender");
-			properties.setProperty("log4j.appender.stdout.layout", "org.apache.log4j.PatternLayout");
-			properties.setProperty("log4j.appender.stdout.layout.ConversionPattern", "%d %p [%c] - <%m>%n");
-			
+//			properties.setProperty("log4j.appender.INFO", "org.apache.log4j.ConsoleAppender");
+//			properties.setProperty("log4j.appender.INFO.layout", "org.apache.log4j.PatternLayout");
+//			properties.setProperty("log4j.appender.INFO.layout.ConversionPattern", "%d %p [%c] - <%m>%n");
+			//配置每日生成日志文件 形式的日志对象
 			properties.setProperty("log4j.appender.logfile", "org.apache.log4j.DailyRollingFileAppender");
+			//配置日志文件路径
 			properties.setProperty("log4j.appender.logfile.File", path);
+			//配置日志文件编码方式
 			properties.setProperty("log4j.appender.logfile.Encoding", "UTF-8");
+			//配置日志文件为追加形式
 			properties.setProperty("log4j.appender.logfile.File.Append", "true");
+			//配置自动生成日志文件的后缀名
 			properties.setProperty("log4j.appender.logfile.DatePattern", "yyyy-MM-dd'.log'");
+			//配置日志文件的记录形式
 			properties.setProperty("log4j.appender.logfile.layout", "org.apache.log4j.PatternLayout");
+			//配置日志文件表达式
 			properties.setProperty("log4j.appender.logfile.layout.ConversionPattern", "%d %p [%c] - <%m>%n");
-			
-//			properties.setProperty("log4j.appender.CONSOLE", "org.apache.log4j.ConsoleAppender");
-//			properties.setProperty("log4j.appender.CONSOLE.layout", "org.apache.log4j.PatternLayout");
-//			properties.setProperty("log4j.appender.CONSOLE.layout.ConversionPattern", "%d %p [%c] - <%m>%n");
+			//配置控制台输出的日志对象
+			properties.setProperty("log4j.appender.console", "org.apache.log4j.ConsoleAppender");
+			properties.setProperty("log4j.appender.console.layout", "org.apache.log4j.PatternLayout");
+			properties.setProperty("log4j.appender.console.layout.ConversionPattern", "%d %p [%c] - <%m>%n");
 			PropertyConfigurator.configure(properties);
 		} catch (Exception e) {
 			throw new RuntimeException("加载log4j配置异常", e);
