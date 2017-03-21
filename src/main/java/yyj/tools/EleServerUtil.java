@@ -431,17 +431,17 @@ public class EleServerUtil {
 		 * 
 		 * @param reqType
 		 *            请求类型
-		 * @param add
-		 *            请求发起方
 		 * @param src
+		 *            请求发起方
+		 * @param des
 		 *            请求接收方
 		 * @param key
 		 *            发起方密钥
 		 */
-		public ReqHead(String reqType, String add, String src, String key) {
+		public ReqHead(String reqType, String src, String des, String key) {
 			init();
 			this.msgNo = reqType;
-			this.add = add;
+			this.des = des;
 			this.src = src;
 			setKey(key);
 		}
@@ -450,19 +450,19 @@ public class EleServerUtil {
 		 * 
 		 * @param reqType
 		 *            请求类型
-		 * @param add
-		 *            请求发起方
 		 * @param src
+		 *            请求发起方
+		 * @param des
 		 *            请求接收方
 		 * @param key
 		 *            请求发起方密钥
 		 * @param chkDate
 		 *            清算日期
 		 */
-		public ReqHead(String reqType, String add, String src, String key, String chkDate) {
+		public ReqHead(String reqType, String src, String des, String key, String chkDate) {
 			init();
 			this.msgNo = reqType;
-			this.add = add;
+			this.des = des;
 			this.src = src;
 			this.chkDate = chkDate;
 			setKey(key);

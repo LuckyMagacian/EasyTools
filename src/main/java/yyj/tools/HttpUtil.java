@@ -227,7 +227,7 @@ public class HttpUtil {
 	 * @return 接收方返回的内容
 	 */
 	public static String postStr(String str, HttpServletResponse res, String charset) {
-		return post(str, res, charset, "txt/html");
+		return post(str, res, charset, "txt/plain");
 	}
 
 	/**
@@ -274,7 +274,7 @@ public class HttpUtil {
 	 * @return 0 发送成功 1 发送失败
 	 */
 	public static String postXml(String xml, HttpServletResponse res, String charset) {
-		return post(xml, res, charset, "txt/html");
+		return post(xml, res, charset, "txt/xml");
 	}
 
 	/**

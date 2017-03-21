@@ -1131,7 +1131,7 @@ public class SqlUtilForDB {
 						for(IndexInfo one:value){
 							String name=one.getColumnName();
 							name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
-							name=CheckReplaceUtil.firstCharUpcase(name);
+							name=CheckReplaceUtil.firstCharLowcase(name);
 							buffer.append(" * @param "+name+" 索引:"+columnMap.get(one.getColumnName()).getRemark()+"\n");
 						}
 						buffer.append(" */\n");
@@ -1230,7 +1230,7 @@ public class SqlUtilForDB {
 						for(IndexInfo one:value){
 							String name=one.getColumnName();
 							name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
-							name=CheckReplaceUtil.firstCharUpcase(name);
+							name=CheckReplaceUtil.firstCharLowcase(name);
 							buffer.append(" * @param "+name+" 索引:"+columnMap.get(one.getColumnName()).getRemark()+"\n");
 						}
 						buffer.append(" */\n");
@@ -1315,7 +1315,7 @@ public class SqlUtilForDB {
 						for(IndexInfo one:value){
 							String name=one.getColumnName();
 							name=CheckReplaceUtil.underlineLowcaserToUpcase(name);
-							name=CheckReplaceUtil.firstCharUpcase(name);
+							name=CheckReplaceUtil.firstCharLowcase(name);
 							buffer.append(" * @param "+name+" 索引:"+columnMap.get(one.getColumnName()).getRemark()+"\n");
 						}
 						buffer.append(" * @return 符合条件的数据对象");

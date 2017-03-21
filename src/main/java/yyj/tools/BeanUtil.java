@@ -1,5 +1,7 @@
 package com.lanxi.tools;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -455,4 +457,16 @@ public class BeanUtil {
 	//
 	// return map;
 	// }
+	/**
+	 * 获取异常的堆栈信息
+	 * @param e 捕获的异常
+	 * @return 异常的堆栈信息
+	 */
+	public static String getStackInfo(Exception e){
+			StringWriter stringWriter=new StringWriter();
+			PrintWriter  printWriter =new PrintWriter(stringWriter);
+			e.printStackTrace(printWriter);
+			printWriter.close();
+			return stringWriter.toString();
+	}
 }

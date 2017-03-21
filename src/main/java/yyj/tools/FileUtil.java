@@ -3,10 +3,13 @@ package com.lanxi.tools;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,6 +18,8 @@ import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.filechooser.FileFilter;
+
+import sun.text.normalizer.UTF16;
 
 
 /**
@@ -489,5 +494,36 @@ public class FileUtil {
 		} catch (Exception e) {
 			throw new RuntimeException("构建路径及文件异常2",e);
 		}
+	}
+	/**
+	 * 将多个文件中的内容合并到一个文件中并返回
+	 * @param files 	多个文件
+	 * @param newFile 	合并后的文件
+	 * @return 
+	 */
+	public static File fileAppend(File[] files,File newFile,String fileNameMatche){
+		try {
+			makeDirAndFile(newFile);
+			FileOutputStream fout=new FileOutputStream(newFile);
+			OutputStreamWriter writer=new OutputStreamWriter(fout, "utf-8");
+			PrintWriter printer=new PrintWriter(writer);
+			
+			for(File each:files){
+				if(fileNameMatche!=null&&!fileNameMatche.isEmpty())
+					if(!each.getName().matches(fileNameMatche))
+						continue;
+				FileInputStream fin=new FileInputStream(each);
+				InputStreamReader reader= new InputStreamReader(fin,"utf-8");
+				BufferedReader buff=new BufferedReader(reader);
+				String temp=null;
+				while((temp=buff.readLine())!=null)
+					printer.println(temp);
+				buff.close();
+			}
+			printer.close();
+			return newFile;
+		} catch (Exception e) {
+			throw new RuntimeException("文件追加异常",e);
+		} 
 	}
 }
